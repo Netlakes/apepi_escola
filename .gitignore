@@ -14,3 +14,10 @@ Thumbs.db
 
 # Gemini / Antigravity temporary files
 .gemini/
+
+# Scratch & Extraction files
+*.pdf
+check_*.py
+hero_lab_*.png
+page_*.png
+pdf_page_*.png
