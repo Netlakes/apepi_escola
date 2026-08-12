@@ -412,34 +412,33 @@ p.muted {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #F7F0E6 0%, #EFE8DE 100%) !important;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-hover) 100%) !important;
   color: #17110C !important;
-  border: 1px solid rgba(23, 17, 12, 0.2) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 18px rgba(76, 154, 42, 0.25) !important;
   font-weight: 700 !important;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #FFFFFF 0%, #F7F0E6 100%) !important;
+  background: linear-gradient(135deg, var(--secondary-hover) 0%, var(--secondary-active) 100%) !important;
   color: #000000 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.22) !important;
-  border-color: rgba(23, 17, 12, 0.35) !important;
+  box-shadow: 0 8px 25px rgba(76, 154, 42, 0.35) !important;
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #EAE2D5 0%, #DFD6C6 100%) !important;
+  background: linear-gradient(135deg, var(--secondary-hover) 0%, var(--secondary-active) 100%) !important;
   color: #17110C !important;
-  border: 1px solid rgba(23, 17, 12, 0.2) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(76, 154, 42, 0.2) !important;
   font-weight: 700 !important;
 }
 
 .btn-secondary:hover {
-  background: linear-gradient(135deg, #F7F0E6 0%, #EAE2D5 100%) !important;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-hover) 100%) !important;
   color: #000000 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+  box-shadow: 0 8px 22px rgba(76, 154, 42, 0.3) !important;
 }
 
 .btn-outline {
