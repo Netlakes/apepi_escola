@@ -67,43 +67,45 @@ Tags: custom-menu, dark-mode, responsive-layout, education, medical, custom-post
 }
 
 [data-theme="dark"] {
-  /* Warm Obsidian & Imperial Ivory Palette (Marfim & Creme requested by Client) */
-  --bg-primary: #0A120E;       /* Carvão orgânico de floresta noturna */
-  --bg-secondary: #111C16;     /* Superfície secundária aveludada */
-  --bg-tertiary: #18261E;      /* Cartões e divisórias profundos */
-  --surface: #132018;          /* Superfície botânica escura */
-  --surface-hover: #1C2D22;    /* Destaque suave em hover */
+  /* Earth, Timber & Organic Botanical Palette (Terra, Madeira e Folhas) */
+  --bg-primary: #17110C;       /* Marrom Terra Profunda / Deep Earth Charcoal */
+  --bg-secondary: #221811;     /* Madeira Acetinada Escura / Deep Chestnut Timber */
+  --bg-tertiary: #2D2016;      /* Solo fértil de cultivo / Rich Cultivation Soil */
+  --surface: #261A12;          /* Superfície em Madeira de Nogueira Escura */
+  --surface-hover: #33241A;    /* Destaque suave em tom madeira quente */
 
-  --text-primary: #F8F4EC;     /* Marfim Quente Nobre (Warm Ivory) */
-  --text-secondary: #E3DACB;   /* Marfim Suave Aveludado */
-  --text-muted: #B8AC9A;       /* Marfim Muted atenuado */
+  /* Tipografia em Marfim Orgânico (Solicitado pela Cliente) */
+  --text-primary: #F7F0E6;     /* Marfim Natural Quente (Warm Natural Ivory) */
+  --text-secondary: #E4D7C5;   /* Marfim Pergaminho Aveludado */
+  --text-muted: #BAAA96;       /* Argila Marfim Muted */
 
-  --primary: #F8F4EC;          /* Títulos soberanos em Marfim Quente */
-  --primary-hover: #FFFDF9;    /* Marfim luminoso em hover */
+  --primary: #F7F0E6;          /* Títulos soberanos em Marfim Orgânico */
+  --primary-hover: #FFFBF5;    /* Marfim reluzente em hover */
   --primary-active: #EADFCF;
-  --primary-light: rgba(248, 244, 236, 0.12);
+  --primary-light: rgba(247, 240, 230, 0.12);
 
-  --secondary: #E5D5B5;        /* Marfim Dourado (Warm Ivory Gold) para ícones e destaques */
-  --secondary-hover: #F5E8C9;
-  --secondary-active: #D4C3A1;
-  --secondary-light: rgba(229, 213, 181, 0.14);
+  /* Destaques em Tom Folha Verde Orgânica & Marfim Dourado */
+  --secondary: #7EA152;        /* Verde Folha Orgânica Viva (Natural Leaf Green) */
+  --secondary-hover: #8BB15E;
+  --secondary-active: #597B34;
+  --secondary-light: rgba(126, 161, 82, 0.16);
 
-  --accent-gold: #E5B25D;      /* Dourado Marfim para selos de prestígio */
-  --accent-gold-light: rgba(229, 178, 93, 0.15);
+  --accent-gold: #D49B4B;      /* Âmbar de Terra / Terracotta Amber Gold */
+  --accent-gold-light: rgba(212, 155, 75, 0.16);
 
-  --text-on-primary: #0A120E;
-  --text-on-secondary: #0A120E;
+  --text-on-primary: #17110C;
+  --text-on-secondary: #17110C;
 
-  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.65);
-  --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.75);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.85);
-  --shadow-glow: 0 0 30px rgba(248, 244, 236, 0.12);
-  --shadow-emerald: 0 0 25px rgba(229, 213, 181, 0.18);
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.7);
+  --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.9);
+  --shadow-glow: 0 0 30px rgba(247, 240, 230, 0.14);
+  --shadow-emerald: 0 0 25px rgba(126, 161, 82, 0.22);
 
-  --glass-bg: rgba(10, 18, 14, 0.93);
-  --glass-card: rgba(19, 32, 24, 0.92);
-  --border-color: rgba(248, 244, 236, 0.12);    /* Bordas sutis em tom marfim */
-  --border-hover: rgba(229, 213, 181, 0.35);
+  --glass-bg: rgba(23, 17, 12, 0.94);
+  --glass-card: rgba(38, 26, 18, 0.93);
+  --border-color: rgba(247, 240, 230, 0.12);    /* Linhas em tom marfim terra */
+  --border-hover: rgba(126, 161, 82, 0.4);
 }
 
 /* Specific Dark Mode Icon & Contrast Enhancements */
@@ -2712,7 +2714,7 @@ p.muted {
   -webkit-text-fill-color: transparent;
 }
 
-/* Dark Mode Icon System Overrides */
+/* Dark Mode Icon System Overrides (Terra, Folhas e Marfim) */
 [data-theme="dark"] .stat-icon-wrapper,
 [data-theme="dark"] .dif-icon-holder,
 [data-theme="dark"] .card-badge-icon,
@@ -2726,9 +2728,9 @@ p.muted {
 [data-theme="dark"] .aud-icon,
 [data-theme="dark"] .cta-icon-holder,
 [data-theme="dark"] .contact-icon-pill {
-  background: linear-gradient(135deg, rgba(74, 222, 128, 0.18) 0%, rgba(46, 173, 101, 0.06) 100%) !important;
-  border: 1px solid rgba(74, 222, 128, 0.32) !important;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 10px 25px -5px rgba(74, 222, 128, 0.25) !important;
+  background: linear-gradient(135deg, rgba(126, 161, 82, 0.18) 0%, rgba(247, 240, 230, 0.06) 100%) !important;
+  border: 1px solid rgba(126, 161, 82, 0.3) !important;
+  box-shadow: inset 0 1px 1px rgba(247, 240, 230, 0.2), 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
 }
 
 [data-theme="dark"] .stat-icon-wrapper i,
@@ -2745,11 +2747,11 @@ p.muted {
 [data-theme="dark"] .cta-icon-holder i,
 [data-theme="dark"] .contact-icon-pill i,
 [data-theme="dark"] .service-inc-card i {
-  background: linear-gradient(135deg, #4ADE80 0%, #34D399 100%);
+  background: linear-gradient(135deg, #F7F0E6 0%, #7EA152 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.6));
+  filter: drop-shadow(0 0 8px rgba(126, 161, 82, 0.4));
 }
 
 /* Video Play Button Pulse Glass Animation */
