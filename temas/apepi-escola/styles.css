@@ -67,43 +67,43 @@ Tags: custom-menu, dark-mode, responsive-layout, education, medical, custom-post
 }
 
 [data-theme="dark"] {
-  /* Premium Luminous Emerald Obsidian Theme */
-  --bg-primary: #070C0A;       /* Preto carvão com profundidade florestal */
-  --bg-secondary: #0D1411;     /* Superfície secundária refinada */
-  --bg-tertiary: #131E19;      /* Tom de divisão e cartões profundos */
-  --surface: #101914;          /* Ardósia escura com toque esmeralda */
-  --surface-hover: #17241D;    /* Destaque ao passar o mouse */
+  /* Warm Obsidian & Imperial Ivory Palette (Marfim & Creme requested by Client) */
+  --bg-primary: #0A120E;       /* Carvão orgânico de floresta noturna */
+  --bg-secondary: #111C16;     /* Superfície secundária aveludada */
+  --bg-tertiary: #18261E;      /* Cartões e divisórias profundos */
+  --surface: #132018;          /* Superfície botânica escura */
+  --surface-hover: #1C2D22;    /* Destaque suave em hover */
 
-  --text-primary: #F1F7F4;     /* Branco esmeralda límpido e de altíssimo contraste */
-  --text-secondary: #B0C4B8;   /* Cinza esverdeado claro altamente legível */
-  --text-muted: #7E9689;       /* Tom atenuado, porém claro e nítido */
+  --text-primary: #F8F4EC;     /* Marfim Quente Nobre (Warm Ivory) */
+  --text-secondary: #E3DACB;   /* Marfim Suave Aveludado */
+  --text-muted: #B8AC9A;       /* Marfim Muted atenuado */
 
-  --primary: #2EAD65;          /* Verde Esmeralda Vibrante (Leitura perfeita sobre fundo escuro) */
-  --primary-hover: #3ADB7F;    /* Esmeralda luminoso em hover */
-  --primary-active: #228B4E;   /* Esmeralda denso para estados ativos */
-  --primary-light: rgba(46, 173, 101, 0.16);
+  --primary: #F8F4EC;          /* Títulos soberanos em Marfim Quente */
+  --primary-hover: #FFFDF9;    /* Marfim luminoso em hover */
+  --primary-active: #EADFCF;
+  --primary-light: rgba(248, 244, 236, 0.12);
 
-  --secondary: #4ADE80;        /* Verde Folha Luminous para ícones, badges e destaques */
-  --secondary-hover: #22C55E;  /* Verde vibrante para hover */
-  --secondary-active: #16A34A;
-  --secondary-light: rgba(74, 222, 128, 0.15);
+  --secondary: #E5D5B5;        /* Marfim Dourado (Warm Ivory Gold) para ícones e destaques */
+  --secondary-hover: #F5E8C9;
+  --secondary-active: #D4C3A1;
+  --secondary-light: rgba(229, 213, 181, 0.14);
 
-  --accent-gold: #F59E0B;      /* Dourado quente e radiante para destaques premium */
-  --accent-gold-light: rgba(245, 158, 11, 0.15);
+  --accent-gold: #E5B25D;      /* Dourado Marfim para selos de prestígio */
+  --accent-gold-light: rgba(229, 178, 93, 0.15);
 
-  --text-on-primary: #050806;
-  --text-on-secondary: #050806;
+  --text-on-primary: #0A120E;
+  --text-on-secondary: #0A120E;
 
-  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.6);
-  --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.7);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.8);
-  --shadow-glow: 0 0 25px rgba(46, 173, 101, 0.25);      /* Brilho esmeralda sofisticado */
-  --shadow-emerald: 0 0 25px rgba(74, 222, 128, 0.2);   /* Brilho folha luminoso */
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.65);
+  --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.75);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 30px rgba(248, 244, 236, 0.12);
+  --shadow-emerald: 0 0 25px rgba(229, 213, 181, 0.18);
 
-  --glass-bg: rgba(7, 12, 10, 0.92);
-  --glass-card: rgba(16, 25, 20, 0.9);
-  --border-color: rgba(255, 255, 255, 0.08);       /* Linhas de divisão sutis e elegantes */
-  --border-hover: rgba(74, 222, 128, 0.4);
+  --glass-bg: rgba(10, 18, 14, 0.93);
+  --glass-card: rgba(19, 32, 24, 0.92);
+  --border-color: rgba(248, 244, 236, 0.12);    /* Bordas sutis em tom marfim */
+  --border-hover: rgba(229, 213, 181, 0.35);
 }
 
 /* Specific Dark Mode Icon & Contrast Enhancements */
