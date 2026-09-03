@@ -2896,8 +2896,8 @@ function apepi_shortcode_pagina_nossos_cursos() {
       <!-- SEÇÃO APEPI ESCOLA EM NÚMEROS -->
       <section class="ref-nc-numeros-section">
         <div class="container">
-          <div class="ref-nc-section-tag text-center">
-            <span><?php echo esc_html($num_tag); ?></span>
+          <div class="text-center" style="margin-bottom: 2rem;">
+            <span class="section-badge"><?php echo esc_html($num_tag); ?></span>
           </div>
           <div class="ref-nc-numeros-grid">
             
@@ -2940,7 +2940,7 @@ function apepi_shortcode_pagina_nossos_cursos() {
       <section class="ref-nc-depoimentos-section">
         <div class="container">
           <div class="ref-nc-dep-header text-center">
-            <span class="ref-nc-section-tag"><?php echo esc_html($dep_tag); ?></span>
+            <span class="section-badge"><?php echo esc_html($dep_tag); ?></span>
             <h2 class="ref-nc-dep-title"><?php echo esc_html($dep_title); ?></h2>
             <p class="ref-nc-dep-sub"><?php echo esc_html($dep_sub); ?></p>
           </div>

@@ -874,7 +874,8 @@ p.muted {
   width: 100%;
 }
 
-.section-badge {
+.section-badge,
+.ref-nc-section-tag {
   font-size: 0.8rem;
   font-weight: 800;
   color: var(--secondary);
