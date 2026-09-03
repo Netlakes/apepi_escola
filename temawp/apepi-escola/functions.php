@@ -877,6 +877,121 @@ function apepi_escola_customize_register($wp_customize) {
         'section'  => 'apepi_quemsomos_section',
         'type'     => 'textarea',
     ));
+
+    // ==========================================================================
+    // 6. PÁGINA NOSSOS CURSOS (apepi_nossos_cursos_section)
+    // ==========================================================================
+    $wp_customize->add_section('apepi_nossos_cursos_section', array(
+        'title'       => __('APEPI - Página "Nossos Cursos"', 'apepi-escola'),
+        'priority'    => 10,
+        'description' => __('Personalize os títulos, botões, números e depoimentos da página Nossos Cursos.', 'apepi-escola'),
+    ));
+
+    $wp_customize->add_setting('apepi_nc_catalog_sub', array('default' => 'NOSSO CATÁLOGO', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_catalog_sub', array('label' => __('Rótulo do Catálogo', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_main_title', array('default' => 'FORMAÇÕES', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_main_title', array('label' => __('Título Principal', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_numeros_tag', array('default' => '🌿 APEPI ESCOLA EM NÚMEROS 🌿', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_numeros_tag', array('label' => __('Tag da Seção APEPI em Números', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_num1_big', array('default' => '14 anos', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num1_big', array('label' => __('Item 1: Valor / Destaque', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_num1_desc', array('default' => 'de experiência na educação canábica', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num1_desc', array('label' => __('Item 1: Descrição', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_num2_big', array('default' => '+1000', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num2_big', array('label' => __('Item 2: Valor / Destaque', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_num2_desc', array('default' => 'alunos formados e preparados para fazer a diferença', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num2_desc', array('label' => __('Item 2: Descrição', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_num3_big', array('default' => '+10h', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num3_big', array('label' => __('Item 3: Valor / Destaque', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_num3_sub', array('default' => 'de conteúdo', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num3_sub', array('label' => __('Item 3: Sub-Rótulo', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_num3_desc', array('default' => 'aulas online e ao vivo com especialistas referência na área', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num3_desc', array('label' => __('Item 3: Descrição', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_num4_title', array('default' => 'Formação completa', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num4_title', array('label' => __('Item 4: Título', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_num4_desc', array('default' => 'da teoria à prática, com segurança e responsabilidade', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num4_desc', array('label' => __('Item 4: Descrição', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_num5_title', array('default' => 'E-books gratuitos', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num5_title', array('label' => __('Item 5: Título', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_num5_desc', array('default' => 'materiais exclusivos para aprofundar seu conhecimento', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_num5_desc', array('label' => __('Item 5: Descrição', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_nc_dep_tag', array('default' => '🌿 DEPOIMENTOS 🌿', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_dep_tag', array('label' => __('Tag da Seção de Depoimentos', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_dep_title', array('default' => 'O que nossos alunos dizem', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_dep_title', array('label' => __('Título dos Depoimentos', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_dep_sub', array('default' => 'Histórias reais de médicos, veterinários e profissionais que transformaram sua prática com o conhecimento em Cannabis Medicinal.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_dep_sub', array('label' => __('Subtítulo dos Depoimentos', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'textarea'));
+
+    $wp_customize->add_setting('apepi_nc_ebook_title', array('default' => 'Conhecimento que vai além da sala de aula', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_ebook_title', array('label' => __('Banner E-books: Título', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_ebook_sub', array('default' => 'Acesse nossos e-books gratuitos e aprofunde ainda mais seus estudos sobre Cannabis Medicinal.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_ebook_sub', array('label' => __('Banner E-books: Subtítulo', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_nc_ebook_btn', array('default' => 'BAIXAR E-BOOKS GRATUITOS', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_ebook_btn', array('label' => __('Banner E-books: Texto do Botão', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_nc_ebook_url', array('default' => '#ebooks', 'sanitize_callback' => 'esc_url_raw', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_ebook_url', array('label' => __('Banner E-books: Link do Botão', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'url'));
+
+    $wp_customize->add_setting('apepi_nc_foot_text', array('default' => 'APEPI Escola – Transformando conhecimento em cuidado e qualidade de vida. Junte-se a mais de 1000 alunos e faça parte dessa história.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_nc_foot_text', array('label' => __('Texto do Banner de Rodapé', 'apepi-escola'), 'section' => 'apepi_nossos_cursos_section', 'type' => 'textarea'));
+
+    // ==========================================================================
+    // 7. PÁGINA CONTATO (apepi_contato_section)
+    // ==========================================================================
+    $wp_customize->add_section('apepi_contato_section', array(
+        'title'       => __('APEPI - Página "Contato"', 'apepi-escola'),
+        'priority'    => 11,
+        'description' => __('Personalize os textos do hero, cards de atendimento e banner da página Contato.', 'apepi-escola'),
+    ));
+
+    $wp_customize->add_setting('apepi_contato_hero_title', array('default' => 'Contato', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_hero_title', array('label' => __('Hero: Título Principal', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_hero_sub', array('default' => 'Fale com a APEPI Escola', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_hero_sub', array('label' => __('Hero: Subtítulo', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_hero_desc', array('default' => 'Nossa equipe está pronta para te atender e ajudar você a escolher o melhor caminho na formação em Cannabis Medicinal.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_hero_desc', array('label' => __('Hero: Descrição', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'textarea'));
+
+    $wp_customize->add_setting('apepi_contato_card1_title', array('default' => 'Fale com nossa secretaria', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card1_title', array('label' => __('Card 1: Título', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_card1_desc', array('default' => 'Dúvidas sobre cursos, parcerias, documentos e outros assuntos.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card1_desc', array('label' => __('Card 1: Descrição', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_contato_card1_phone', array('default' => '+55 21 97495-2236', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card1_phone', array('label' => __('Card 1: Telefone/WhatsApp', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_contato_card2_title', array('default' => 'Inscrição de cursos pelo WhatsApp', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card2_title', array('label' => __('Card 2: Título', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_card2_desc', array('default' => 'Entre em contato com um de nossos atendentes e garanta sua vaga!', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card2_desc', array('label' => __('Card 2: Descrição', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_contato_card2_phone1', array('default' => '+55 21 96753-7633', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card2_phone1', array('label' => __('Card 2: WhatsApp 1', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_card2_phone2', array('default' => '+55 21 99724-0283', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card2_phone2', array('label' => __('Card 2: WhatsApp 2', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+
+    $wp_customize->add_setting('apepi_contato_card3_title', array('default' => 'Acompanhe no Instagram', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card3_title', array('label' => __('Card 3: Título', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_card3_desc', array('default' => 'Fique por dentro das novidades, conteúdos e bastidores da APEPI Escola.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card3_desc', array('label' => __('Card 3: Descrição', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_contato_card3_handle', array('default' => '@apepiescola', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card3_handle', array('label' => __('Card 3: Nome de Usuário', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_card3_url', array('default' => 'https://instagram.com/apepiescola', 'sanitize_callback' => 'esc_url_raw', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card3_url', array('label' => __('Card 3: Link do Instagram', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'url'));
+
+    $wp_customize->add_setting('apepi_contato_card4_title', array('default' => 'Envie um e-mail', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card4_title', array('label' => __('Card 4: Título', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_contato_card4_desc', array('default' => 'Entre em contato por e-mail.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card4_desc', array('label' => __('Card 4: Descrição', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_contato_card4_email', array('default' => 'ead@apepi.org', 'sanitize_callback' => 'sanitize_email', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_card4_email', array('label' => __('Card 4: Endereço de E-mail', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'email'));
+
+    $wp_customize->add_setting('apepi_contato_banner_text', array('default' => 'Nosso compromisso é com a excelência na formação e no atendimento. Ficaremos felizes em te ajudar!', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_contato_banner_text', array('label' => __('Banner Compromisso: Texto', 'apepi-escola'), 'section' => 'apepi_contato_section', 'type' => 'textarea'));
 }
 add_action('customize_register', 'apepi_escola_customize_register');
 
@@ -2607,6 +2722,101 @@ add_shortcode('apepi_banner_ebooks', 'apepi_shortcode_banner_ebooks');
 function apepi_shortcode_pagina_nossos_cursos() {
     ob_start();
     $assets_url = get_template_directory_uri() . '/assets/';
+
+    // Opções do Customizer (Catálogo & Header)
+    $catalog_sub = apepi_get_option('apepi_nc_catalog_sub', 'NOSSO CATÁLOGO');
+    $main_title  = apepi_get_option('apepi_nc_main_title', 'FORMAÇÕES');
+
+    // Opções do Customizer (Estatísticas / Números)
+    $num_tag    = apepi_get_option('apepi_nc_numeros_tag', '🌿 APEPI ESCOLA EM NÚMEROS 🌿');
+    $n1_big     = apepi_get_option('apepi_nc_num1_big', '14 anos');
+    $n1_desc    = apepi_get_option('apepi_nc_num1_desc', 'de experiência na educação canábica');
+    $n2_big     = apepi_get_option('apepi_nc_num2_big', '+1000');
+    $n2_desc    = apepi_get_option('apepi_nc_num2_desc', 'alunos formados e preparados para fazer a diferença');
+    $n3_big     = apepi_get_option('apepi_nc_num3_big', '+10h');
+    $n3_sub     = apepi_get_option('apepi_nc_num3_sub', 'de conteúdo');
+    $n3_desc    = apepi_get_option('apepi_nc_num3_desc', 'aulas online e ao vivo com especialistas referência na área');
+    $n4_title   = apepi_get_option('apepi_nc_num4_title', 'Formação completa');
+    $n4_desc    = apepi_get_option('apepi_nc_num4_desc', 'da teoria à prática, com segurança e responsabilidade');
+    $n5_title   = apepi_get_option('apepi_nc_num5_title', 'E-books gratuitos');
+    $n5_desc    = apepi_get_option('apepi_nc_num5_desc', 'materiais exclusivos para aprofundar seu conhecimento');
+
+    // Opções do Customizer (Depoimentos)
+    $dep_tag    = apepi_get_option('apepi_nc_dep_tag', '🌿 DEPOIMENTOS 🌿');
+    $dep_title  = apepi_get_option('apepi_nc_dep_title', 'O que nossos alunos dizem');
+    $dep_sub    = apepi_get_option('apepi_nc_dep_sub', 'Histórias reais de médicos, veterinários e profissionais que transformaram sua prática com o conhecimento em Cannabis Medicinal.');
+
+    // Opções do Customizer (Banner E-books & Rodapé)
+    $eb_title   = apepi_get_option('apepi_nc_ebook_title', 'Conhecimento que vai além da sala de aula');
+    $eb_sub     = apepi_get_option('apepi_nc_ebook_sub', 'Acesse nossos e-books gratuitos e aprofunde ainda mais seus estudos sobre Cannabis Medicinal.');
+    $eb_btn     = apepi_get_option('apepi_nc_ebook_btn', 'BAIXAR E-BOOKS GRATUITOS');
+    $eb_url     = apepi_get_option('apepi_nc_ebook_url', '#ebooks');
+    $foot_text  = apepi_get_option('apepi_nc_foot_text', 'APEPI Escola – Transformando conhecimento em cuidado e qualidade de vida. Junte-se a mais de 1000 alunos e faça parte dessa história.');
+
+    // WP_Query Dinâmica para Cursos
+    $args_cursos = array(
+        'post_type'      => array('curso', 'cursos', 'jet-engine-curso'),
+        'posts_per_page' => 4,
+        'post_status'    => 'publish',
+    );
+    $query_cursos = new WP_Query($args_cursos);
+
+    // Cursos Padrão (Fallback visual de paridade)
+    $default_courses = array(
+        array(
+            'img'   => $assets_url . 'hero_doctor_medical_desk.png',
+            'title' => 'Cannabis Medicinal na Rotina do Profissional De Saúde',
+            'desc'  => 'Associação pioneira em Cannabis Medicinal no Brasil, lançou agora um curso exclusivo para veterinários.',
+            'url'   => '/cursos/saude',
+        ),
+        array(
+            'img'   => $assets_url . 'course_vet_dog.png',
+            'title' => 'Uso Veterinário de Cannabis',
+            'desc'  => 'Associação pioneira em Cannabis Medicinal no Brasil, lançou agora um curso exclusivo para veterinários.',
+            'url'   => '/cursos/veterinaria',
+        ),
+        array(
+            'img'   => $assets_url . 'course_family_farm.png',
+            'title' => 'Cultivo & Extração - De Família para Família',
+            'desc'  => 'Aprenda a cultivar na prática com carinho e segurança, com quem já testou e validou cada passo.',
+            'url'   => '/fazenda',
+        ),
+        array(
+            'img'   => $assets_url . 'course_farm_visit.png',
+            'title' => 'Curso de Prescrição Medicinal de Cannabis',
+            'desc'  => 'São 12 edições aprovadas e reconhecidas por médicos em todo o Brasil.',
+            'url'   => '/cursos/prescricao',
+        ),
+    );
+
+    // WP_Query Dinâmica para Depoimentos
+    $args_dep = array(
+        'post_type'      => array('depoimento', 'depoimentos', 'jet-engine-depoimento'),
+        'posts_per_page' => 3,
+        'post_status'    => 'publish',
+    );
+    $query_dep = new WP_Query($args_dep);
+
+    $default_testimonials = array(
+        array(
+            'img'   => $assets_url . 'avatar_doctor_1.png',
+            'text'  => 'O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes com muito mais consciência e resultados.',
+            'name'  => 'Dr. Rafael M.',
+            'role'  => 'Médico',
+        ),
+        array(
+            'img'   => $assets_url . 'avatar_vet_1.png',
+            'text'  => 'Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo de olhos fechados!',
+            'name'  => 'Dra. Juliana T.',
+            'role'  => 'Médica Veterinária',
+        ),
+        array(
+            'img'   => $assets_url . 'avatar_doctor_2.png',
+            'text'  => 'A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação. Um curso que vai muito além da teoria.',
+            'name'  => 'Dr. Lucas P.',
+            'role'  => 'Médico',
+        ),
+    );
     ?>
     <div class="ref-nc-wrapper">
       
@@ -2616,8 +2826,8 @@ function apepi_shortcode_pagina_nossos_cursos() {
           
           <div class="ref-nc-header-row">
             <div class="ref-nc-title-block">
-              <span class="ref-nc-catalog-sub">NOSSO CATÁLOGO</span>
-              <h1 class="ref-nc-main-title">FORMAÇÕES</h1>
+              <span class="ref-nc-catalog-sub"><?php echo esc_html($catalog_sub); ?></span>
+              <h1 class="ref-nc-main-title"><?php echo esc_html($main_title); ?></h1>
             </div>
             <div class="ref-nc-nav-arrows">
               <button class="ref-arrow-btn ref-arrow-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -2625,61 +2835,52 @@ function apepi_shortcode_pagina_nossos_cursos() {
             </div>
           </div>
 
-          <!-- GRID DE 4 CARDS DE CURSOS -->
+          <!-- GRID DE CARDS DE CURSOS -->
           <div class="ref-nc-formacoes-grid">
-            
-            <!-- CARD 1 -->
-            <div class="ref-course-card">
-              <div class="ref-course-img-wrap">
-                <img src="<?php echo esc_url($assets_url . 'hero_doctor_medical_desk.png'); ?>" alt="Cannabis Medicinal na Rotina do Profissional De Saúde">
-                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
-              </div>
-              <div class="ref-course-body">
-                <h3>Cannabis Medicinal na Rotina do Profissional De Saúde</h3>
-                <p>Associação pioneira em Cannabis Medicinal no Brasil, lançou agora um curso exclusivo para veterinários.</p>
-                <a href="/cursos/saude" class="ref-course-link">SAIBA MAIS &rarr;</a>
-              </div>
-            </div>
+            <?php
+            $rendered_count = 0;
+            if ($query_cursos->have_posts()) :
+              while ($query_cursos->have_posts()) : $query_cursos->the_post();
+                $rendered_count++;
+                $icone = apepi_get_course_meta(get_the_ID(), 'icone', 'fa-solid fa-cannabis');
+                $thumb = apepi_get_course_thumb_image(get_the_ID());
+                ?>
+                <div class="ref-course-card">
+                  <div class="ref-course-img-wrap">
+                    <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>">
+                    <div class="ref-course-leaf-badge"><i class="<?php echo esc_attr($icone); ?>"></i></div>
+                  </div>
+                  <div class="ref-course-body">
+                    <h3><?php the_title(); ?></h3>
+                    <p><?php echo wp_trim_words(get_the_excerpt(), 18, '...'); ?></p>
+                    <a href="<?php the_permalink(); ?>" class="ref-course-link">SAIBA MAIS &rarr;</a>
+                  </div>
+                </div>
+                <?php
+              endwhile;
+              wp_reset_postdata();
+            endif;
 
-            <!-- CARD 2 -->
-            <div class="ref-course-card">
-              <div class="ref-course-img-wrap">
-                <img src="<?php echo esc_url($assets_url . 'course_vet_dog.png'); ?>" alt="Uso Veterinário de Cannabis">
-                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
-              </div>
-              <div class="ref-course-body">
-                <h3>Uso Veterinário de Cannabis</h3>
-                <p>Associação pioneira em Cannabis Medicinal no Brasil, lançou agora um curso exclusivo para veterinários.</p>
-                <a href="/cursos/veterinaria" class="ref-course-link">SAIBA MAIS &rarr;</a>
-              </div>
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="ref-course-card">
-              <div class="ref-course-img-wrap">
-                <img src="<?php echo esc_url($assets_url . 'course_family_farm.png'); ?>" alt="Cultivo & Extração - De Família para Família">
-                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
-              </div>
-              <div class="ref-course-body">
-                <h3>Cultivo & Extração - De Família para Família</h3>
-                <p>Aprenda a cultivar na prática com carinho e segurança, com quem já testou e validou cada passo.</p>
-                <a href="/fazenda" class="ref-course-link">SAIBA MAIS &rarr;</a>
-              </div>
-            </div>
-
-            <!-- CARD 4 -->
-            <div class="ref-course-card">
-              <div class="ref-course-img-wrap">
-                <img src="<?php echo esc_url($assets_url . 'course_farm_visit.png'); ?>" alt="Curso de Prescrição Medicinal de Cannabis">
-                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
-              </div>
-              <div class="ref-course-body">
-                <h3>Curso de Prescrição Medicinal de Cannabis</h3>
-                <p>São 12 edições aprovadas e reconhecidas por médicos em todo o Brasil.</p>
-                <a href="/cursos/prescricao" class="ref-course-link">SAIBA MAIS &rarr;</a>
-              </div>
-            </div>
-
+            // Preenchimento com Fallback para Garantir a Grade Completa de 4 Cards
+            if ($rendered_count < 4) {
+              for ($i = $rendered_count; $i < 4; $i++) {
+                $card = $default_courses[$i];
+                ?>
+                <div class="ref-course-card">
+                  <div class="ref-course-img-wrap">
+                    <img src="<?php echo esc_url($card['img']); ?>" alt="<?php echo esc_attr($card['title']); ?>">
+                    <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
+                  </div>
+                  <div class="ref-course-body">
+                    <h3><?php echo esc_html($card['title']); ?></h3>
+                    <p><?php echo esc_html($card['desc']); ?></p>
+                    <a href="<?php echo esc_url($card['url']); ?>" class="ref-course-link">SAIBA MAIS &rarr;</a>
+                  </div>
+                </div>
+                <?php
+              }
+            }
+            ?>
           </div>
 
           <!-- PROGRESS BAR SLIDER KNOB -->
@@ -2696,39 +2897,39 @@ function apepi_shortcode_pagina_nossos_cursos() {
       <section class="ref-nc-numeros-section">
         <div class="container">
           <div class="ref-nc-section-tag text-center">
-            <span>🌿 APEPI ESCOLA EM NÚMEROS 🌿</span>
+            <span><?php echo esc_html($num_tag); ?></span>
           </div>
           <div class="ref-nc-numeros-grid">
             
             <div class="ref-num-item">
               <div class="ref-num-icon"><i class="fa-solid fa-award"></i></div>
-              <h2 class="ref-num-big">14 anos</h2>
-              <p class="ref-num-desc">de experiência na educação canábica</p>
+              <h2 class="ref-num-big"><?php echo esc_html($n1_big); ?></h2>
+              <p class="ref-num-desc"><?php echo esc_html($n1_desc); ?></p>
             </div>
 
             <div class="ref-num-item">
               <div class="ref-num-icon"><i class="fa-solid fa-users"></i></div>
-              <h2 class="ref-num-big">+1000</h2>
-              <p class="ref-num-desc">alunos formados e preparados para fazer a diferença</p>
+              <h2 class="ref-num-big"><?php echo esc_html($n2_big); ?></h2>
+              <p class="ref-num-desc"><?php echo esc_html($n2_desc); ?></p>
             </div>
 
             <div class="ref-num-item">
               <div class="ref-num-icon"><i class="fa-solid fa-circle-play"></i></div>
-              <h2 class="ref-num-big">+10h</h2>
-              <p class="ref-num-sub-label">de conteúdo</p>
-              <p class="ref-num-desc">aulas online e ao vivo com especialistas referência na área</p>
+              <h2 class="ref-num-big"><?php echo esc_html($n3_big); ?></h2>
+              <?php if (!empty($n3_sub)) : ?><p class="ref-num-sub-label"><?php echo esc_html($n3_sub); ?></p><?php endif; ?>
+              <p class="ref-num-desc"><?php echo esc_html($n3_desc); ?></p>
             </div>
 
             <div class="ref-num-item">
               <div class="ref-num-icon"><i class="fa-solid fa-cannabis"></i></div>
-              <h2 class="ref-num-title">Formação completa</h2>
-              <p class="ref-num-desc">da teoria à prática, com segurança e responsabilidade</p>
+              <h2 class="ref-num-title"><?php echo esc_html($n4_title); ?></h2>
+              <p class="ref-num-desc"><?php echo esc_html($n4_desc); ?></p>
             </div>
 
             <div class="ref-num-item">
               <div class="ref-num-icon"><i class="fa-solid fa-download"></i></div>
-              <h2 class="ref-num-title">E-books gratuitos</h2>
-              <p class="ref-num-desc">materiais exclusivos para aprofundar seu conhecimento</p>
+              <h2 class="ref-num-title"><?php echo esc_html($n5_title); ?></h2>
+              <p class="ref-num-desc"><?php echo esc_html($n5_desc); ?></p>
             </div>
 
           </div>
@@ -2739,49 +2940,59 @@ function apepi_shortcode_pagina_nossos_cursos() {
       <section class="ref-nc-depoimentos-section">
         <div class="container">
           <div class="ref-nc-dep-header text-center">
-            <span class="ref-nc-section-tag">🌿 DEPOIMENTOS 🌿</span>
-            <h2 class="ref-nc-dep-title">O que nossos alunos dizem</h2>
-            <p class="ref-nc-dep-sub">Histórias reais de médicos, veterinários e profissionais que transformaram sua prática com o conhecimento em Cannabis Medicinal.</p>
+            <span class="ref-nc-section-tag"><?php echo esc_html($dep_tag); ?></span>
+            <h2 class="ref-nc-dep-title"><?php echo esc_html($dep_title); ?></h2>
+            <p class="ref-nc-dep-sub"><?php echo esc_html($dep_sub); ?></p>
           </div>
 
           <div class="ref-nc-dep-grid">
-            
-            <div class="ref-dep-card">
-              <div class="ref-dep-quote">&ldquo;</div>
-              <p class="ref-dep-text">O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes com muito mais consciência e resultados.</p>
-              <div class="ref-dep-profile">
-                <img src="<?php echo esc_url($assets_url . 'avatar_doctor_1.png'); ?>" alt="Dr. Rafael M.">
-                <div class="ref-dep-info">
-                  <strong>Dr. Rafael M.</strong>
-                  <span>Médico</span>
+            <?php
+            $dep_rendered = 0;
+            if ($query_dep->have_posts()) :
+              while ($query_dep->have_posts()) : $query_dep->the_post();
+                $dep_rendered++;
+                $role = get_post_meta(get_the_ID(), 'cargo', true);
+                if (empty($role)) $role = get_post_meta(get_the_ID(), 'role', true);
+                if (empty($role)) $role = 'Aluno APEPI';
+                $avatar = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+                if (empty($avatar)) $avatar = $assets_url . 'avatar_doctor_1.png';
+                ?>
+                <div class="ref-dep-card">
+                  <div class="ref-dep-quote">&ldquo;</div>
+                  <p class="ref-dep-text"><?php echo get_the_content(); ?></p>
+                  <div class="ref-dep-profile">
+                    <img src="<?php echo esc_url($avatar); ?>" alt="<?php the_title_attribute(); ?>">
+                    <div class="ref-dep-info">
+                      <strong><?php the_title(); ?></strong>
+                      <span><?php echo esc_html($role); ?></span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+                <?php
+              endwhile;
+              wp_reset_postdata();
+            endif;
 
-            <div class="ref-dep-card">
-              <div class="ref-dep-quote">&ldquo;</div>
-              <p class="ref-dep-text">Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo de olhos fechados!</p>
-              <div class="ref-dep-profile">
-                <img src="<?php echo esc_url($assets_url . 'avatar_vet_1.png'); ?>" alt="Dra. Juliana T.">
-                <div class="ref-dep-info">
-                  <strong>Dra. Juliana T.</strong>
-                  <span>Médica Veterinária</span>
+            // Fallback para Depoimentos
+            if ($dep_rendered < 3) {
+              for ($j = $dep_rendered; $j < 3; $j++) {
+                $dep = $default_testimonials[$j];
+                ?>
+                <div class="ref-dep-card">
+                  <div class="ref-dep-quote">&ldquo;</div>
+                  <p class="ref-dep-text"><?php echo esc_html($dep['text']); ?></p>
+                  <div class="ref-dep-profile">
+                    <img src="<?php echo esc_url($dep['img']); ?>" alt="<?php echo esc_attr($dep['name']); ?>">
+                    <div class="ref-dep-info">
+                      <strong><?php echo esc_html($dep['name']); ?></strong>
+                      <span><?php echo esc_html($dep['role']); ?></span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="ref-dep-card">
-              <div class="ref-dep-quote">&ldquo;</div>
-              <p class="ref-dep-text">A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação. Um curso que vai muito além da teoria.</p>
-              <div class="ref-dep-profile">
-                <img src="<?php echo esc_url($assets_url . 'avatar_doctor_2.png'); ?>" alt="Dr. Lucas P.">
-                <div class="ref-dep-info">
-                  <strong>Dr. Lucas P.</strong>
-                  <span>Médico</span>
-                </div>
-              </div>
-            </div>
-
+                <?php
+              }
+            }
+            ?>
           </div>
 
           <div class="ref-dep-nav-row text-right">
@@ -2802,13 +3013,13 @@ function apepi_shortcode_pagina_nossos_cursos() {
             </div>
 
             <div class="ref-nc-ebook-center">
-              <h2>Conhecimento que vai além da sala de aula</h2>
-              <p>Acesse nossos e-books gratuitos e aprofunde ainda mais seus estudos sobre Cannabis Medicinal.</p>
+              <h2><?php echo esc_html($eb_title); ?></h2>
+              <p><?php echo esc_html($eb_sub); ?></p>
             </div>
 
             <div class="ref-nc-ebook-right">
-              <a href="#ebooks" class="ref-btn-download-green">
-                <i class="fa-solid fa-download"></i> BAIXAR E-BOOKS GRATUITOS
+              <a href="<?php echo esc_url($eb_url); ?>" class="ref-btn-download-green">
+                <i class="fa-solid fa-download"></i> <?php echo esc_html($eb_btn); ?>
               </a>
               <span class="ref-ebook-guarantee"><i class="fa-solid fa-lock"></i> 100% gratuitos e seguros.</span>
             </div>
@@ -2823,7 +3034,7 @@ function apepi_shortcode_pagina_nossos_cursos() {
           <div class="ref-nc-foot-box">
             <div class="ref-foot-left">
               <img src="<?php echo esc_url($assets_url . 'logo_apepi_escola.png'); ?>" alt="APEPI Escola" class="ref-foot-logo">
-              <p><strong>APEPI Escola &ndash; Transformando conhecimento em cuidado e qualidade de vida.</strong> Junte-se a mais de 1000 alunos e faça parte dessa história.</p>
+              <p><?php echo esc_html($foot_text); ?></p>
             </div>
             <div class="ref-foot-right">
               <button class="ref-heart-btn" title="Favoritar"><i class="fa-regular fa-heart"></i></button>
