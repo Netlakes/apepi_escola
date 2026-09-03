@@ -112,8 +112,8 @@ function apepi_get_logo_url($type = 'light') {
  */
 function apepi_escola_scripts() {
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
-    wp_enqueue_style('apepi-escola-style', get_stylesheet_uri(), array('font-awesome'), '4.2.0');
-    wp_enqueue_script('apepi-escola-script', get_template_directory_uri() . '/script.js', array(), '4.2.0', true);
+    wp_enqueue_style('apepi-escola-style', get_stylesheet_uri(), array('font-awesome'), '5.8.0');
+    wp_enqueue_script('apepi-escola-script', get_template_directory_uri() . '/script.js', array(), '5.8.0', true);
 }
 add_action('wp_enqueue_scripts', 'apepi_escola_scripts');
 
