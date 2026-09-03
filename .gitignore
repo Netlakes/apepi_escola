@@ -18,6 +18,8 @@ Thumbs.db
 # Scratch & Extraction files
 *.pdf
 *.zip
+drive-download-*
+Layout do Portal*
 check_*.py
 hero_lab_*.png
 page_*.png
