@@ -2603,118 +2603,248 @@ function apepi_shortcode_banner_ebooks() {
 add_shortcode('apepi_banner_ebooks', 'apepi_shortcode_banner_ebooks');
 
 
-// Shortcode: Template da Página "Nossos Cursos"
+// Shortcode: Template da Página "Nossos Cursos" (100% Fiel à Imagem de Referência)
 function apepi_shortcode_pagina_nossos_cursos() {
     ob_start();
+    $assets_url = get_template_directory_uri() . '/assets/';
     ?>
-    <div class="nossos-cursos-page-wrapper">
+    <div class="ref-nc-wrapper">
       
-      <!-- HERO NOSSOS CURSOS -->
-      <section class="nc-hero-section">
+      <!-- SEÇÃO FORMAÇÕES (CATÁLOGO + SLIDER ARROWS) -->
+      <section class="ref-nc-formacoes-section">
         <div class="container">
-          <div class="nc-hero-header text-center">
-            <span class="nc-badge-pill"><i class="fa-solid fa-graduation-cap"></i> FORMAÇÃO CONTINUADA APEPI</span>
-            <h1 class="nc-title">Conheça Nossos Cursos</h1>
-            <p class="nc-subtitle">Capacitação científica, prática clínica e imersão para médicos, profissionais de saúde, veterinários e estudantes.</p>
+          
+          <div class="ref-nc-header-row">
+            <div class="ref-nc-title-block">
+              <span class="ref-nc-catalog-sub">NOSSO CATÁLOGO</span>
+              <h1 class="ref-nc-main-title">FORMAÇÕES</h1>
+            </div>
+            <div class="ref-nc-nav-arrows">
+              <button class="ref-arrow-btn ref-arrow-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="ref-arrow-btn ref-arrow-next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <!-- FORMAÇÕES EM DESTAQUE -->
-      <section class="nc-formacoes-section">
-        <div class="container">
-          <div class="nc-section-header text-center">
-            <h2>Cursos em Destaque</h2>
-            <p>Selecione a formação ideal para impulsionar a sua carreira</p>
-          </div>
-          <div class="nc-formacoes-grid">
+          <!-- GRID DE 4 CARDS DE CURSOS -->
+          <div class="ref-nc-formacoes-grid">
             
-            <div class="nc-curso-card-destaque">
-              <div class="nc-card-header-accent nc-accent-medical">
-                <span class="nc-card-tag"><i class="fa-solid fa-user-doctor"></i> PÓS-GRADUAÇÃO</span>
+            <!-- CARD 1 -->
+            <div class="ref-course-card">
+              <div class="ref-course-img-wrap">
+                <img src="<?php echo esc_url($assets_url . 'hero_doctor_medical_desk.png'); ?>" alt="Cannabis Medicinal na Rotina do Profissional De Saúde">
+                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
               </div>
-              <div class="nc-card-content-body">
-                <h3>Pós-Graduação Médica em Cannabis</h3>
-                <p>Formação completa com mentoria individual, estudos de casos reais e imersão presencial na Fazenda APEPI.</p>
-                <div class="nc-card-meta-list">
-                  <span><i class="fa-solid fa-clock"></i> 360h / 12 meses</span>
-                  <span><i class="fa-solid fa-certificate"></i> Certificação MEC</span>
-                </div>
-                <a href="/cursos/pos-graduacao" class="btn btn-primary nc-btn-card">CONHECER CURSO <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="ref-course-body">
+                <h3>Cannabis Medicinal na Rotina do Profissional De Saúde</h3>
+                <p>Associação pioneira em Cannabis Medicinal no Brasil, lançou agora um curso exclusivo para veterinários.</p>
+                <a href="/cursos/saude" class="ref-course-link">SAIBA MAIS &rarr;</a>
               </div>
             </div>
 
-            <div class="nc-curso-card-destaque">
-              <div class="nc-card-header-accent nc-accent-vet">
-                <span class="nc-card-tag"><i class="fa-solid fa-paw"></i> VETERINÁRIA</span>
+            <!-- CARD 2 -->
+            <div class="ref-course-card">
+              <div class="ref-course-img-wrap">
+                <img src="<?php echo esc_url($assets_url . 'course_vet_dog.png'); ?>" alt="Uso Veterinário de Cannabis">
+                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
               </div>
-              <div class="nc-card-content-body">
-                <h3>Cannabis Medicinal Veterinária</h3>
-                <p>Dosagem, segurança, sistema endocanabinoide e aplicação clínica para pequenos e grandes animais.</p>
-                <div class="nc-card-meta-list">
-                  <span><i class="fa-solid fa-clock"></i> 120h online</span>
-                  <span><i class="fa-solid fa-certificate"></i> Certificado APEPI</span>
-                </div>
-                <a href="/cursos/veterinaria" class="btn btn-primary nc-btn-card">CONHECER CURSO <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="ref-course-body">
+                <h3>Uso Veterinário de Cannabis</h3>
+                <p>Associação pioneira em Cannabis Medicinal no Brasil, lançou agora um curso exclusivo para veterinários.</p>
+                <a href="/cursos/veterinaria" class="ref-course-link">SAIBA MAIS &rarr;</a>
               </div>
             </div>
 
-            <div class="nc-curso-card-destaque">
-              <div class="nc-card-header-accent nc-accent-cultivo">
-                <span class="nc-card-tag"><i class="fa-solid fa-seedling"></i> CULTIVO & EXTRAÇÃO</span>
+            <!-- CARD 3 -->
+            <div class="ref-course-card">
+              <div class="ref-course-img-wrap">
+                <img src="<?php echo esc_url($assets_url . 'course_family_farm.png'); ?>" alt="Cultivo & Extração - De Família para Família">
+                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
               </div>
-              <div class="nc-card-content-body">
-                <h3>Imersão Prática em Cultivo</h3>
-                <p>Aprenda na prática na maior fazenda de Cannabis Medicinal do Brasil: genética, manejo sustentável e extração.</p>
-                <div class="nc-card-meta-list">
-                  <span><i class="fa-solid fa-location-dot"></i> Presencial na Fazenda</span>
-                  <span><i class="fa-solid fa-calendar"></i> Imersão de 3 Dias</span>
-                </div>
-                <a href="/fazenda" class="btn btn-primary nc-btn-card">CONHECER CURSO <i class="fa-solid fa-arrow-right"></i></a>
+              <div class="ref-course-body">
+                <h3>Cultivo & Extração - De Família para Família</h3>
+                <p>Aprenda a cultivar na prática com carinho e segurança, com quem já testou e validou cada passo.</p>
+                <a href="/fazenda" class="ref-course-link">SAIBA MAIS &rarr;</a>
+              </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="ref-course-card">
+              <div class="ref-course-img-wrap">
+                <img src="<?php echo esc_url($assets_url . 'course_farm_visit.png'); ?>" alt="Curso de Prescrição Medicinal de Cannabis">
+                <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
+              </div>
+              <div class="ref-course-body">
+                <h3>Curso de Prescrição Medicinal de Cannabis</h3>
+                <p>São 12 edições aprovadas e reconhecidas por médicos em todo o Brasil.</p>
+                <a href="/cursos/prescricao" class="ref-course-link">SAIBA MAIS &rarr;</a>
               </div>
             </div>
 
           </div>
+
+          <!-- PROGRESS BAR SLIDER KNOB -->
+          <div class="ref-nc-progress-bar">
+            <div class="ref-nc-progress-track">
+              <div class="ref-nc-progress-knob"></div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- BARRA DE ESTATÍSTICAS -->
-      <?php echo apepi_shortcode_escola_numeros(); ?>
-
-      <!-- CATÁLOGO GERAL DE CURSOS -->
-      <section class="nc-catalogo-section">
+      <!-- SEÇÃO APEPI ESCOLA EM NÚMEROS -->
+      <section class="ref-nc-numeros-section">
         <div class="container">
-          <div class="nc-section-header text-center">
-            <h2>Todos os Cursos Disponíveis</h2>
-            <p>Explore nosso catálogo completo e matricule-se online com facilidade</p>
+          <div class="ref-nc-section-tag text-center">
+            <span>🌿 APEPI ESCOLA EM NÚMEROS 🌿</span>
           </div>
-          <?php
-          if (shortcode_exists('apepi_lista_cursos')) {
-              echo do_shortcode('[apepi_lista_cursos limit="12"]');
-          }
-          ?>
+          <div class="ref-nc-numeros-grid">
+            
+            <div class="ref-num-item">
+              <div class="ref-num-icon"><i class="fa-solid fa-award"></i></div>
+              <h2 class="ref-num-big">14 anos</h2>
+              <p class="ref-num-desc">de experiência na educação canábica</p>
+            </div>
+
+            <div class="ref-num-item">
+              <div class="ref-num-icon"><i class="fa-solid fa-users"></i></div>
+              <h2 class="ref-num-big">+1000</h2>
+              <p class="ref-num-desc">alunos formados e preparados para fazer a diferença</p>
+            </div>
+
+            <div class="ref-num-item">
+              <div class="ref-num-icon"><i class="fa-solid fa-circle-play"></i></div>
+              <h2 class="ref-num-big">+10h</h2>
+              <p class="ref-num-sub-label">de conteúdo</p>
+              <p class="ref-num-desc">aulas online e ao vivo com especialistas referência na área</p>
+            </div>
+
+            <div class="ref-num-item">
+              <div class="ref-num-icon"><i class="fa-solid fa-cannabis"></i></div>
+              <h2 class="ref-num-title">Formação completa</h2>
+              <p class="ref-num-desc">da teoria à prática, com segurança e responsabilidade</p>
+            </div>
+
+            <div class="ref-num-item">
+              <div class="ref-num-icon"><i class="fa-solid fa-download"></i></div>
+              <h2 class="ref-num-title">E-books gratuitos</h2>
+              <p class="ref-num-desc">materiais exclusivos para aprofundar seu conhecimento</p>
+            </div>
+
+          </div>
         </div>
       </section>
 
-      <!-- DEPOIMENTOS DE ALUNOS -->
-      <?php
-      if (shortcode_exists('apepi_depoimentos')) {
-          echo do_shortcode('[apepi_depoimentos title="Depoimentos de Nossos Alunos" badge="A VOZ DE QUEM FEZ"]');
-      }
-      ?>
+      <!-- SEÇÃO DEPOIMENTOS -->
+      <section class="ref-nc-depoimentos-section">
+        <div class="container">
+          <div class="ref-nc-dep-header text-center">
+            <span class="ref-nc-section-tag">🌿 DEPOIMENTOS 🌿</span>
+            <h2 class="ref-nc-dep-title">O que nossos alunos dizem</h2>
+            <p class="ref-nc-dep-sub">Histórias reais de médicos, veterinários e profissionais que transformaram sua prática com o conhecimento em Cannabis Medicinal.</p>
+          </div>
 
-      <!-- E-BOOKS GRATUITOS -->
-      <?php echo apepi_shortcode_banner_ebooks(); ?>
+          <div class="ref-nc-dep-grid">
+            
+            <div class="ref-dep-card">
+              <div class="ref-dep-quote">&ldquo;</div>
+              <p class="ref-dep-text">O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes com muito mais consciência e resultados.</p>
+              <div class="ref-dep-profile">
+                <img src="<?php echo esc_url($assets_url . 'avatar_doctor_1.png'); ?>" alt="Dr. Rafael M.">
+                <div class="ref-dep-info">
+                  <strong>Dr. Rafael M.</strong>
+                  <span>Médico</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ref-dep-card">
+              <div class="ref-dep-quote">&ldquo;</div>
+              <p class="ref-dep-text">Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo de olhos fechados!</p>
+              <div class="ref-dep-profile">
+                <img src="<?php echo esc_url($assets_url . 'avatar_vet_1.png'); ?>" alt="Dra. Juliana T.">
+                <div class="ref-dep-info">
+                  <strong>Dra. Juliana T.</strong>
+                  <span>Médica Veterinária</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ref-dep-card">
+              <div class="ref-dep-quote">&ldquo;</div>
+              <p class="ref-dep-text">A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação. Um curso que vai muito além da teoria.</p>
+              <div class="ref-dep-profile">
+                <img src="<?php echo esc_url($assets_url . 'avatar_doctor_2.png'); ?>" alt="Dr. Lucas P.">
+                <div class="ref-dep-info">
+                  <strong>Dr. Lucas P.</strong>
+                  <span>Médico</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="ref-dep-nav-row text-right">
+            <button class="ref-arrow-btn ref-arrow-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="ref-arrow-btn ref-arrow-next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BANNER E-BOOKS GRATUITOS -->
+      <section class="ref-nc-ebook-banner-section">
+        <div class="container">
+          <div class="ref-nc-ebook-box">
+            
+            <div class="ref-nc-ebook-left">
+              <img src="<?php echo esc_url($assets_url . 'ebook_cannabis_vida.png'); ?>" alt="E-books Cannabis e a Vida" class="ref-ebook-3d-img">
+            </div>
+
+            <div class="ref-nc-ebook-center">
+              <h2>Conhecimento que vai além da sala de aula</h2>
+              <p>Acesse nossos e-books gratuitos e aprofunde ainda mais seus estudos sobre Cannabis Medicinal.</p>
+            </div>
+
+            <div class="ref-nc-ebook-right">
+              <a href="#ebooks" class="ref-btn-download-green">
+                <i class="fa-solid fa-download"></i> BAIXAR E-BOOKS GRATUITOS
+              </a>
+              <span class="ref-ebook-guarantee"><i class="fa-solid fa-lock"></i> 100% gratuitos e seguros.</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- BANNER RODAPÉ INSTITUCIONAL -->
+      <section class="ref-nc-footer-banner">
+        <div class="container">
+          <div class="ref-nc-foot-box">
+            <div class="ref-foot-left">
+              <img src="<?php echo esc_url($assets_url . 'logo_apepi_escola.png'); ?>" alt="APEPI Escola" class="ref-foot-logo">
+              <p><strong>APEPI Escola &ndash; Transformando conhecimento em cuidado e qualidade de vida.</strong> Junte-se a mais de 1000 alunos e faça parte dessa história.</p>
+            </div>
+            <div class="ref-foot-right">
+              <button class="ref-heart-btn" title="Favoritar"><i class="fa-regular fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
     <?php
     return ob_get_clean();
 }
 add_shortcode('apepi_pagina_nossos_cursos', 'apepi_shortcode_pagina_nossos_cursos');
+add_shortcode('apepi_shortcode_pagina_nossos_cursos', 'apepi_shortcode_pagina_nossos_cursos');
+add_shortcode('apepi_nossos_cursos', 'apepi_shortcode_pagina_nossos_cursos');
 
 
-// Shortcode: Template da Página "Contato" (Design Redesenhado Sem Sobreposição)
+// Shortcode: Template da Página "Contato" (100% Fiel à Imagem de Referência)
 function apepi_shortcode_pagina_contato() {
+    $assets_url  = get_template_directory_uri() . '/assets/';
+
     $hero_title  = apepi_get_option('apepi_contato_hero_title', 'Contato');
     $hero_sub    = apepi_get_option('apepi_contato_hero_sub', 'Fale com a APEPI Escola');
     $hero_desc   = apepi_get_option('apepi_contato_hero_desc', 'Nossa equipe está pronta para te atender e ajudar você a escolher o melhor caminho na formação em Cannabis Medicinal.');
@@ -2741,27 +2871,42 @@ function apepi_shortcode_pagina_contato() {
 
     ob_start();
     ?>
-    <div class="contato-page-wrapper">
+    <div class="ref-contato-wrapper">
       
-      <!-- HERO CONTATO (LAYOUT LIMPO E ELEGANTE) -->
-      <section class="cnt-hero-section">
+      <!-- HERO CONTATO -->
+      <section class="ref-cnt-hero">
         <div class="container">
-          <div class="cnt-hero-wrapper-box">
+          <div class="ref-cnt-hero-grid">
             
-            <div class="cnt-hero-content-col">
-              <span class="cnt-hero-badge-pill"><i class="fa-solid fa-headset"></i> <?php echo esc_html($hero_sub); ?></span>
-              <h1 class="cnt-hero-title"><?php echo esc_html($hero_title); ?></h1>
-              <p class="cnt-hero-desc"><?php echo esc_html($hero_desc); ?></p>
+            <!-- ESQUERDA: ATENDENTE -->
+            <div class="ref-cnt-attendant-col">
+              <div class="ref-cnt-attendant-wrap">
+                <div class="ref-cnt-blob-bg"></div>
+                <div class="ref-cnt-leaf-float">
+                  <i class="fa-solid fa-cannabis"></i>
+                </div>
+                <img src="<?php echo esc_url($assets_url . 'contato_attendant.png'); ?>" alt="Atendimento APEPI Escola" class="ref-cnt-attendant-img">
+              </div>
             </div>
 
-            <div class="cnt-hero-avatar-col">
-              <div class="cnt-avatar-card">
-                <div class="cnt-avatar-circle-icon">
-                  <i class="fa-solid fa-comments"></i>
+            <!-- CENTRO: TÍTULOS E DESCRIÇÃO -->
+            <div class="ref-cnt-center-col text-center">
+              <h1 class="ref-cnt-title"><?php echo esc_html($hero_title); ?></h1>
+              <h2 class="ref-cnt-subtitle"><?php echo esc_html($hero_sub); ?></h2>
+              <p class="ref-cnt-desc"><?php echo esc_html($hero_desc); ?></p>
+            </div>
+
+            <!-- DIREITA: BALÃO DE DIÁLOGO E DESENHO FOLIAR -->
+            <div class="ref-cnt-bubble-col">
+              <div class="ref-cnt-speech-graphic-wrap">
+                <div class="ref-speech-bubble-green">
+                  <div class="ref-speech-inner-icons">
+                    <i class="fa-solid fa-cannabis ref-speech-leaf"></i>
+                    <i class="fa-solid fa-comments ref-speech-lines"></i>
+                  </div>
                 </div>
-                <div class="cnt-speech-bubble-box">
-                  <strong>Atendimento Online APEPI</strong>
-                  <span>Olá! Como podemos te ajudar hoje?</span>
+                <div class="ref-speech-leaf-drawing">
+                  <i class="fa-solid fa-leaf"></i>
                 </div>
               </div>
             </div>
@@ -2770,87 +2915,67 @@ function apepi_shortcode_pagina_contato() {
         </div>
       </section>
 
-      <!-- GRID DE CANAIS DE ATENDIMENTO (4 CARDS PREMIUM) -->
-      <section class="cnt-grid-section">
+      <!-- GRID DE 4 CARDS LADO A LADO -->
+      <section class="ref-cnt-cards-section">
         <div class="container">
-          <div class="cnt-cards-grid">
+          <div class="ref-cnt-cards-grid">
             
             <!-- CARD 1: SECRETARIA -->
-            <div class="cnt-card-premium">
-              <div class="cnt-card-top-bar cnt-bar-blue"></div>
-              <div class="cnt-card-inner">
-                <div class="cnt-card-icon-badge cnt-icon-blue">
-                  <i class="fa-solid fa-building-columns"></i>
-                </div>
-                <div class="cnt-card-details">
-                  <h3><?php echo esc_html($c1_title); ?></h3>
-                  <p><?php echo esc_html($c1_desc); ?></p>
-                  <div class="cnt-actions-row">
-                    <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $c1_phone)); ?>" target="_blank" class="cnt-btn-pill cnt-btn-whatsapp">
-                      <i class="fa-brands fa-whatsapp"></i> <?php echo esc_html($c1_phone); ?>
-                    </a>
-                  </div>
-                </div>
+            <div class="ref-cnt-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+              <h3><?php echo esc_html($c1_title); ?></h3>
+              <p><?php echo esc_html($c1_desc); ?></p>
+              <div class="ref-cnt-card-links">
+                <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $c1_phone)); ?>" target="_blank" class="ref-cnt-link-green">
+                  <i class="fa-brands fa-whatsapp"></i> <?php echo esc_html($c1_phone); ?>
+                </a>
               </div>
             </div>
 
-            <!-- CARD 2: WHATSAPP CURSOS -->
-            <div class="cnt-card-premium">
-              <div class="cnt-card-top-bar cnt-bar-green"></div>
-              <div class="cnt-card-inner">
-                <div class="cnt-card-icon-badge cnt-icon-green">
-                  <i class="fa-brands fa-whatsapp"></i>
-                </div>
-                <div class="cnt-card-details">
-                  <h3><?php echo esc_html($c2_title); ?></h3>
-                  <p><?php echo esc_html($c2_desc); ?></p>
-                  <div class="cnt-actions-row multiline">
-                    <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $c2_p1)); ?>" target="_blank" class="cnt-btn-pill cnt-btn-whatsapp">
-                      <i class="fa-brands fa-whatsapp"></i> Atendente 1: <?php echo esc_html($c2_p1); ?>
-                    </a>
-                    <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $c2_p2)); ?>" target="_blank" class="cnt-btn-pill cnt-btn-whatsapp">
-                      <i class="fa-brands fa-whatsapp"></i> Atendente 2: <?php echo esc_html($c2_p2); ?>
-                    </a>
-                  </div>
-                </div>
+            <!-- CARD 2: WHATSAPP INSCRIÇÃO -->
+            <div class="ref-cnt-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <h3><?php echo esc_html($c2_title); ?></h3>
+              <p><?php echo esc_html($c2_desc); ?></p>
+              <div class="ref-cnt-card-links">
+                <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $c2_p1)); ?>" target="_blank" class="ref-cnt-link-green">
+                  <i class="fa-brands fa-whatsapp"></i> <?php echo esc_html($c2_p1); ?>
+                </a>
+                <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $c2_p2)); ?>" target="_blank" class="ref-cnt-link-green">
+                  <i class="fa-brands fa-whatsapp"></i> <?php echo esc_html($c2_p2); ?>
+                </a>
               </div>
             </div>
 
             <!-- CARD 3: INSTAGRAM -->
-            <div class="cnt-card-premium">
-              <div class="cnt-card-top-bar cnt-bar-pink"></div>
-              <div class="cnt-card-inner">
-                <div class="cnt-card-icon-badge cnt-icon-pink">
-                  <i class="fa-brands fa-instagram"></i>
-                </div>
-                <div class="cnt-card-details">
-                  <h3><?php echo esc_html($c3_title); ?></h3>
-                  <p><?php echo esc_html($c3_desc); ?></p>
-                  <div class="cnt-actions-row">
-                    <a href="<?php echo esc_url($c3_url); ?>" target="_blank" class="cnt-btn-pill cnt-btn-instagram">
-                      <i class="fa-brands fa-instagram"></i> <?php echo esc_html($c3_handle); ?>
-                    </a>
-                  </div>
-                </div>
+            <div class="ref-cnt-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <h3><?php echo esc_html($c3_title); ?></h3>
+              <p><?php echo esc_html($c3_desc); ?></p>
+              <div class="ref-cnt-card-links">
+                <a href="<?php echo esc_url($c3_url); ?>" target="_blank" class="ref-cnt-link-green">
+                  <i class="fa-brands fa-instagram"></i> <?php echo esc_html($c3_handle); ?>
+                </a>
               </div>
             </div>
 
             <!-- CARD 4: E-MAIL -->
-            <div class="cnt-card-premium">
-              <div class="cnt-card-top-bar cnt-bar-orange"></div>
-              <div class="cnt-card-inner">
-                <div class="cnt-card-icon-badge cnt-icon-orange">
-                  <i class="fa-regular fa-envelope"></i>
-                </div>
-                <div class="cnt-card-details">
-                  <h3><?php echo esc_html($c4_title); ?></h3>
-                  <p><?php echo esc_html($c4_desc); ?></p>
-                  <div class="cnt-actions-row">
-                    <a href="mailto:<?php echo esc_attr($c4_email); ?>" class="cnt-btn-pill cnt-btn-email">
-                      <i class="fa-regular fa-envelope"></i> <?php echo esc_html($c4_email); ?>
-                    </a>
-                  </div>
-                </div>
+            <div class="ref-cnt-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-regular fa-envelope"></i>
+              </div>
+              <h3><?php echo esc_html($c4_title); ?></h3>
+              <p><?php echo esc_html($c4_desc); ?></p>
+              <div class="ref-cnt-card-links">
+                <a href="mailto:<?php echo esc_attr($c4_email); ?>" class="ref-cnt-link-green">
+                  <?php echo esc_html($c4_email); ?>
+                </a>
               </div>
             </div>
 
@@ -2858,16 +2983,19 @@ function apepi_shortcode_pagina_contato() {
         </div>
       </section>
 
-      <!-- BANNER INSTITUCIONAL E COMPROMISSO -->
-      <section class="cnt-banner-section">
+      <!-- BANNER COMPROMISSO -->
+      <section class="ref-cnt-banner-section">
         <div class="container">
-          <div class="cnt-banner-card-box">
-            <div class="cnt-banner-leaf-wrap">
-              <i class="fa-solid fa-leaf"></i>
-            </div>
-            <div class="cnt-banner-content-text">
-              <h4>Nossa Missão no Atendimento</h4>
+          <div class="ref-cnt-banner-box">
+            <div class="ref-cnt-banner-left">
+              <div class="ref-cnt-leaf-badge">
+                <i class="fa-solid fa-cannabis"></i>
+              </div>
               <p><?php echo esc_html($banner_text); ?></p>
+            </div>
+            <div class="ref-cnt-banner-divider"></div>
+            <div class="ref-cnt-banner-right">
+              <img src="<?php echo esc_url($assets_url . 'seedling_plant.png'); ?>" alt="Planter Sprout APEPI" class="ref-cnt-plant-img">
             </div>
           </div>
         </div>
