@@ -2878,4 +2878,6 @@ function apepi_shortcode_pagina_contato() {
     return ob_get_clean();
 }
 add_shortcode('apepi_pagina_contato', 'apepi_shortcode_pagina_contato');
+add_shortcode('apepi_shortcode_pagina_contato', 'apepi_shortcode_pagina_contato');
+add_shortcode('apepi_contato', 'apepi_shortcode_pagina_contato');
 

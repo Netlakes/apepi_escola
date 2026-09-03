@@ -8967,4 +8967,23 @@ body.dark-theme .cnt-banner-content-text p {
   color: #F7F0E6 !important;
 }
 
+/* Regras de Segurança para Evitar Sobreposição em Conteúdos Legados do WP Admin */
+.cnt-avatar-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cnt-speech-bubble {
+  position: relative !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  margin-top: 0.75rem !important;
+  white-space: normal !important;
+  display: inline-block !important;
+  max-width: 260px;
+}
+
 
