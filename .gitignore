@@ -17,6 +17,7 @@ Thumbs.db
 
 # Scratch & Extraction files
 *.pdf
+*.zip
 check_*.py
 hero_lab_*.png
 page_*.png

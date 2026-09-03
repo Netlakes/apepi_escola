@@ -18,9 +18,17 @@
       </a>
 
       <nav>
-        <ul class="nav-links" id="navLinks">
+                <ul class="nav-links" id="navLinks">
           <li><a href="quem-somos.html">Quem somos</a></li>
-          <li><a href="index.html#cursos" class="active">Cursos</a></li>
+          <li class="menu-item-has-children">
+            <a href="index.html#cursos">Cursos</a>
+            <ul class="sub-menu">
+              <li><a href="course-detail.html">Prescrição Médica</a></li>
+              <li><a href="course-detail-vet.html">Prescrição Veterinária</a></li>
+              <li><a href="course-detail-cultivo.html">Cultivo Agroecológico & Extração</a></li>
+              <li><a href="index.html#cursos">Ver Todos os Cursos</a></li>
+            </ul>
+          </li>
           <li><a href="fazenda.html">Fazenda de Cannabis</a></li>
           <li><a href="index.html#contato">Área do Aluno</a></li>
           <li><a href="index.html#contato">Contatos</a></li>
@@ -28,7 +36,7 @@
       </nav>
 
       <div class="nav-actions">
-        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores">
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores" aria-label="Alternar Modo de Cores">
           <i class="fa-solid fa-moon"></i>
         </button>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir Menu">
@@ -43,7 +51,7 @@
     <div class="container course-hero-grid">
       <div class="course-hero-left">
         <div class="course-badge-sub">FORMAÇÃO COMPLETA PARA MÉDICOS</div>
-        <h1 class="course-title font-serif">12º Curso de Prescrição de Cannabis Medicinal</h1>
+        <h1 class="course-title">12º Curso de Prescrição de Cannabis Medicinal</h1>
         <p class="course-intro-desc">
           Único curso que proporciona uma experiência prática com visita guiada à Fazenda de Cannabis Medicinal da APEPI.
         </p>
@@ -126,7 +134,7 @@
         <!-- Sobre e Aprendizado side-by-side inside main -->
         <div class="about-learn-row">
           <div class="about-course-col">
-            <h2 class="sub-section-title font-serif">SOBRE O CURSO</h2>
+            <h2 class="sub-section-title">SOBRE O CURSO</h2>
             <p>
               O Curso de Prescrição de Cannabis Medicinal da APEPI Escola é uma formação completa para médicos que desejam aprender a prescrever Cannabis Medicinal com segurança, ética e embasamento científico.
             </p>
@@ -136,7 +144,7 @@
           </div>
 
           <div class="learn-course-col">
-            <h2 class="sub-section-title font-serif">VOCÊ VAI APRENDER</h2>
+            <h2 class="sub-section-title">VOCÊ VAI APRENDER</h2>
             <ul class="learn-list">
               <li><i class="fa-solid fa-circle-check"></i> Fundamentos da Cannabis e do Sistema Endocanabinoide</li>
               <li><i class="fa-solid fa-circle-check"></i> Indicações terapêuticas e evidências científicas</li>
@@ -151,7 +159,7 @@
 
         <!-- Conteúdo Programático Accordion -->
         <div class="programmatic-content-area">
-          <h2 class="sub-section-title font-serif">CONTEÚDO PROGRAMÁTICO</h2>
+          <h2 class="sub-section-title">CONTEÚDO PROGRAMÁTICO</h2>
           
           <div class="accordion-container">
             <!-- Mod 1 -->
@@ -247,7 +255,7 @@
       <div class="course-info-sidebar">
         <div class="diferencial-exclusivo-card">
           <div class="dif-badge">DIFERENCIAL EXCLUSIVO</div>
-          <h3 class="font-serif">Visita à Fazenda Experimental</h3>
+          <h3 class="">Visita à Fazenda Experimental</h3>
           <p>Experiência prática e imersiva na Fazenda de Cannabis Medicinal da APEPI.</p>
           <ul class="dif-checks">
             <li><i class="fa-solid fa-circle-check"></i> Conheça de perto o cultivo e o processo produtivo</li>
@@ -266,7 +274,7 @@
   <!-- Corpo Docente -->
   <section class="corpo-docente-section">
     <div class="container">
-      <h2 class="sub-section-title font-serif">CORPO DOCENTE</h2>
+      <h2 class="sub-section-title">CORPO DOCENTE</h2>
       
       <div class="docentes-grid-wrapper">
         <div class="docentes-grid">
@@ -324,12 +332,85 @@
     </div>
   </section>
 
+  <!-- Depoimentos dos Alunos -->
+  <section class="course-testimonials-section">
+    <div class="container">
+      <div class="testimonials-header text-center">
+        <div class="section-badge">DEPOIMENTOS DE ALUNOS</div>
+        <h2 class="section-main-title">O Que Dizem Nossos Formandos</h2>
+        <p class="section-subtitle">A experiência de médicos e profissionais que transformaram sua prática clínica com a APEPI Escola.</p>
+      </div>
+
+      <div class="course-testimonials-grid">
+        <!-- Testimonial 1 -->
+        <div class="course-testimonial-card">
+          <div class="test-video-thumb">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dra. Mariana Costa">
+            <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+          </div>
+          <div class="test-card-content">
+            <div class="test-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "O curso me deu total segurança técnica e respaldo ético para começar a prescrever Cannabis aos meus pacientes neurológicos. A imersão na fazenda foi um divisor de águas."
+            </p>
+            <div class="test-author-info">
+              <h4 class="test-author-name">Dra. Mariana Costa</h4>
+              <p class="test-author-role">Médica Neurologista • CRM 52 98412-1</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="course-testimonial-card">
+          <div class="test-video-thumb">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Dr. Roberto Albuquerque">
+            <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+          </div>
+          <div class="test-card-content">
+            <div class="test-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "A clareza dos professores e o rigor científico das aulas superaram minhas expectativas. Hoje consigo acompanhar a evolução dos pacientes com muito mais precisão."
+            </p>
+            <div class="test-author-info">
+              <h4 class="test-author-name">Dr. Roberto Albuquerque</h4>
+              <p class="test-author-role">Médico Psiquiatra • CRM 52 44781-0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="course-testimonial-card">
+          <div class="test-video-thumb">
+            <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=600&q=80" alt="Dra. Luciana Paiva">
+            <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+          </div>
+          <div class="test-card-content">
+            <div class="test-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "Ver a seriedade do laboratório de extração e a conexão com a prática clínica me deu a certeza de que a APEPI Escola é a maior referência do país no tema."
+            </p>
+            <div class="test-author-info">
+              <h4 class="test-author-name">Dra. Luciana Paiva</h4>
+              <p class="test-author-role">Médica de Família e Comunidade • CRM 52 61209-3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Bottom CTA Banner -->
   <section class="bottom-cta-banner">
     <div class="container cta-banner-container">
       <div class="cta-banner-content">
         <div class="cta-icon-holder"><i class="fa-solid fa-graduation-cap"></i></div>
-        <p class="cta-text font-serif">
+        <p class="cta-text">
           Invista no conhecimento que transforma sua prática e oferece o melhor para seus pacientes.
         </p>
         <a href="#" class="btn btn-primary btn-lg cta-btn-right">QUERO ME INSCREVER &rarr;</a>

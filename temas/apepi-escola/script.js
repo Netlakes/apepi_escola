@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Theme Toggle Logic (Warm Cream Light as Default)
+  // Theme Toggle Logic (Light Mode Warm Cream as Default)
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const storedTheme = localStorage.getItem('apepi_theme') || 'light';
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(newTheme);
       localStorage.setItem('apepi_theme', newTheme);
     });
@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeToggleBtn) {
       const icon = themeToggleBtn.querySelector('i');
       if (icon) {
-        if (theme === 'light') {
-          icon.className = 'fa-solid fa-moon';
-          themeToggleBtn.setAttribute('title', 'Mudar para Modo Escuro');
-          themeToggleBtn.setAttribute('aria-label', 'Mudar para Modo Escuro');
-        } else {
+        if (theme === 'dark') {
           icon.className = 'fa-solid fa-sun';
           themeToggleBtn.setAttribute('title', 'Mudar para Modo Claro');
           themeToggleBtn.setAttribute('aria-label', 'Mudar para Modo Claro');
+        } else {
+          icon.className = 'fa-solid fa-moon';
+          themeToggleBtn.setAttribute('title', 'Mudar para Modo Escuro');
+          themeToggleBtn.setAttribute('aria-label', 'Mudar para Modo Escuro');
         }
       }
     }
@@ -81,43 +81,57 @@ document.addEventListener('DOMContentLoaded', () => {
       const isAlreadyActive = parent.classList.contains('active');
 
       // Collapse all accordions in this container
-      const siblingItems = parent.parentElement.querySelectorAll('.accordion-item');
+      const siblingItems = parent.parentElement.querySelectorAll('.accordion-item, .p2-accordion-item');
       siblingItems.forEach(item => {
         item.classList.remove('active');
-        const p = item.querySelector('.accordion-panel');
+        const p = item.querySelector('.accordion-panel, .p2-accordion-content');
         if (p) p.style.maxHeight = null;
       });
 
       // Toggle clicked one
       if (!isAlreadyActive) {
         parent.classList.add('active');
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+        if (panel) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
       }
     });
   });
 
-  // Home Formations Carousel Logic
-  const formationsGrid = document.getElementById('formationsGrid');
-  const prevForm = document.getElementById('prevForm');
-  const nextForm = document.getElementById('nextForm');
+  // Universal Formations Carousel Logic
+  document.querySelectorAll('.formations-section, .courses-slider-section, section').forEach(section => {
+    const wrapper = section.querySelector('.formations-carousel-wrapper');
+    if (!wrapper) return;
 
-  if (formationsGrid && prevForm && nextForm) {
-    const scrollAmount = 340; // width of card + gap
+    const prevBtn = section.querySelector('#prevForm, .prevFormBtn, .arrow-btn[aria-label="Anterior"], .arrow-btn:first-child');
+    const nextBtn = section.querySelector('#nextForm, .nextFormBtn, .arrow-btn[aria-label="Próximo"], .arrow-btn:last-child');
 
-    prevForm.addEventListener('click', () => {
-      formationsGrid.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = section.querySelector('.formation-card');
+        const cardWidth = card ? card.offsetWidth : 310;
+        const scrollAmount = cardWidth + 28; // card width + gap
+        wrapper.scrollBy({
+          left: -scrollAmount,
+          behavior: 'smooth'
+        });
       });
-    });
+    }
 
-    nextForm.addEventListener('click', () => {
-      formationsGrid.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = section.querySelector('.formation-card');
+        const cardWidth = card ? card.offsetWidth : 310;
+        const scrollAmount = cardWidth + 28; // card width + gap
+        wrapper.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
       });
-    });
-  }
+    }
+  });
 
   // Smooth Scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

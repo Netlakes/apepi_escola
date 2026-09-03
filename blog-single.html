@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +17,17 @@
       </a>
 
       <nav>
-        <ul class="nav-links" id="navLinks">
+                <ul class="nav-links" id="navLinks">
           <li><a href="quem-somos.html">Quem somos</a></li>
-          <li><a href="index.html#cursos">Cursos</a></li>
+          <li class="menu-item-has-children">
+            <a href="index.html#cursos">Cursos</a>
+            <ul class="sub-menu">
+              <li><a href="course-detail.html">Prescrição Médica</a></li>
+              <li><a href="course-detail-vet.html">Prescrição Veterinária</a></li>
+              <li><a href="course-detail-cultivo.html">Cultivo Agroecológico & Extração</a></li>
+              <li><a href="index.html#cursos">Ver Todos os Cursos</a></li>
+            </ul>
+          </li>
           <li><a href="fazenda.html">Fazenda de Cannabis</a></li>
           <li><a href="index.html#contato">Área do Aluno</a></li>
           <li><a href="index.html#contato">Contatos</a></li>
@@ -27,9 +35,8 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="index.html#cursos" class="btn btn-primary btn-sm">Ver Cursos</a>
-        <button id="themeToggleBtn" class="theme-toggle-btn" title="Mudar para Modo Claro" aria-label="Mudar para Modo Claro">
-          <i class="fa-solid fa-sun"></i>
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores" aria-label="Alternar Modo de Cores">
+          <i class="fa-solid fa-moon"></i>
         </button>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir Menu">
           <i class="fa-solid fa-bars"></i>
@@ -63,7 +70,7 @@
       </p>
 
       <div style="background: var(--surface); border-left: 4px solid var(--primary-hover); padding: 1.75rem; border-radius: 8px; margin: 2.25rem 0; border: 1px solid var(--border-color); border-left: 4px solid var(--primary-hover);">
-        <p class="font-serif" style="margin: 0; color: var(--text-primary); font-size:1.15rem;">
+        <p class="" style="margin: 0; color: var(--text-primary); font-size:1.15rem;">
           "A ciência é a nossa bússola. Na APEPI Escola, unimos a fundamentação acadêmica ao compromisso social e humano."
         </p>
       </div>

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quem Somos - Missão e Valores - APEPI Escola</title>
-  <meta name="description" content="Conheça a história, missão, valores e os pilares fundamentais da APEPI Escola e da maior associação de Cannabis do Brasil.">
+  <title>Quem Somos - Missão, Visão e Valores - APEPI Escola</title>
+  <meta name="description" content="Conheça a história, missão, visão, valores e os pilares fundamentais da APEPI Escola e da maior associação de Cannabis Medicinal do Brasil.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,9 +19,17 @@
       </a>
 
       <nav>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="quem-somos.html" class="active">Quem somos</a></li>
-          <li><a href="index.html#cursos">Cursos</a></li>
+                <ul class="nav-links" id="navLinks">
+          <li><a href="quem-somos.html">Quem somos</a></li>
+          <li class="menu-item-has-children">
+            <a href="index.html#cursos">Cursos</a>
+            <ul class="sub-menu">
+              <li><a href="course-detail.html">Prescrição Médica</a></li>
+              <li><a href="course-detail-vet.html">Prescrição Veterinária</a></li>
+              <li><a href="course-detail-cultivo.html">Cultivo Agroecológico & Extração</a></li>
+              <li><a href="index.html#cursos">Ver Todos os Cursos</a></li>
+            </ul>
+          </li>
           <li><a href="fazenda.html">Fazenda de Cannabis</a></li>
           <li><a href="index.html#contato">Área do Aluno</a></li>
           <li><a href="index.html#contato">Contatos</a></li>
@@ -28,7 +37,7 @@
       </nav>
 
       <div class="nav-actions">
-        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores">
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores" aria-label="Alternar Modo de Cores">
           <i class="fa-solid fa-moon"></i>
         </button>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir Menu">
@@ -38,98 +47,156 @@
     </div>
   </header>
 
-  <!-- Quem Somos Hero (Exact Page 5 Proof) -->
-  <section class="quem-somos-hero">
-    <div class="container qs-hero-grid">
-      <div class="qs-hero-left">
-        <div class="qs-badge">QUEM SOMOS</div>
-        <h1 class="font-serif">Missão<br>e Valores</h1>
-        <h2 class="font-serif qs-subtitle">Uma trajetória de saúde e cuidado</h2>
-        <p class="qs-desc">
+    <!-- ======================== 1. HERO QUEM SOMOS (FULL-WIDTH EDGE-TO-EDGE) ======================== -->
+  <section class="hero-home-exact hero-banner-degrade qs-hero-banner">
+    <div class="hero-bg-wrapper">
+      <img src="assets/qs_founders_hero.png" alt="Margarete Brito e Marcos Langenbach - Fundadores da APEPI" class="hero-bg-img">
+      <div class="hero-gradient-overlay"></div>
+    </div>
+
+    <div class="container hero-container-exact qs-hero-container">
+      <div class="hero-content-exact qs-hero-content">
+        <span class="qs-kicker">QUEM SOMOS</span>
+        <h1 class="hero-title-exact">
+          Missão<br><span class="text-green">Visão e Valores</span>
+        </h1>
+        <div class="hero-green-divider"></div>
+        <h2 class="qs-subtitle">Uma trajetória de saúde e cuidado</h2>
+        <p class="hero-desc-exact">
           A APEPI existe para transformar vidas por meio da Cannabis Medicinal, promovendo acesso, conhecimento, inovação e tratamento com qualidade e responsabilidade.
         </p>
-      </div>
 
-      <div class="qs-hero-right">
-        <div class="founders-container-relative">
-          <div class="founders-img-container">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Margarete Brito e Marcos Langenbach - Fundadores da APEPI" class="founders-img">
-          </div>
-          <!-- Speech Card Balloon on Photo -->
-          <div class="founders-speech-card">
-            <p>
-              A APEPI Escola iniciou com a ideia de Margarete Brito e Marcos Langenbach e ensinar as pessoas a cultivar seu próprio óleo.
-            </p>
-          </div>
+        <!-- Refined Floating Organic Speech Balloon / Badge -->
+        <div class="qs-speech-bubble-organic">
+          <div class="qs-bubble-leaf-icon"><i class="fa-solid fa-leaf"></i></div>
+          <p>
+            A APEPI Escola iniciou com a ideia de <strong>Margarete Brito e Marcos Langenbach</strong> de ensinar as pessoas a cultivar seu próprio óleo com qualidade e segurança.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- De Onde Viemos Timeline (Exact Page 5 Proof) -->
-  <section class="evolution-timeline-section">
+  <!-- ======================== 2. MISSÃO, VISÃO E VALORES ======================== -->
+  <section class="qs-mvv-section">
     <div class="container">
-      <div class="evolution-header text-center">
-        <h2 class="font-serif text-center">DE ONDE VIEMOS E PARA ONDE VAMOS</h2>
-        <p class="evolution-subheader">Do cultivo ao conhecimento. Do conhecimento ao cuidado. Do cuidado à transformação.</p>
+      <div class="qs-mvv-grid">
+        
+        <!-- MISSÃO -->
+        <div class="qs-mvv-card">
+          <div class="qs-mvv-icon-circle">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h3 class="qs-mvv-card-title">MISSÃO</h3>
+          <p class="qs-mvv-card-desc">
+            Promover saúde e qualidade de vida por meio do acesso ao conhecimento, formação e tratamentos seguros com Cannabis Medicinal.
+          </p>
+        </div>
+
+        <!-- VISÃO -->
+        <div class="qs-mvv-card">
+          <div class="qs-mvv-icon-circle">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <h3 class="qs-mvv-card-title">VISÃO</h3>
+          <p class="qs-mvv-card-desc">
+            Ser referência nacional e internacional em ciência, educação e inovação em Cannabis Medicinal, transformando realidades e impulsionando o futuro da saúde.
+          </p>
+        </div>
+
+        <!-- VALORES -->
+        <div class="qs-mvv-card">
+          <div class="qs-mvv-icon-circle">
+            <i class="fa-solid fa-gem"></i>
+          </div>
+          <h3 class="qs-mvv-card-title">VALORES</h3>
+          <ul class="qs-valores-checklist">
+            <li><span class="bullet-dot">•</span> Ética e transparência</li>
+            <li><span class="bullet-dot">•</span> Ciência e evidência</li>
+            <li><span class="bullet-dot">•</span> Respeito à vida</li>
+            <li><span class="bullet-dot">•</span> Inovação e excelência</li>
+            <li><span class="bullet-dot">•</span> Responsabilidade social e ambiental</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== 3. DE ONDE VIEMOS E PARA ONDE VAMOS ======================== -->
+  <section class="qs-timeline-section">
+    <div class="container">
+      <div class="qs-timeline-header text-center">
+        <h2 class="qs-timeline-title">DE ONDE VEMOS E PARA ONDE VAMOS</h2>
+        <p class="qs-timeline-subtitle">Do cultivo ao conhecimento. Do conhecimento ao cuidado. Do cuidado à transformação.</p>
       </div>
 
-      <div class="horizontal-evolution-timeline">
+      <div class="qs-stepper-container">
         
         <!-- Step 1 -->
-        <div class="evolution-step">
-          <div class="step-icon-circle"><i class="fa-solid fa-seedling"></i></div>
-          <div class="evolution-step-content">
-            <h3>A IDEIA</h3>
-            <p>Ensinar as pessoas a cultivar seu próprio óleo com qualidade e segurança.</p>
+        <div class="qs-step-item">
+          <div class="qs-step-circle">
+            <i class="fa-solid fa-seedling"></i>
+          </div>
+          <div class="qs-step-info">
+            <h4 class="qs-step-name">A IDEIA</h4>
+            <p class="qs-step-text">Ensinar as pessoas a cultivar seu próprio óleo com qualidade e segurança.</p>
           </div>
         </div>
 
-        <!-- Arrow -->
-        <div class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <!-- Arrow 1 -->
+        <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
         <!-- Step 2 -->
-        <div class="evolution-step">
-          <div class="step-icon-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-          <div class="evolution-step-content">
-            <h3>A EVOLUÇÃO</h3>
-            <p>Expandimos o propósito e transformamos a experiência prática em formação especializada.</p>
+        <div class="qs-step-item">
+          <div class="qs-step-circle">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <div class="qs-step-info">
+            <h4 class="qs-step-name">A EVOLUÇÃO</h4>
+            <p class="qs-step-text">Expandimos o propósito e transformamos a experiência prática em formação especializada.</p>
           </div>
         </div>
 
-        <!-- Arrow -->
-        <div class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <!-- Arrow 2 -->
+        <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
-        <!-- Step 3 -->
-        <div class="evolution-step">
-          <div class="step-icon-circle"><i class="fa-solid fa-plus"></i></div>
-          <div class="evolution-step-content">
-            <h3>A MISSÃO</h3>
-            <p>Criamos cursos para médicos, veterinários e profissionais de saúde, levando conhecimento científico e responsável sobre a Cannabis Medicinal.</p>
+        <!-- Step 3 (HIGHLIGHTED / CIRCULO PREENCHIDO) -->
+        <div class="qs-step-item qs-step-active">
+          <div class="qs-step-circle qs-step-circle-filled">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="qs-step-info">
+            <h4 class="qs-step-name">A MISSÃO</h4>
+            <p class="qs-step-text">Criamos cursos para médicos, veterinários e profissionais de saúde, levando conhecimento científico e responsável sobre a Cannabis Medicinal.</p>
           </div>
         </div>
 
-        <!-- Arrow -->
-        <div class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <!-- Arrow 3 -->
+        <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
         <!-- Step 4 -->
-        <div class="evolution-step">
-          <div class="step-icon-circle"><i class="fa-solid fa-users"></i></div>
-          <div class="evolution-step-content">
-            <h3>O IMPACTO</h3>
-            <p>Formamos profissionais mais preparados e promovemos mais acesso, qualidade de vida e bem-estar para milhares de pacientes.</p>
+        <div class="qs-step-item">
+          <div class="qs-step-circle">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="qs-step-info">
+            <h4 class="qs-step-name">O IMPACTO</h4>
+            <p class="qs-step-text">Formamos profissionais mais preparados e promovemos mais acesso, qualidade de vida e bem-estar para milhares de pacientes.</p>
           </div>
         </div>
 
-        <!-- Arrow -->
-        <div class="timeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <!-- Arrow 4 -->
+        <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
 
         <!-- Step 5 -->
-        <div class="evolution-step">
-          <div class="step-icon-circle"><i class="fa-solid fa-leaf"></i></div>
-          <div class="evolution-step-content">
-            <h3>O FUTURO</h3>
-            <p>Continuamos inovando, pesquisando e educando para construir um futuro com mais saúde, liberdade e respeito à planta e às pessoas.</p>
+        <div class="qs-step-item">
+          <div class="qs-step-circle qs-step-circle-dark">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <div class="qs-step-info">
+            <h4 class="qs-step-name">O FUTURO</h4>
+            <p class="qs-step-text">Continuamos inovando, pesquisando e educando para construir um futuro com mais saúde, liberdade e respeito à planta e às pessoas.</p>
           </div>
         </div>
 
@@ -137,58 +204,77 @@
     </div>
   </section>
 
-  <!-- Nossos Pilares (Exact Page 5 Proof) -->
-  <section class="pilares-section">
+  <!-- ======================== 4. NOSSOS PILARES ======================== -->
+  <section class="qs-pilares-section">
     <div class="container">
-      <h2 class="font-serif section-main-title text-center">NOSSOS PILARES</h2>
-      
-      <div class="pilares-grid">
+      <div class="qs-pilares-header text-center">
+        <h2 class="qs-pilares-title">NOSSOS PILARES</h2>
+        <div class="qs-pilares-line"></div>
+      </div>
+
+      <div class="qs-pilares-grid">
         
         <!-- Pilar 1 -->
-        <div class="pilar-card">
-          <div class="pilar-img-holder">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Parte da história">
-            <div class="pilar-badge-icon"><i class="fa-solid fa-flag"></i></div>
+        <div class="qs-pilar-card">
+          <div class="qs-pilar-photo-wrap">
+            <img src="assets/qs_pilar1.png" alt="Parte da história da APEPI" class="qs-pilar-img">
+            <div class="qs-pilar-badge-icon">
+              <i class="fa-solid fa-flag"></i>
+            </div>
           </div>
-          <div class="pilar-content">
-            <h3>Parte da história</h3>
-            <p>Em mais de uma década, a APEPI ajudou a mudar leis e quebrar o preconceito sobre a planta. Ser associado APEPI é fazer parte da história da cannabis medicinal.</p>
+          <div class="qs-pilar-body">
+            <h3 class="qs-pilar-name">Parte da história</h3>
+            <p class="qs-pilar-text">
+              Em mais de uma década, a APEPI ajudou a mudar leis e quebrar o preconceito sobre a planta. Ser associado APEPI é fazer parte da história da cannabis medicinal.
+            </p>
           </div>
         </div>
 
         <!-- Pilar 2 -->
-        <div class="pilar-card">
-          <div class="pilar-img-holder">
-            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80" alt="Pioneirismo e inovação">
-            <div class="pilar-badge-icon"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="qs-pilar-card">
+          <div class="qs-pilar-photo-wrap">
+            <img src="assets/qs_pilar2.png" alt="Pioneirismo e inovação na Fazenda Sofia Langenbach" class="qs-pilar-img">
+            <div class="qs-pilar-badge-icon">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
           </div>
-          <div class="pilar-content">
-            <h3>Pioneirismo e inovação</h3>
-            <p>Primeira e maior fazenda legal de cannabis no país, para garantir qualidade e inovação aos associados. É planta no chão e remédio na mão.</p>
+          <div class="qs-pilar-body">
+            <h3 class="qs-pilar-name">Pioneirismo e inovação</h3>
+            <p class="qs-pilar-text">
+              Primeira e maior fazenda legal de cannabis no país, para garantir qualidade e inovação aos associados. É planta no chão e remédio na mão.
+            </p>
           </div>
         </div>
 
         <!-- Pilar 3 -->
-        <div class="pilar-card">
-          <div class="pilar-img-holder">
-            <img src="https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=600&q=80" alt="Tecnologia e sustentabilidade">
-            <div class="pilar-badge-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div class="qs-pilar-card">
+          <div class="qs-pilar-photo-wrap">
+            <img src="assets/qs_pilar3.png" alt="Tecnologia e sustentabilidade agronômica" class="qs-pilar-img">
+            <div class="qs-pilar-badge-icon">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
           </div>
-          <div class="pilar-content">
-            <h3>Tecnologia e sustentabilidade</h3>
-            <p>Controle avançado de cada planta, unindo plantio com insumos agroecológicos a pesquisa e maquinário de última geração.</p>
+          <div class="qs-pilar-body">
+            <h3 class="qs-pilar-name">Tecnologia e sustentabilidade</h3>
+            <p class="qs-pilar-text">
+              Controle avançado de cada planta, unindo plantio com insumos agroecológicos à pesquisa e maquinário de última geração.
+            </p>
           </div>
         </div>
 
         <!-- Pilar 4 -->
-        <div class="pilar-card">
-          <div class="pilar-img-holder">
-            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=600&q=80" alt="Qualidade, segurança e união">
-            <div class="pilar-badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="qs-pilar-card">
+          <div class="qs-pilar-photo-wrap">
+            <img src="assets/qs_pilar4.png" alt="Qualidade, segurança e união nos óleos medicinais" class="qs-pilar-img">
+            <div class="qs-pilar-badge-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
           </div>
-          <div class="pilar-content">
-            <h3>Qualidade, segurança e união</h3>
-            <p>Remédios à base de cannabis com certificado de análise (COA), que garante a efetividade do tratamento a preço justo.</p>
+          <div class="qs-pilar-body">
+            <h3 class="qs-pilar-name">Qualidade, segurança e união</h3>
+            <p class="qs-pilar-text">
+              Remédios à base de cannabis com certificado de análise (COA), que garante a efetividade do tratamento a preço justo.
+            </p>
           </div>
         </div>
 
@@ -196,13 +282,20 @@
     </div>
   </section>
 
-  <!-- Bottom Elegant Banner -->
-  <section class="bottom-green-brand-banner">
-    <div class="container text-center">
-      <div class="brand-icon-wrapper"><i class="fa-solid fa-leaf"></i></div>
-      <p class="brand-quote font-serif">
-        "Acreditamos que educar é cultivar. E cultivar conhecimento é transformar vidas. Vamos juntos por uma sociedade mais saudável, informada e consciente."
-      </p>
+  <!-- ======================== 5. BANNER FINAL QUEM SOMOS ======================== -->
+  <section class="qs-quote-banner">
+    <div class="container qs-quote-banner-container">
+      <div class="qs-quote-leaf-icon">
+        <i class="fa-solid fa-leaf"></i>
+      </div>
+      <div class="qs-quote-content">
+        <p class="qs-quote-primary">
+          Acreditamos que educar é cultivar. E cultivar conhecimento é transformar vidas.
+        </p>
+        <p class="qs-quote-secondary">
+          Vamos juntos por uma sociedade mais saudável, informada e consciente.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -211,35 +304,64 @@
     <div class="container footer-content">
       <div class="footer-left">
         <a href="index.html" class="brand-logo">
-          <img src="assets/logo_apepi_escola.png" alt="APEPI Escola" class="logo-img logo-light">
-          <img src="assets/logo_apepi_escola_dark.png" alt="APEPI Escola" class="logo-img logo-dark">
+          <img src="assets/logo_apepi_escola.png" alt="APEPI Escola" class="footer-logo-img logo-light">
+          <img src="assets/logo_apepi_escola_dark.png" alt="APEPI Escola" class="footer-logo-img logo-dark">
+        </a>
+        <p class="footer-tagline">
+          A principal Escola Brasileira de Cannabis Medicinal. Formação científica, prática clínica e acompanhamento com excelência.
+        </p>
+        <a href="https://wa.me/5521979570000" target="_blank" class="footer-whatsapp-badge">
+          <i class="fa-brands fa-whatsapp"></i> Atendimento via WhatsApp
         </a>
       </div>
 
       <div class="footer-center">
-        <h3>LINKS RÁPIDOS</h3>
+        <h3>Links Rápidos</h3>
         <ul class="footer-links-grid">
-          <li><a href="index.html#cursos">Cursos</a></li>
-          <li><a href="index.html#cursos">Mentorias</a></li>
-          <li><a href="quem-somos.html">Professores</a></li>
-          <li><a href="fazenda.html">Fazenda de Cannabis</a></li>
-          <li><a href="quem-somos.html">Pesquisa</a></li>
-          <li><a href="index.html">Conteúdo</a></li>
-          <li><a href="index.html#contato">Área do Aluno</a></li>
-          <li><a href="index.html#contato">Contatos</a></li>
+          <li><a href="index.html#cursos"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Cursos</a></li>
+          <li><a href="index.html#cursos"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Mentorias</a></li>
+          <li><a href="quem-somos.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Professores</a></li>
+          <li><a href="fazenda.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Fazenda de Cannabis</a></li>
+          <li><a href="quem-somos.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Pesquisa</a></li>
+          <li><a href="index.html"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Conteúdo</a></li>
+          <li><a href="index.html#contato"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Área do Aluno</a></li>
+          <li><a href="index.html#contato"><i class="fa-solid fa-chevron-right" style="font-size: 0.65rem;"></i> Contatos</a></li>
         </ul>
       </div>
 
       <div class="footer-right">
-        <h3>CONTATO</h3>
-        <p><i class="fa-regular fa-envelope"></i> contato@apepi.com.br</p>
-        <p><i class="fa-solid fa-phone"></i> (21) 97957-0000</p>
-        <p><i class="fa-solid fa-location-dot"></i> Rio de Janeiro - RJ</p>
+        <h3>Contato</h3>
+        <div class="footer-right-list">
+          <div class="footer-contact-item">
+            <span class="contact-icon-pill"><i class="fa-regular fa-envelope"></i></span>
+            <span>contato@apepi.com.br</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="contact-icon-pill"><i class="fa-solid fa-phone"></i></span>
+            <span>(21) 97957-0000</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="contact-icon-pill"><i class="fa-solid fa-location-dot"></i></span>
+            <span>Rio de Janeiro - RJ</span>
+          </div>
+        </div>
+        
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
         <p>&copy; 2025 APEPI Escola. Todos os direitos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Termos de Uso</a>
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Acessibilidade</a>
+        </div>
       </div>
     </div>
   </footer>

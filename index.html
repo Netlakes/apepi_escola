@@ -18,9 +18,17 @@
       </a>
 
       <nav>
-        <ul class="nav-links" id="navLinks">
+                <ul class="nav-links" id="navLinks">
           <li><a href="quem-somos.html">Quem somos</a></li>
-          <li><a href="index.html#cursos" class="active">Cursos</a></li>
+          <li class="menu-item-has-children">
+            <a href="index.html#cursos">Cursos</a>
+            <ul class="sub-menu">
+              <li><a href="course-detail.html">Prescrição Médica</a></li>
+              <li><a href="course-detail-vet.html">Prescrição Veterinária</a></li>
+              <li><a href="course-detail-cultivo.html">Cultivo Agroecológico & Extração</a></li>
+              <li><a href="index.html#cursos">Ver Todos os Cursos</a></li>
+            </ul>
+          </li>
           <li><a href="fazenda.html">Fazenda de Cannabis</a></li>
           <li><a href="index.html#contato">Área do Aluno</a></li>
           <li><a href="index.html#contato">Contatos</a></li>
@@ -38,71 +46,85 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-home">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <h1 class="hero-title font-serif">
-          A principal Escola Brasileira de <span class="highlight-line">Cannabis Medicinal</span>
+  <!-- Hero Section Home (Estilo Degradê Idêntico a Quem Somos - Sans-serif) -->
+  <section class="hero-home-exact hero-banner-degrade">
+    <div class="hero-bg-wrapper">
+      <img src="assets/home_hero_photo.png" alt="APEPI Escola - Laboratório e Prática Clínica" class="hero-bg-img">
+      <div class="hero-gradient-overlay"></div>
+    </div>
+
+    <div class="container hero-container-exact">
+      <div class="hero-content-exact">
+        <h1 class="hero-title-exact">
+          A principal Escola Brasileira de <span class="text-green">Cannabis Medicinal</span>
         </h1>
-        <p class="hero-desc">
+
+        <div class="hero-green-divider"></div>
+
+        <p class="hero-desc-exact">
           Formação baseada em evidências científicas, prática clínica e experiências reais de cultivo e acompanhamento terapêutico.
         </p>
-        <div class="hero-actions">
-          <a href="#cursos" class="btn btn-primary btn-lg">CONHEÇA NOSSOS CURSOS &rarr;</a>
-          <a href="fazenda.html" class="btn btn-outline btn-lg">CONHEÇA A FAZENDA &rarr;</a>
+
+        <div class="hero-cta-group-exact">
+          <a href="#cursos" class="btn-hero-green">
+            CONHEÇA NOSSOS CURSOS &nbsp;&rarr;
+          </a>
+          <a href="fazenda.html" class="btn-hero-outline">
+            CONHEÇA A FAZENDA &nbsp;&rarr;
+          </a>
         </div>
-      </div>
-      <div class="hero-image-container">
-        <div class="hero-bg-blob"></div>
-        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80" alt="Profissionais de saúde e cientistas em laboratório da APEPI" class="hero-main-img">
       </div>
     </div>
   </section>
 
-  <!-- Stats Bar Section -->
-  <section class="stats-bar-section">
-    <div class="container stats-bar-grid">
-      <div class="stat-item">
-        <div class="stat-icon-wrapper"><i class="fa-solid fa-graduation-cap"></i></div>
-        <div class="stat-info">
-          <h3>10 anos</h3>
-          <p>De experiência educacional</p>
+  <!-- Stats Bar Section (Fundo Creme / Ícones Redondos Verdes) -->
+  <section class="stats-bar-exact">
+    <div class="container stats-grid-exact">
+      <div class="stat-item-exact">
+        <div class="stat-icon-exact"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div class="stat-text-exact">
+          <span class="stat-number-exact">10 anos</span>
+          <span class="stat-label-exact">De experiência educacional</span>
         </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-icon-wrapper"><i class="fa-solid fa-users"></i></div>
-        <div class="stat-info">
-          <h3>120+</h3>
-          <p>Professores especialistas</p>
+
+      <div class="stat-item-exact">
+        <div class="stat-icon-exact"><i class="fa-solid fa-users"></i></div>
+        <div class="stat-text-exact">
+          <span class="stat-number-exact">120+</span>
+          <span class="stat-label-exact">Professores especialistas</span>
         </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-icon-wrapper"><i class="fa-solid fa-user-graduate"></i></div>
-        <div class="stat-info">
-          <h3>6.500+</h3>
-          <p>Alunos capacitados</p>
+
+      <div class="stat-item-exact">
+        <div class="stat-icon-exact"><i class="fa-regular fa-user"></i></div>
+        <div class="stat-text-exact">
+          <span class="stat-number-exact">6.500+</span>
+          <span class="stat-label-exact">Alunos capacitados</span>
         </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-icon-wrapper"><i class="fa-solid fa-map-location-dot"></i></div>
-        <div class="stat-info">
-          <h3>26</h3>
-          <p>Estados atendidos</p>
+
+      <div class="stat-item-exact">
+        <div class="stat-icon-exact"><i class="fa-solid fa-map-location-dot"></i></div>
+        <div class="stat-text-exact">
+          <span class="stat-number-exact">26</span>
+          <span class="stat-label-exact">Estados atendidos</span>
         </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-icon-wrapper"><i class="fa-solid fa-clock"></i></div>
-        <div class="stat-info">
-          <h3>2.400+</h3>
-          <p>Horas de conteúdo</p>
+
+      <div class="stat-item-exact">
+        <div class="stat-icon-exact"><i class="fa-regular fa-clock"></i></div>
+        <div class="stat-text-exact">
+          <span class="stat-number-exact">2.400+</span>
+          <span class="stat-label-exact">Horas de conteúdo</span>
         </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-icon-wrapper"><i class="fa-solid fa-file-medical"></i></div>
-        <div class="stat-info">
-          <h3>1.500+</h3>
-          <p>Casos clínicos discutidos</p>
+
+      <div class="stat-item-exact">
+        <div class="stat-icon-exact"><i class="fa-regular fa-clipboard"></i></div>
+        <div class="stat-text-exact">
+          <span class="stat-number-exact">1.500+</span>
+          <span class="stat-label-exact">Casos clínicos discutidos</span>
         </div>
       </div>
     </div>
@@ -114,7 +136,7 @@
       <div class="section-title-area">
         <div>
           <div class="section-badge">CONHEÇA NOSSAS</div>
-          <h2 class="section-main-title font-serif">FORMAÇÕES</h2>
+          <h2 class="section-main-title">FORMAÇÕES</h2>
         </div>
         <div class="section-arrows">
           <button class="arrow-btn" id="prevForm" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -132,7 +154,7 @@
               <div class="card-badge-icon"><i class="fa-solid fa-user-doctor"></i></div>
             </div>
             <div class="card-content">
-              <h3 class="font-serif">Prescrição Médica</h3>
+              <h3 class="">Prescrição Médica</h3>
               <p>Aprenda a indicar e acompanhar tratamentos com Cannabis Medicinal.</p>
               <a href="course-detail.html" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
             </div>
@@ -145,7 +167,7 @@
               <div class="card-badge-icon"><i class="fa-solid fa-paw"></i></div>
             </div>
             <div class="card-content">
-              <h3 class="font-serif">Prescrição Veterinária</h3>
+              <h3 class="">Prescrição Veterinária</h3>
               <p>Formação completa para veterinários na prescrição canabinoide.</p>
               <a href="course-detail-vet.html" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
             </div>
@@ -158,7 +180,7 @@
               <div class="card-badge-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
             </div>
             <div class="card-content">
-              <h3 class="font-serif">Cannabis na Rotina dos Profissionais de Saúde</h3>
+              <h3 class="">Cannabis na Rotina dos Profissionais de Saúde</h3>
               <p>Integração da Cannabis Medicinal na prática clínica multiprofissional.</p>
               <a href="course-detail.html" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
             </div>
@@ -171,7 +193,7 @@
               <div class="card-badge-icon"><i class="fa-solid fa-microscope"></i></div>
             </div>
             <div class="card-content">
-              <h3 class="font-serif">Atualização em Prescrição</h3>
+              <h3 class="">Atualização em Prescrição</h3>
               <p>Atualização científica e prática para prescritores de Cannabis Medicinal.</p>
               <a href="course-detail.html" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
             </div>
@@ -184,7 +206,7 @@
               <div class="card-badge-icon"><i class="fa-solid fa-comments"></i></div>
             </div>
             <div class="card-content">
-              <h3 class="font-serif">Mentoria Médica</h3>
+              <h3 class="">Mentoria Médica</h3>
               <p>Acompanhamento individualizado para médicos prescritores.</p>
               <a href="course-detail.html" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
             </div>
@@ -203,7 +225,7 @@
       </div>
       <div class="fazenda-text-card">
         <div class="section-badge">CONHEÇA NOSSA</div>
-        <h2 class="font-serif">Fazenda Experimental</h2>
+        <h2 class="">Fazenda Experimental</h2>
         <p>
           A maior fazenda de Cannabis Medicinal do Brasil. Estrutura completa de cultivo, processamento, pesquisa e desenvolvimento com os mais altos padrões de qualidade.
         </p>
@@ -212,10 +234,101 @@
     </div>
   </section>
 
+  <!-- E-Books Gratuitos Section -->
+  <section class="ebooks-section-home" id="ebooks">
+    <div class="container">
+      <div class="ebooks-header">
+        <div class="section-badge">CONHECIMENTO PARA SUA PRÁTICA</div>
+        <h2 class="ebooks-main-title">5 E-BOOKS GRATUITOS</h2>
+        <p class="ebooks-subtitle">Conteúdos exclusivos para aprofundar seus conhecimentos em Cannabis Medicinal.</p>
+        <p class="ebooks-cta-text"><strong>Escolha um e-book e baixe gratuitamente.</strong></p>
+      </div>
+
+      <div class="ebooks-grid">
+
+        <!-- Ebook 1 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80" alt="Cannabis e a Vida">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">CANNABIS<br>E A VIDA</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Cannabis e a vida</h3>
+            <p>Entenda a Cannabis Medicinal e sua relação com saúde, bem-estar e qualidade de vida.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 2 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=400&q=80" alt="Médicos Prescritores">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">MÉDICOS<br>PRESCRITORES</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Médicos prescritores</h3>
+            <p>Um guia completo sobre a prescrição de Cannabis Medicinal na prática clínica.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 3 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=400&q=80" alt="Cultivo e Extração">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">CULTIVO E<br>EXTRAÇÃO</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Cultivo e extração</h3>
+            <p>Conheça as etapas do cultivo, processamento e extração da Cannabis Medicinal.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 4 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=80" alt="Rotinas do Prescritor">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">ROTINAS DO<br>PRESCRITOR</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Rotinas do Prescritor</h3>
+            <p>Ferramentas e orientações para apoiar o médico no dia a dia da prática clínica.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 5 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80" alt="Vida e Saúde de Cannabis">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">VIDA E SAÚDE<br>DE CANNABIS</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Vida e saúde de cannabis</h3>
+            <p>Informação científica sobre os benefícios e possibilidades terapêuticas da Cannabis.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Diferenciais Section -->
   <section class="diferenciais-section-home">
     <div class="container">
-      <h2 class="diferenciais-title font-serif">O que torna a APEPI diferente?</h2>
+      <h2 class="diferenciais-title">O que torna a APEPI diferente?</h2>
       <div class="diferenciais-grid">
         
         <!-- Diferencial 1 -->
@@ -256,7 +369,7 @@
       <div class="professores-header">
         <div>
           <div class="section-badge">NOSSOS PROFESSORES</div>
-          <h2 class="font-serif">Referência em Cannabis Medicinal</h2>
+          <h2 class="">Referência em Cannabis Medicinal</h2>
         </div>
         <a href="quem-somos.html" class="view-all-link">VER TODOS OS PROFESSORES &rarr;</a>
       </div>
@@ -333,7 +446,7 @@
       <div class="depoimentos-header">
         <div>
           <div class="section-badge">DEPOIMENTOS</div>
-          <h2 class="font-serif">O que dizem os nossos alunos</h2>
+          <h2 class="">O que dizem os nossos alunos</h2>
         </div>
         <a href="#cursos" class="view-all-link">VER TODOS OS DEPOIMENTOS &rarr;</a>
       </div>

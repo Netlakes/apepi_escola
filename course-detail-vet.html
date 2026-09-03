@@ -18,9 +18,17 @@
       </a>
 
       <nav>
-        <ul class="nav-links" id="navLinks">
+                <ul class="nav-links" id="navLinks">
           <li><a href="quem-somos.html">Quem somos</a></li>
-          <li><a href="index.html#cursos" class="active">Cursos</a></li>
+          <li class="menu-item-has-children">
+            <a href="index.html#cursos">Cursos</a>
+            <ul class="sub-menu">
+              <li><a href="course-detail.html">Prescrição Médica</a></li>
+              <li><a href="course-detail-vet.html">Prescrição Veterinária</a></li>
+              <li><a href="course-detail-cultivo.html">Cultivo Agroecológico & Extração</a></li>
+              <li><a href="index.html#cursos">Ver Todos os Cursos</a></li>
+            </ul>
+          </li>
           <li><a href="fazenda.html">Fazenda de Cannabis</a></li>
           <li><a href="index.html#contato">Área do Aluno</a></li>
           <li><a href="index.html#contato">Contatos</a></li>
@@ -28,7 +36,7 @@
       </nav>
 
       <div class="nav-actions">
-        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores">
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Alternar Modo de Cores" aria-label="Alternar Modo de Cores">
           <i class="fa-solid fa-moon"></i>
         </button>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir Menu">
@@ -43,7 +51,7 @@
     <div class="container course-hero-grid">
       <div class="course-hero-left">
         <div class="course-badge-sub">FORMAÇÃO COMPLETA PARA MÉDICOS VETERINÁRIOS</div>
-        <h1 class="course-title font-serif">Curso de Uso Veterinário de Cannabis Medicinal</h1>
+        <h1 class="course-title">Curso de Uso Veterinário de Cannabis Medicinal</h1>
         <p class="course-intro-desc">
           Aprenda a utilizar a Cannabis Medicinal na prática veterinária com segurança, ética e embasamento científico.
         </p>
@@ -126,7 +134,7 @@
         <!-- Sobre e Aprendizado side-by-side inside main -->
         <div class="about-learn-row">
           <div class="about-course-col">
-            <h2 class="sub-section-title font-serif">SOBRE O CURSO</h2>
+            <h2 class="sub-section-title">SOBRE O CURSO</h2>
             <p>
               O Curso de Uso Veterinário de Cannabis Medicinal da APEPI Escola é uma formação completa para médicos veterinários que desejam aprender a utilizar a Cannabis Medicinal como aliada terapêutica no tratamento de diversas condições em animais.
             </p>
@@ -136,7 +144,7 @@
           </div>
 
           <div class="learn-course-col">
-            <h2 class="sub-section-title font-serif">VOCÊ VAI APRENDER</h2>
+            <h2 class="sub-section-title">VOCÊ VAI APRENDER</h2>
             <ul class="learn-list">
               <li><i class="fa-solid fa-circle-check"></i> Fundamentos da Cannabis e do Sistema Endocanabinoide</li>
               <li><i class="fa-solid fa-circle-check"></i> Indicações e evidências científicas em veterinária</li>
@@ -151,7 +159,7 @@
 
         <!-- Conteúdo Programático Accordion -->
         <div class="programmatic-content-area">
-          <h2 class="sub-section-title font-serif">CONTEÚDO PROGRAMÁTICO</h2>
+          <h2 class="sub-section-title">CONTEÚDO PROGRAMÁTICO</h2>
           
           <div class="accordion-container">
             <!-- Mod 1 -->
@@ -247,7 +255,7 @@
       <div class="course-info-sidebar">
         <div class="diferencial-exclusivo-card">
           <div class="dif-badge">DIFERENCIAL EXCLUSIVO</div>
-          <h3 class="font-serif">Visita à Fazenda Experimental</h3>
+          <h3 class="">Visita à Fazenda Experimental</h3>
           <div class="optional-badge">OPCIONAL</div>
           <p>Uma experiência prática com contato real com o cultivo e o processo produtivo de Cannabis Medicinal.</p>
           <ul class="dif-checks">
@@ -268,7 +276,7 @@
   <!-- Corpo Docente -->
   <section class="corpo-docente-section">
     <div class="container">
-      <h2 class="sub-section-title font-serif">CORPO DOCENTE</h2>
+      <h2 class="sub-section-title">CORPO DOCENTE</h2>
       
       <div class="docentes-grid-wrapper">
         <div class="docentes-grid">
@@ -326,12 +334,85 @@
     </div>
   </section>
 
+  <!-- Depoimentos dos Alunos -->
+  <section class="course-testimonials-section">
+    <div class="container">
+      <div class="testimonials-header text-center">
+        <div class="section-badge">DEPOIMENTOS DE ALUNOS</div>
+        <h2 class="section-main-title">O Que Dizem Nossos Veterinários</h2>
+        <p class="section-subtitle">Casos de sucesso na clínica de pequenos e grandes animais com o suporte técnico da APEPI Escola.</p>
+      </div>
+
+      <div class="course-testimonials-grid">
+        <!-- Testimonial 1 -->
+        <div class="course-testimonial-card">
+          <div class="test-video-thumb">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dra. Camila Nogueira">
+            <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+          </div>
+          <div class="test-card-content">
+            <div class="test-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "A prescrição de canabinoides mudou o prognóstico de pacientes idosos com dor crônica e osteoartrite na minha clínica. O curso dá uma base farmacológica fantástica."
+            </p>
+            <div class="test-author-info">
+              <h4 class="test-author-name">Dra. Camila Nogueira</h4>
+              <p class="test-author-role">Médica Veterinária • CRMV-SP 38.291</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="course-testimonial-card">
+          <div class="test-video-thumb">
+            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Dr. Marcelo Santos">
+            <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+          </div>
+          <div class="test-card-content">
+            <div class="test-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "Módulo de casos clínicos e titulação de doses em cães e gatos é extremamente detalhado. Sinto muita segurança nos cálculos e termos legais."
+            </p>
+            <div class="test-author-info">
+              <h4 class="test-author-name">Dr. Marcelo Santos</h4>
+              <p class="test-author-role">Médico Veterinário Fisiatra • CRMV-RJ 14.802</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="course-testimonial-card">
+          <div class="test-video-thumb">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80" alt="Dra. Beatriz Ferraz">
+            <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+          </div>
+          <div class="test-card-content">
+            <div class="test-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="test-quote">
+              "A visita guiada à fazenda e o contato com os professores enriqueceram muito a minha formação. É sem dúvida a melhor capacitação veterinária do Brasil."
+            </p>
+            <div class="test-author-info">
+              <h4 class="test-author-name">Dra. Beatriz Ferraz</h4>
+              <p class="test-author-role">Veterinária Acupunturista • CRMV-MG 11.540</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Bottom CTA Banner -->
   <section class="bottom-cta-banner">
     <div class="container cta-banner-container">
       <div class="cta-banner-content">
         <div class="cta-icon-holder"><i class="fa-solid fa-graduation-cap"></i></div>
-        <p class="cta-text font-serif">
+        <p class="cta-text">
           Amplie suas opções terapêuticas e ofereça mais qualidade de vida aos seus pacientes com responsabilidade e embasamento científico.
         </p>
         <a href="#" class="btn btn-primary btn-lg cta-btn-right">QUERO ME INSCREVER &rarr;</a>
