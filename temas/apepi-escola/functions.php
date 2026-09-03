@@ -2826,7 +2826,7 @@ function apepi_shortcode_pagina_nossos_cursos() {
           
           <div class="ref-nc-header-row">
             <div class="ref-nc-title-block">
-              <span class="ref-nc-catalog-sub"><?php echo esc_html($catalog_sub); ?></span>
+              <span class="section-badge"><?php echo esc_html($catalog_sub); ?></span>
               <h1 class="ref-nc-main-title"><?php echo esc_html($main_title); ?></h1>
             </div>
             <div class="ref-nc-nav-arrows">
