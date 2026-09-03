@@ -870,6 +870,8 @@ p.muted {
   letter-spacing: 0.12em;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
 }
 
 .section-main-title {
@@ -9432,25 +9434,23 @@ body.dark-theme .ref-arrow-btn:hover {
 
 /* 4 CARDS GRID (FORMAÇÕES) */
 .ref-nc-formacoes-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
 }
 
-@media (max-width: 1100px) {
-  .ref-nc-formacoes-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .ref-nc-formacoes-grid {
-    grid-template-columns: 1fr;
-  }
+.ref-nc-formacoes-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .ref-course-card {
+  flex: 0 0 calc(25% - 1.125rem);
+  min-width: 260px;
   background: #FFFFFF;
   border: 1px solid #EBE7DF;
   border-radius: 16px;
@@ -9459,6 +9459,18 @@ body.dark-theme .ref-arrow-btn:hover {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
+}
+
+@media (max-width: 1100px) {
+  .ref-course-card {
+    flex: 0 0 calc(50% - 0.75rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .ref-course-card {
+    flex: 0 0 100%;
+  }
 }
 
 [data-theme="dark"] .ref-course-card,
@@ -9677,6 +9689,10 @@ body.dark-theme .ref-num-desc {
 .ref-nc-dep-header {
   max-width: 680px;
   margin: 0 auto 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ref-nc-dep-title {
@@ -9703,19 +9719,23 @@ body.dark-theme .ref-nc-dep-sub {
 }
 
 .ref-nc-dep-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
-@media (max-width: 992px) {
-  .ref-nc-dep-grid {
-    grid-template-columns: 1fr;
-  }
+.ref-nc-dep-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .ref-dep-card {
+  flex: 0 0 calc(33.333% - 1.34rem);
+  min-width: 280px;
   background: #FFFFFF;
   border: 1px solid #EBE7DF;
   border-radius: 20px;
@@ -9723,6 +9743,27 @@ body.dark-theme .ref-nc-dep-sub {
   box-shadow: 0 4px 15px rgba(0,0,0,0.02);
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 992px) {
+  .ref-dep-card {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .ref-dep-card {
+    flex: 0 0 100%;
+  }
+}
+
+.ref-dep-nav-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
 [data-theme="dark"] .ref-dep-card,

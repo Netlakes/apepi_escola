@@ -156,6 +156,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Nossos Cursos - Formações Slider Logic
+  const refNcFormacoesSection = document.querySelector('.ref-nc-formacoes-section');
+  if (refNcFormacoesSection) {
+    const formGrid = refNcFormacoesSection.querySelector('.ref-nc-formacoes-grid');
+    const prevBtn = refNcFormacoesSection.querySelector('.ref-arrow-prev');
+    const nextBtn = refNcFormacoesSection.querySelector('.ref-arrow-next');
+    const progressKnob = refNcFormacoesSection.querySelector('.ref-nc-progress-knob');
+
+    if (formGrid) {
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          formGrid.scrollBy({ left: -formGrid.clientWidth * 0.75, behavior: 'smooth' });
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          formGrid.scrollBy({ left: formGrid.clientWidth * 0.75, behavior: 'smooth' });
+        });
+      }
+      if (progressKnob) {
+        formGrid.addEventListener('scroll', () => {
+          const maxScroll = formGrid.scrollWidth - formGrid.clientWidth;
+          if (maxScroll > 0) {
+            const percentage = (formGrid.scrollLeft / maxScroll) * 100;
+            progressKnob.style.left = `${Math.min(Math.max(percentage, 0), 100)}%`;
+          }
+        });
+      }
+    }
+  }
+
+  // Nossos Cursos - Depoimentos Slider Logic
+  const refNcDepSection = document.querySelector('.ref-nc-depoimentos-section');
+  if (refNcDepSection) {
+    const depGrid = refNcDepSection.querySelector('.ref-nc-dep-grid');
+    const prevBtn = refNcDepSection.querySelector('.ref-arrow-prev');
+    const nextBtn = refNcDepSection.querySelector('.ref-arrow-next');
+
+    if (depGrid) {
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          depGrid.scrollBy({ left: -depGrid.clientWidth * 0.75, behavior: 'smooth' });
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          depGrid.scrollBy({ left: depGrid.clientWidth * 0.75, behavior: 'smooth' });
+        });
+      }
+    }
+  }
+
   // Smooth Scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
