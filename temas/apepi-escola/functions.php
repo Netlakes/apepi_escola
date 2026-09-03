@@ -111,9 +111,16 @@ function apepi_get_logo_url($type = 'light') {
  * Enfileirar Estilos e Scripts
  */
 function apepi_escola_scripts() {
+    $theme_ver = wp_get_theme()->get('Version');
+    $style_file = get_stylesheet_directory() . '/style.css';
+    $script_file = get_stylesheet_directory() . '/script.js';
+
+    $style_ver = file_exists($style_file) ? filemtime($style_file) : $theme_ver;
+    $script_ver = file_exists($script_file) ? filemtime($script_file) : $theme_ver;
+
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), '6.4.0');
-    wp_enqueue_style('apepi-escola-style', get_stylesheet_uri(), array('font-awesome'), '4.2.0');
-    wp_enqueue_script('apepi-escola-script', get_template_directory_uri() . '/script.js', array(), '4.2.0', true);
+    wp_enqueue_style('apepi-escola-style', get_stylesheet_uri(), array('font-awesome'), $style_ver);
+    wp_enqueue_script('apepi-escola-script', get_template_directory_uri() . '/script.js', array(), $script_ver, true);
 }
 add_action('wp_enqueue_scripts', 'apepi_escola_scripts');
 

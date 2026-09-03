@@ -4,19 +4,7 @@ Theme URI: https://apepi.org.br
 Author: Netlagos Consulting
 Author URI: https://netlagos.com.br
 Description: Tema oficial da APEPI Escola - A principal Escola Brasileira de Cannabis Medicinal. Totalmente responsivo, suporte a Dark Mode, menus dinâmicos com dropdowns, painel de customização, breadcrumbs nativos e Custom Post Types.
-Version: 6.0.0
-License: GNU General Public License v2 or later
-Text Domain: apepi-escola
-Tags: custom-menu, dark-mode, responsive-layout, education, medical, custom-post-types
-*/
-
-/*
-Theme Name: APEPI Escola
-Theme URI: https://apepi.org.br
-Author: Netlagos Consulting
-Author URI: https://netlagos.com.br
-Description: Tema oficial da APEPI Escola - A principal Escola Brasileira de Cannabis Medicinal. Totalmente responsivo, suporte a Dark Mode, menus dinâmicos e Custom Post Types.
-Version: 1.0.0
+Version: 6.2.0
 License: GNU General Public License v2 or later
 Text Domain: apepi-escola
 Tags: custom-menu, dark-mode, responsive-layout, education, medical, custom-post-types
@@ -9411,9 +9399,9 @@ body.dark-theme .ref-nc-main-title {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid #D5CEC2;
-  background: #FFFFFF;
-  color: #003E19;
+  border: 1px solid var(--border, #D5CEC2);
+  background: var(--bg-card, #FFFFFF);
+  color: var(--secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9423,16 +9411,23 @@ body.dark-theme .ref-nc-main-title {
 }
 
 .ref-arrow-btn:hover {
-  background: #003E19;
-  color: #FFFFFF;
-  border-color: #003E19;
+  background: var(--secondary);
+  color: var(--text-on-secondary, #FFFFFF);
+  border-color: var(--secondary);
 }
 
 [data-theme="dark"] .ref-arrow-btn,
 body.dark-theme .ref-arrow-btn {
   background: #1F1711 !important;
   border-color: #38291F !important;
-  color: #7EA152 !important;
+  color: var(--secondary) !important;
+}
+
+[data-theme="dark"] .ref-arrow-btn:hover,
+body.dark-theme .ref-arrow-btn:hover {
+  background: var(--secondary) !important;
+  color: var(--text-on-secondary, #17110C) !important;
+  border-color: var(--secondary) !important;
 }
 
 /* 4 CARDS GRID (FORMAÇÕES) */
