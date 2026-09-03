@@ -2244,3 +2244,465 @@ add_shortcode('apepi_pagina_fazenda', 'apepi_shortcode_pagina_fazenda');
 
 
 
+/* ============================================================
+   NOSSOS CURSOS PAGE — SHORTCODES + CUSTOMIZER
+   ============================================================ */
+
+/**
+ * Shortcode: Números APEPI Escola em Números (Nossos Cursos page)
+ */
+function apepi_shortcode_escola_numeros($atts) {
+    $atts = shortcode_atts(array(
+        'badge' => 'APEPI ESCOLA EM NÚMEROS',
+    ), $atts);
+
+    $stats = array(
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num1_icon',  'fa-solid fa-award'),
+            'value' => apepi_get_option('apepi_nc_num1_value', '14 anos'),
+            'label' => apepi_get_option('apepi_nc_num1_label', 'de experiência na educação canábica'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num2_icon',  'fa-solid fa-users'),
+            'value' => apepi_get_option('apepi_nc_num2_value', '+1000'),
+            'label' => apepi_get_option('apepi_nc_num2_label', 'alunos formados e preparados para fazer a diferença'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num3_icon',  'fa-solid fa-play-circle'),
+            'value' => apepi_get_option('apepi_nc_num3_value', '+10h'),
+            'label' => apepi_get_option('apepi_nc_num3_label', 'de conteúdo — aulas online e ao vivo com especialistas referência na área'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num4_icon',  'fa-solid fa-graduation-cap'),
+            'value' => apepi_get_option('apepi_nc_num4_value', 'Formação completa'),
+            'label' => apepi_get_option('apepi_nc_num4_label', 'da teoria à prática, com segurança e responsabilidade'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num5_icon',  'fa-solid fa-book-open'),
+            'value' => apepi_get_option('apepi_nc_num5_value', 'E-books gratuitos'),
+            'label' => apepi_get_option('apepi_nc_num5_label', 'materiais exclusivos para aprofundar seu conhecimento'),
+        ),
+    );
+
+    ob_start();
+    ?>
+    <section class="nc-numeros-section">
+      <div class="container">
+        <div class="nc-numeros-header">
+          <div class="nc-numeros-badge">
+            <i class="fa-solid fa-leaf"></i>
+            <?php echo esc_html($atts['badge']); ?>
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+        </div>
+        <div class="nc-numeros-grid">
+          <?php foreach ($stats as $s) : ?>
+          <div class="nc-numero-item">
+            <div class="nc-numero-icon"><i class="<?php echo esc_attr($s['icon']); ?>"></i></div>
+            <div class="nc-numero-value"><?php echo esc_html($s['value']); ?></div>
+            <div class="nc-numero-label"><?php echo esc_html($s['label']); ?></div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('apepi_escola_numeros', 'apepi_shortcode_escola_numeros');
+
+/**
+ * Shortcode: Depoimentos (Nossos Cursos page)
+ */
+function apepi_shortcode_depoimentos_nc($atts) {
+    $atts = shortcode_atts(array(
+        'limit' => 6,
+    ), $atts);
+
+    $badge    = apepi_get_option('apepi_nc_dep_badge',    'DEPOIMENTOS');
+    $title    = apepi_get_option('apepi_nc_dep_title',    'O que nossos alunos dizem');
+    $subtitle = apepi_get_option('apepi_nc_dep_subtitle', 'Histórias reais de médicos, veterinários e profissionais que transformaram sua prática com o conhecimento em Cannabis Medicinal.');
+
+    // Try to pull from CPT depoimento first
+    $args = array(
+        'post_type'      => 'depoimento',
+        'posts_per_page' => intval($atts['limit']),
+        'post_status'    => 'publish',
+    );
+    $query = new WP_Query($args);
+
+    $fallback_deps = array(
+        array(
+            'text'   => apepi_get_option('apepi_nc_dep1_text', 'O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes com muito mais consciência e resultados.'),
+            'name'   => apepi_get_option('apepi_nc_dep1_name', 'Dr. Rafael M.'),
+            'role'   => apepi_get_option('apepi_nc_dep1_role', 'Médico'),
+            'avatar' => apepi_get_option('apepi_nc_dep1_avatar', 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'),
+        ),
+        array(
+            'text'   => apepi_get_option('apepi_nc_dep2_text', 'Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo de olhos fechados!'),
+            'name'   => apepi_get_option('apepi_nc_dep2_name', 'Dra. Juliana T.'),
+            'role'   => apepi_get_option('apepi_nc_dep2_role', 'Médica Veterinária'),
+            'avatar' => apepi_get_option('apepi_nc_dep2_avatar', 'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=200&q=80'),
+        ),
+        array(
+            'text'   => apepi_get_option('apepi_nc_dep3_text', 'A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação. Um curso que vai muito além da teoria.'),
+            'name'   => apepi_get_option('apepi_nc_dep3_name', 'Dr. Lucas P.'),
+            'role'   => apepi_get_option('apepi_nc_dep3_role', 'Médico'),
+            'avatar' => apepi_get_option('apepi_nc_dep3_avatar', 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80'),
+        ),
+    );
+
+    ob_start();
+    ?>
+    <section class="nc-depoimentos-section">
+      <div class="container">
+        <div class="nc-depoimentos-header">
+          <div class="nc-depoimentos-badge">
+            <i class="fa-solid fa-leaf"></i>
+            <?php echo esc_html($badge); ?>
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h2 class="font-serif"><?php echo esc_html($title); ?></h2>
+          <p><?php echo esc_html($subtitle); ?></p>
+        </div>
+
+        <div class="nc-depoimentos-carousel-wrapper" id="nc-dep-carousel">
+          <div class="nc-depoimentos-grid" id="nc-dep-grid">
+            <?php if ($query->have_posts()) :
+              while ($query->have_posts()) : $query->the_post();
+                $cargo   = get_post_meta(get_the_ID(), '_depoimento_cargo', true);
+                $avatar  = apepi_get_professor_image_url(get_the_ID());
+            ?>
+            <div class="nc-depoimento-card">
+              <div class="nc-dep-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="nc-dep-text"><?php echo wp_kses_post(get_the_excerpt()); ?></p>
+              <div class="nc-dep-author">
+                <img src="<?php echo esc_url($avatar); ?>" alt="<?php the_title_attribute(); ?>" class="nc-dep-avatar">
+                <div>
+                  <p class="nc-dep-name"><?php the_title(); ?></p>
+                  <?php if ($cargo) : ?><p class="nc-dep-role"><?php echo esc_html($cargo); ?></p><?php endif; ?>
+                </div>
+              </div>
+            </div>
+            <?php
+              endwhile;
+              wp_reset_postdata();
+            else :
+              foreach ($fallback_deps as $dep) : ?>
+            <div class="nc-depoimento-card">
+              <div class="nc-dep-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="nc-dep-text"><?php echo esc_html($dep['text']); ?></p>
+              <div class="nc-dep-author">
+                <img src="<?php echo esc_url($dep['avatar']); ?>" alt="<?php echo esc_attr($dep['name']); ?>" class="nc-dep-avatar">
+                <div>
+                  <p class="nc-dep-name"><?php echo esc_html($dep['name']); ?></p>
+                  <p class="nc-dep-role"><?php echo esc_html($dep['role']); ?></p>
+                </div>
+              </div>
+            </div>
+            <?php endforeach;
+            endif; ?>
+          </div>
+        </div>
+
+        <div class="nc-carousel-arrows">
+          <button class="arrow-btn" id="nc-dep-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="arrow-btn" id="nc-dep-next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+    <script>
+    (function(){
+      var grid = document.getElementById('nc-dep-grid');
+      if (!grid) return;
+      var cards = Array.from(grid.children);
+      var perPage = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+      var current = 0;
+      var total = cards.length;
+      function show(idx) {
+        current = ((idx % total) + total) % total;
+        cards.forEach(function(c, i) {
+          c.style.display = (i >= current && i < current + perPage) ? '' : 'none';
+        });
+      }
+      show(0);
+      document.getElementById('nc-dep-prev').addEventListener('click', function(){ show(current - 1); });
+      document.getElementById('nc-dep-next').addEventListener('click', function(){ show(current + 1); });
+      window.addEventListener('resize', function(){
+        perPage = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+        show(current);
+      });
+    })();
+    </script>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('apepi_depoimentos', 'apepi_shortcode_depoimentos_nc');
+add_shortcode('apepi_depoimentos_nc', 'apepi_shortcode_depoimentos_nc');
+
+/**
+ * Shortcode: Banner E-books (Nossos Cursos page)
+ */
+function apepi_shortcode_banner_ebooks($atts) {
+    $title     = apepi_get_option('apepi_nc_ebook_title',   'Conhecimento que vai além da sala de aula');
+    $subtitle  = apepi_get_option('apepi_nc_ebook_subtitle','Acesse nossos e-books gratuitos e aprofunde ainda mais seus estudos sobre Cannabis Medicinal.');
+    $btn_text  = apepi_get_option('apepi_nc_ebook_btn',     'BAIXAR E-BOOKS GRATUITOS');
+    $btn_url   = apepi_get_option('apepi_nc_ebook_url',     '#ebooks');
+    $cover_img = apepi_get_option('apepi_nc_ebook_cover',   '');
+
+    $default_cover = 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=300&q=80';
+    if (empty($cover_img)) $cover_img = $default_cover;
+
+    ob_start();
+    ?>
+    <section class="nc-ebook-banner-section">
+      <div class="container">
+        <div class="nc-ebook-banner-inner">
+          <div class="nc-ebook-img-wrap">
+            <img src="<?php echo esc_url($cover_img); ?>" alt="E-books APEPI Escola">
+          </div>
+          <div class="nc-ebook-text">
+            <h3 class="font-serif"><?php echo esc_html($title); ?></h3>
+            <p><?php echo esc_html($subtitle); ?></p>
+          </div>
+          <div class="nc-ebook-cta">
+            <a href="<?php echo esc_url($btn_url); ?>" class="nc-ebook-btn">
+              <i class="fa-solid fa-download"></i>
+              <?php echo esc_html($btn_text); ?>
+            </a>
+            <span class="nc-ebook-secure"><i class="fa-solid fa-lock"></i> 100% gratuitos e seguros.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('apepi_banner_ebooks', 'apepi_shortcode_banner_ebooks');
+
+/**
+ * Master Shortcode: Página Nossos Cursos Completa
+ */
+function apepi_shortcode_pagina_nossos_cursos($atts) {
+    $atts = shortcode_atts(array(), $atts);
+    ob_start();
+    echo do_shortcode('[apepi_lista_cursos title="FORMAÇÕES" badge="NOSSO CATÁLOGO" limit="8"]');
+    echo do_shortcode('[apepi_escola_numeros]');
+    echo do_shortcode('[apepi_depoimentos]');
+    echo do_shortcode('[apepi_banner_ebooks]');
+    return ob_get_clean();
+}
+add_shortcode('apepi_pagina_nossos_cursos', 'apepi_shortcode_pagina_nossos_cursos');
+
+/**
+ * Admin options — Nossos Cursos page
+ */
+add_action('admin_menu', 'apepi_nc_add_admin_submenu');
+function apepi_nc_add_admin_submenu() {
+    add_submenu_page(
+        'apepi-escola-options',
+        'Nossos Cursos — Conteúdo',
+        'Nossos Cursos',
+        'manage_options',
+        'apepi-nc-options',
+        'apepi_nc_admin_page_callback'
+    );
+}
+
+function apepi_nc_admin_page_callback() {
+    if (isset($_POST['apepi_nc_save']) && check_admin_referer('apepi_nc_nonce_action', 'apepi_nc_nonce')) {
+        $fields = array(
+            // Números
+            'apepi_nc_num1_icon','apepi_nc_num1_value','apepi_nc_num1_label',
+            'apepi_nc_num2_icon','apepi_nc_num2_value','apepi_nc_num2_label',
+            'apepi_nc_num3_icon','apepi_nc_num3_value','apepi_nc_num3_label',
+            'apepi_nc_num4_icon','apepi_nc_num4_value','apepi_nc_num4_label',
+            'apepi_nc_num5_icon','apepi_nc_num5_value','apepi_nc_num5_label',
+            // Depoimentos
+            'apepi_nc_dep_badge','apepi_nc_dep_title','apepi_nc_dep_subtitle',
+            'apepi_nc_dep1_text','apepi_nc_dep1_name','apepi_nc_dep1_role','apepi_nc_dep1_avatar',
+            'apepi_nc_dep2_text','apepi_nc_dep2_name','apepi_nc_dep2_role','apepi_nc_dep2_avatar',
+            'apepi_nc_dep3_text','apepi_nc_dep3_name','apepi_nc_dep3_role','apepi_nc_dep3_avatar',
+            // E-books
+            'apepi_nc_ebook_title','apepi_nc_ebook_subtitle','apepi_nc_ebook_btn','apepi_nc_ebook_url','apepi_nc_ebook_cover',
+        );
+        foreach ($fields as $field) {
+            if (isset($_POST[$field])) {
+                $val = in_array($field, array('apepi_nc_dep1_text','apepi_nc_dep2_text','apepi_nc_dep3_text','apepi_nc_dep_subtitle','apepi_nc_ebook_subtitle'))
+                    ? sanitize_textarea_field($_POST[$field])
+                    : sanitize_text_field($_POST[$field]);
+                update_option($field, $val);
+                set_theme_mod($field, $val);
+            }
+        }
+        echo '<div class="notice notice-success is-dismissible" style="margin-top:12px;"><p><strong>Configurações da página Nossos Cursos salvas com sucesso!</strong></p></div>';
+    }
+
+    // Load values
+    $v = function($key, $default = '') { return apepi_get_option($key, $default); };
+    ?>
+    <div class="wrap">
+        <h1 style="font-size:24px;font-weight:700;color:#003E19;">APEPI Escola — Nossos Cursos (Conteúdo da Página)</h1>
+        <p style="color:#555;font-size:14px;">Edite os textos, números, depoimentos e configurações do banner de e-books.</p>
+        <hr style="margin-bottom:20px;">
+
+        <form method="post" action="">
+            <?php wp_nonce_field('apepi_nc_nonce_action', 'apepi_nc_nonce'); ?>
+            <style>
+            .apepi-admin-card { background:#fff; border:1px solid #ccd0d4; border-radius:8px; padding:20px 24px; margin-bottom:20px; }
+            .apepi-admin-card h2 { margin-top:0; padding-bottom:10px; border-bottom:1px solid #eee; color:#003E19; font-size:17px; }
+            .nc-grid-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:10px; }
+            .nc-dep-group { border:1px solid #e8e8e8; border-radius:6px; padding:14px; margin-bottom:12px; background:#fafafa; }
+            .nc-dep-group h4 { margin:0 0 10px; color:#444; font-size:14px; }
+            </style>
+
+            <!-- 1. APEPI em Números -->
+            <div class="apepi-admin-card">
+                <h2>1. Seção "APEPI Escola em Números" (5 itens)</h2>
+                <?php
+                $nums = array(
+                    1 => array('Ícone FA', '14 anos', 'de experiência na educação canábica', 'fa-solid fa-award'),
+                    2 => array('Ícone FA', '+1000', 'alunos formados e preparados para fazer a diferença', 'fa-solid fa-users'),
+                    3 => array('Ícone FA', '+10h', 'de conteúdo — aulas online e ao vivo', 'fa-solid fa-play-circle'),
+                    4 => array('Ícone FA', 'Formação completa', 'da teoria à prática, com segurança', 'fa-solid fa-graduation-cap'),
+                    5 => array('Ícone FA', 'E-books gratuitos', 'materiais exclusivos para aprofundar', 'fa-solid fa-book-open'),
+                );
+                foreach ($nums as $n => $def) : ?>
+                <div class="nc-grid-row">
+                    <div>
+                        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:3px;">Item <?php echo $n; ?> — Ícone FontAwesome</label>
+                        <input type="text" name="apepi_nc_num<?php echo $n; ?>_icon" value="<?php echo esc_attr($v("apepi_nc_num{$n}_icon", $def[3])); ?>" class="regular-text" placeholder="<?php echo esc_attr($def[3]); ?>">
+                    </div>
+                    <div>
+                        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:3px;">Valor / Número</label>
+                        <input type="text" name="apepi_nc_num<?php echo $n; ?>_value" value="<?php echo esc_attr($v("apepi_nc_num{$n}_value", $def[1])); ?>" class="regular-text">
+                    </div>
+                    <div>
+                        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:3px;">Legenda / Descrição</label>
+                        <input type="text" name="apepi_nc_num<?php echo $n; ?>_label" value="<?php echo esc_attr($v("apepi_nc_num{$n}_label", $def[2])); ?>" class="regular-text">
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- 2. Depoimentos -->
+            <div class="apepi-admin-card">
+                <h2>2. Seção "Depoimentos" — Textos e Cabeçalho</h2>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="apepi_nc_dep_badge">Badge (ex: DEPOIMENTOS)</label></th>
+                        <td><input type="text" id="apepi_nc_dep_badge" name="apepi_nc_dep_badge" value="<?php echo esc_attr($v('apepi_nc_dep_badge','DEPOIMENTOS')); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_dep_title">Título Principal</label></th>
+                        <td><input type="text" id="apepi_nc_dep_title" name="apepi_nc_dep_title" value="<?php echo esc_attr($v('apepi_nc_dep_title','O que nossos alunos dizem')); ?>" class="large-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_dep_subtitle">Subtítulo / Descrição</label></th>
+                        <td><textarea id="apepi_nc_dep_subtitle" name="apepi_nc_dep_subtitle" rows="2" class="large-text"><?php echo esc_textarea($v('apepi_nc_dep_subtitle','Histórias reais...')); ?></textarea></td>
+                    </tr>
+                </table>
+
+                <p style="margin-top:16px;font-size:13px;color:#555;">⚠️ Os depoimentos abaixo são usados como <strong>fallback</strong> quando não há posts do tipo "Depoimento" cadastrados no WordPress.</p>
+
+                <?php $dep_defaults = array(
+                    1 => array(
+                        'text' => 'O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes.',
+                        'name' => 'Dr. Rafael M.',
+                        'role' => 'Médico',
+                        'avatar' => 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80',
+                    ),
+                    2 => array(
+                        'text' => 'Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo!',
+                        'name' => 'Dra. Juliana T.',
+                        'role' => 'Médica Veterinária',
+                        'avatar' => 'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=200&q=80',
+                    ),
+                    3 => array(
+                        'text' => 'A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação.',
+                        'name' => 'Dr. Lucas P.',
+                        'role' => 'Médico',
+                        'avatar' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80',
+                    ),
+                );
+                foreach ($dep_defaults as $d => $dd) : ?>
+                <div class="nc-dep-group">
+                    <h4>Depoimento <?php echo $d; ?></h4>
+                    <table class="form-table" style="margin:0;">
+                        <tr>
+                            <th style="width:130px;"><label>Texto</label></th>
+                            <td><textarea name="apepi_nc_dep<?php echo $d; ?>_text" rows="2" class="large-text"><?php echo esc_textarea($v("apepi_nc_dep{$d}_text", $dd['text'])); ?></textarea></td>
+                        </tr>
+                        <tr>
+                            <th><label>Nome</label></th>
+                            <td><input type="text" name="apepi_nc_dep<?php echo $d; ?>_name" value="<?php echo esc_attr($v("apepi_nc_dep{$d}_name", $dd['name'])); ?>" class="regular-text"></td>
+                        </tr>
+                        <tr>
+                            <th><label>Cargo / Profissão</label></th>
+                            <td><input type="text" name="apepi_nc_dep<?php echo $d; ?>_role" value="<?php echo esc_attr($v("apepi_nc_dep{$d}_role", $dd['role'])); ?>" class="regular-text"></td>
+                        </tr>
+                        <tr>
+                            <th><label>URL da Foto</label></th>
+                            <td><input type="text" name="apepi_nc_dep<?php echo $d; ?>_avatar" value="<?php echo esc_attr($v("apepi_nc_dep{$d}_avatar", $dd['avatar'])); ?>" class="large-text" placeholder="https://..."></td>
+                        </tr>
+                    </table>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- 3. Banner E-books -->
+            <div class="apepi-admin-card">
+                <h2>3. Banner "E-books Gratuitos" (rodapé da página Nossos Cursos)</h2>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="apepi_nc_ebook_title">Título</label></th>
+                        <td><input type="text" id="apepi_nc_ebook_title" name="apepi_nc_ebook_title" value="<?php echo esc_attr($v('apepi_nc_ebook_title','Conhecimento que vai além da sala de aula')); ?>" class="large-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_subtitle">Subtítulo / Descrição</label></th>
+                        <td><textarea id="apepi_nc_ebook_subtitle" name="apepi_nc_ebook_subtitle" rows="2" class="large-text"><?php echo esc_textarea($v('apepi_nc_ebook_subtitle','Acesse nossos e-books gratuitos...')); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_btn">Texto do Botão</label></th>
+                        <td><input type="text" id="apepi_nc_ebook_btn" name="apepi_nc_ebook_btn" value="<?php echo esc_attr($v('apepi_nc_ebook_btn','BAIXAR E-BOOKS GRATUITOS')); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_url">Link do Botão</label></th>
+                        <td><input type="text" id="apepi_nc_ebook_url" name="apepi_nc_ebook_url" value="<?php echo esc_attr($v('apepi_nc_ebook_url','#ebooks')); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_cover">URL da Capa do E-book (imagem)</label></th>
+                        <td>
+                            <div style="display:flex;gap:10px;align-items:center;">
+                                <input type="text" id="apepi_nc_ebook_cover" name="apepi_nc_ebook_cover" value="<?php echo esc_attr($v('apepi_nc_ebook_cover','')); ?>" class="large-text" placeholder="https://...">
+                                <button type="button" class="button apepi-upload-btn">Selecionar</button>
+                            </div>
+                            <?php $cover = $v('apepi_nc_ebook_cover',''); if ($cover) : ?>
+                            <img src="<?php echo esc_url($cover); ?>" style="max-height:70px;margin-top:8px;border:1px solid #ddd;border-radius:4px;" alt="E-book cover preview">
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <p class="submit">
+                <input type="submit" name="apepi_nc_save" class="button button-primary button-hero" value="Salvar Configurações da Página Nossos Cursos">
+            </p>
+        </form>
+    </div>
+    <script>
+    jQuery(document).ready(function($){
+        $('.apepi-upload-btn').off('click').on('click', function(e) {
+            e.preventDefault();
+            var btn = $(this);
+            var targetInput = btn.prev('input');
+            wp.media({ title: 'Selecionar Imagem', button: { text: 'Usar esta Imagem' }, multiple: false })
+              .on('select', function() {
+                  var att = this.state().get('selection').first().toJSON();
+                  targetInput.val(att.url);
+              }.bind(this)).open();
+        });
+    });
+    </script>
+    <?php
+}

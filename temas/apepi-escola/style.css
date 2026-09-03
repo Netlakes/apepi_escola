@@ -4854,4 +4854,589 @@ img, video {
 
 
 
+/* ============================================================
+   NOSSOS CURSOS PAGE — SECTIONS
+   ============================================================ */
+
+/* --- 1. Formations Carousel (enhanced badge) --- */
+.nc-formations-section {
+  padding: 4.5rem 0;
+  background: var(--bg-primary);
+}
+
+.nc-formations-section .section-title-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 2.25rem;
+  gap: 1rem;
+}
+
+.nc-formations-section .section-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nc-formations-section .arrow-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.85rem;
+}
+
+.nc-formations-section .arrow-btn:hover {
+  background: var(--secondary);
+  color: #fff;
+  border-color: var(--secondary);
+}
+
+.nc-formations-section .section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--secondary);
+  margin-bottom: 0.45rem;
+}
+
+.nc-formations-section .section-main-title {
+  font-size: clamp(2rem, 3.5vw, 2.85rem);
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.nc-formations-section .formations-carousel-wrapper {
+  overflow: hidden;
+}
+
+.nc-formations-section .formations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(228px, 1fr));
+  gap: 1.25rem;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nc-formations-section .formation-card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.nc-formations-section .formation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-hover);
+}
+
+.nc-formations-section .card-img-holder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.nc-formations-section .card-img-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.nc-formations-section .formation-card:hover .card-img-holder img {
+  transform: scale(1.05);
+}
+
+.nc-formations-section .card-badge-icon {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--secondary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+}
+
+.nc-formations-section .card-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.nc-formations-section .card-content h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.55rem;
+  line-height: 1.3;
+}
+
+.nc-formations-section .card-content p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0 0 1.25rem 0;
+  flex: 1;
+}
+
+.nc-formations-section .saiba-mais-btn {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nc-formations-section .saiba-mais-btn:hover {
+  color: var(--secondary-hover);
+}
+
+/* Progress bar under carousel */
+.nc-carousel-progress {
+  height: 3px;
+  background: var(--bg-tertiary);
+  border-radius: 2px;
+  margin-top: 1.5rem;
+  overflow: hidden;
+}
+
+.nc-carousel-progress-bar {
+  height: 100%;
+  background: var(--secondary);
+  border-radius: 2px;
+  width: 25%;
+  transition: width 0.4s ease;
+}
+
+/* --- 2. APEPI em Números --- */
+.nc-numeros-section {
+  padding: 4rem 0;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nc-numeros-header {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.nc-numeros-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--secondary);
+  margin-bottom: 0.35rem;
+}
+
+.nc-numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.nc-numero-item {
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nc-numero-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--secondary);
+}
+
+.nc-numero-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  font-size: 1.5rem;
+  transition: var(--transition);
+}
+
+.nc-numero-item:hover .nc-numero-icon {
+  background: var(--secondary-light);
+  border-color: var(--secondary);
+}
+
+.nc-numero-value {
+  font-size: clamp(1.8rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  font-family: var(--font-serif);
+}
+
+.nc-numero-label {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  text-align: center;
+  max-width: 140px;
+}
+
+/* --- 3. Depoimentos Carousel --- */
+.nc-depoimentos-section {
+  padding: 5rem 0;
+  background: var(--bg-secondary);
+}
+
+.nc-depoimentos-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.nc-depoimentos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--secondary);
+  margin-bottom: 0.4rem;
+}
+
+.nc-depoimentos-header h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.nc-depoimentos-header p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.nc-depoimentos-carousel-wrapper {
+  overflow: hidden;
+}
+
+.nc-depoimentos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nc-depoimento-card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: var(--transition);
+}
+
+.nc-depoimento-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.nc-dep-quote-icon {
+  font-size: 2rem;
+  color: var(--secondary);
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.nc-dep-text {
+  font-size: 0.935rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
+  margin: 0;
+}
+
+.nc-dep-author {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.nc-dep-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 2px solid var(--secondary);
+  flex-shrink: 0;
+}
+
+.nc-dep-name {
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.nc-dep-role {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0.15rem 0 0;
+}
+
+.nc-carousel-arrows {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 2rem;
+}
+
+.nc-carousel-arrows .arrow-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.nc-carousel-arrows .arrow-btn:hover {
+  background: var(--secondary);
+  color: #fff;
+  border-color: var(--secondary);
+}
+
+/* --- 4. E-book Banner --- */
+.nc-ebook-banner-section {
+  padding: 3.5rem 0;
+  background: var(--bg-primary);
+}
+
+.nc-ebook-banner-inner {
+  background: linear-gradient(135deg, #003E19 0%, #0D5C2F 60%, #1B7540 100%);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.nc-ebook-banner-inner::before {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+
+.nc-ebook-img-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nc-ebook-img-wrap img {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.3));
+  border-radius: 6px;
+}
+
+.nc-ebook-text h3 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.55rem;
+  line-height: 1.25;
+}
+
+.nc-ebook-text p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
+  line-height: 1.55;
+  max-width: 480px;
+}
+
+.nc-ebook-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.nc-ebook-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.9rem 1.65rem;
+  background: var(--secondary, #4C9A2A);
+  color: #101A0D !important;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: var(--transition);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.nc-ebook-btn:hover {
+  background: #5DB535;
+  color: #080F07 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(76, 154, 42, 0.4);
+}
+
+.nc-ebook-secure {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* --- Dark Mode overrides for Nossos Cursos sections --- */
+[data-theme="dark"] .nc-numeros-section {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .nc-numero-item {
+  background: var(--surface);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .nc-numero-icon {
+  background: var(--secondary-light);
+  border-color: rgba(126, 161, 82, 0.2);
+}
+
+[data-theme="dark"] .nc-depoimentos-section {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .nc-depoimento-card {
+  background: var(--surface);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .nc-ebook-banner-inner {
+  background: linear-gradient(135deg, #1B7540 0%, #234D29 100%);
+  border: 1px solid rgba(126, 161, 82, 0.25);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .nc-formations-section .formations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nc-numeros-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nc-depoimentos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nc-formations-section .formations-grid,
+  .nc-depoimentos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nc-numeros-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nc-ebook-banner-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .nc-ebook-img-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nc-ebook-cta {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nc-numeros-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
 

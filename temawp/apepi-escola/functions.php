@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * APEPI Escola Theme Functions and Definitions
  * Author: Netlagos Consulting
@@ -152,23 +152,12 @@ function apepi_escola_admin_page_callback() {
             'apepi_social_instagram', 'apepi_social_linkedin', 'apepi_social_youtube', 'apepi_social_facebook',
             'apepi_hero_pre_title', 'apepi_hero_title', 'apepi_hero_desc', 'apepi_hero_cta_text', 'apepi_hero_cta_url', 'apepi_hero_cta2_text', 'apepi_hero_cta2_url', 'apepi_hero_bg_image',
             'apepi_stat_exp_years', 'apepi_stat_professors', 'apepi_stat_students', 'apepi_stat_states', 'apepi_stat_hours', 'apepi_stat_cases',
-            'apepi_fazenda_title', 'apepi_fazenda_subtitle', 'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_fazenda_main_img',
-            'apepi_fazenda_badge1', 'apepi_fazenda_badge2', 'apepi_fazenda_badge3',
-            'apepi_fazenda_callout_left', 'apepi_fazenda_callout_right',
-            'apepi_quemsomos_title', 'apepi_quemsomos_subtitle', 'apepi_quemsomos_desc', 'apepi_quemsomos_founders_img', 'apepi_quemsomos_speech',
-            'apepi_quemsomos_missao_text', 'apepi_quemsomos_visao_text',
-            'apepi_quemsomos_pilar1_img', 'apepi_quemsomos_pilar1_title', 'apepi_quemsomos_pilar1_text',
-            'apepi_quemsomos_pilar2_img', 'apepi_quemsomos_pilar2_title', 'apepi_quemsomos_pilar2_text',
-            'apepi_quemsomos_pilar3_img', 'apepi_quemsomos_pilar3_title', 'apepi_quemsomos_pilar3_text',
-            'apepi_quemsomos_pilar4_img', 'apepi_quemsomos_pilar4_title', 'apepi_quemsomos_pilar4_text',
-            'apepi_quemsomos_quote_p1', 'apepi_quemsomos_quote_p2',
             'apepi_footer_copyright'
         );
 
         foreach ($fields as $field) {
             if (isset($_POST[$field])) {
-                $is_textarea = in_array($field, array('apepi_hero_title', 'apepi_hero_desc', 'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_quemsomos_desc', 'apepi_quemsomos_speech'));
-                $val = $is_textarea ? sanitize_textarea_field($_POST[$field]) : sanitize_text_field($_POST[$field]);
+                $val = ($field === 'apepi_hero_title' || $field === 'apepi_hero_desc') ? sanitize_textarea_field($_POST[$field]) : sanitize_text_field($_POST[$field]);
                 update_option($field, $val);
                 set_theme_mod($field, $val);
             }
@@ -196,7 +185,7 @@ function apepi_escola_admin_page_callback() {
     $hero_url   = apepi_get_option('apepi_hero_cta_url', '#cursos');
     $hero_btn2  = apepi_get_option('apepi_hero_cta2_text', 'CONHEÇA A FAZENDA');
     $hero_url2  = apepi_get_option('apepi_hero_cta2_url', '/fazenda');
-    $hero_bg    = apepi_get_option('apepi_hero_bg_image', get_template_directory_uri() . '/assets/home_hero_photo.png');
+    $hero_bg    = apepi_get_option('apepi_hero_bg_image', get_template_directory_uri() . '/assets/hero_lab_clean.png');
 
     $stat_years  = apepi_get_option('apepi_stat_exp_years', '10 anos');
     $stat_profs  = apepi_get_option('apepi_stat_professors', '120+');
@@ -204,19 +193,6 @@ function apepi_escola_admin_page_callback() {
     $stat_states = apepi_get_option('apepi_stat_states', '26');
     $stat_hours  = apepi_get_option('apepi_stat_hours', '2.400+');
     $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
-
-    $fazenda_title    = apepi_get_option('apepi_fazenda_title', 'Visita à Fazenda Sofia Langenbach');
-    $fazenda_subtitle = apepi_get_option('apepi_fazenda_subtitle', 'Aprendizado que nasce na prática');
-    $fazenda_desc     = apepi_get_option('apepi_fazenda_desc', 'Um marco da cannabis para fins medicinais no Brasil. Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
-    $fazenda_subdesc  = apepi_get_option('apepi_fazenda_subdesc', 'A Fazenda Sofia Langenbach nasce do sonho de Marcos Langenbach e Margarete Brito, fundadores da APEPI, de tornar o tratamento medicinal mais acessível. Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
-    $fazenda_img      = apepi_get_option('apepi_fazenda_main_img', 'https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg');
-
-    $qs_title         = apepi_get_option('apepi_quemsomos_title', 'Missão e Valores');
-    $qs_subtitle      = apepi_get_option('apepi_quemsomos_subtitle', 'Uma trajetória de saúde e cuidado');
-    $qs_desc          = apepi_get_option('apepi_quemsomos_desc', 'A APEPI existe para transformar vidas por meio da Cannabis Medicinal, promovendo acesso, conhecimento, inovação e tratamento com qualidade e responsabilidade.');
-    $qs_founders_img  = apepi_get_option('apepi_quemsomos_founders_img', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80');
-    $qs_speech        = apepi_get_option('apepi_quemsomos_speech', 'A APEPI Escola iniciou com a ideia de Margarete Brito e Marcos Langenbach e ensinar as pessoas a cultivar seu próprio óleo.');
-
     $copyright   = apepi_get_option('apepi_footer_copyright', '© ' . date('Y') . ' APEPI Escola. Todos os direitos reservados.');
     ?>
     <style>
@@ -628,7 +604,7 @@ function apepi_escola_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_setting('apepi_hero_bg_image', array(
-        'default'           => get_template_directory_uri() . '/assets/home_hero_photo.png',
+        'default'           => get_template_directory_uri() . '/assets/hero_lab_clean.png',
         'sanitize_callback' => 'esc_url_raw',
         'type'              => 'theme_mod',
     ));
@@ -749,126 +725,15 @@ function apepi_escola_customize_register($wp_customize) {
         'type'     => 'text',
     ));
 
-    // 6. Página Fazenda
-    $wp_customize->add_section('apepi_fazenda_section', array(
-        'title'    => __('APEPI - Página Fazenda', 'apepi-escola'),
-        'priority' => 6,
-    ));
-
-    $wp_customize->add_setting('apepi_fazenda_title', array(
-        'default'           => 'Visita à Fazenda Sofia Langenbach',
+    $wp_customize->add_setting('apepi_stat_cases', array(
+        'default'           => '1.500+',
         'sanitize_callback' => 'sanitize_text_field',
         'type'              => 'theme_mod',
     ));
-    $wp_customize->add_control('apepi_fazenda_title', array(
-        'label'    => __('Título Principal (Hero)', 'apepi-escola'),
-        'section'  => 'apepi_fazenda_section',
+    $wp_customize->add_control('apepi_stat_cases', array(
+        'label'    => __('Casos Clínicos Discutidos', 'apepi-escola'),
+        'section'  => 'apepi_stats_section',
         'type'     => 'text',
-    ));
-
-    $wp_customize->add_setting('apepi_fazenda_subtitle', array(
-        'default'           => 'Aprendizado que nasce na prática',
-        'sanitize_callback' => 'sanitize_text_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_fazenda_subtitle', array(
-        'label'    => __('Subtítulo (Hero)', 'apepi-escola'),
-        'section'  => 'apepi_fazenda_section',
-        'type'     => 'text',
-    ));
-
-    $wp_customize->add_setting('apepi_fazenda_desc', array(
-        'default'           => 'Um marco da cannabis para fins medicinais no Brasil. Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_fazenda_desc', array(
-        'label'    => __('Descrição do Hero', 'apepi-escola'),
-        'section'  => 'apepi_fazenda_section',
-        'type'     => 'textarea',
-    ));
-
-    $wp_customize->add_setting('apepi_fazenda_subdesc', array(
-        'default'           => 'A Fazenda Sofia Langenbach nasce do sonho de Marcos Langenbach e Margarete Brito, fundadores da APEPI, de tornar o tratamento medicinal mais acessível. Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_fazenda_subdesc', array(
-        'label'    => __('Descrição Complementar do Hero', 'apepi-escola'),
-        'section'  => 'apepi_fazenda_section',
-        'type'     => 'textarea',
-    ));
-
-    $wp_customize->add_setting('apepi_fazenda_main_img', array(
-        'default'           => 'https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg',
-        'sanitize_callback' => 'esc_url_raw',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'apepi_fazenda_main_img', array(
-        'label'    => __('Imagem Principal do Hero (Fazenda)', 'apepi-escola'),
-        'section'  => 'apepi_fazenda_section',
-        'settings' => 'apepi_fazenda_main_img',
-    )));
-
-    // 7. Página Quem Somos
-    $wp_customize->add_section('apepi_quemsomos_section', array(
-        'title'    => __('APEPI - Página Quem Somos', 'apepi-escola'),
-        'priority' => 7,
-    ));
-
-    $wp_customize->add_setting('apepi_quemsomos_title', array(
-        'default'           => 'Missão e Valores',
-        'sanitize_callback' => 'sanitize_text_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_quemsomos_title', array(
-        'label'    => __('Título Principal (Hero)', 'apepi-escola'),
-        'section'  => 'apepi_quemsomos_section',
-        'type'     => 'text',
-    ));
-
-    $wp_customize->add_setting('apepi_quemsomos_subtitle', array(
-        'default'           => 'Uma trajetória de saúde e cuidado',
-        'sanitize_callback' => 'sanitize_text_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_quemsomos_subtitle', array(
-        'label'    => __('Subtítulo (Hero)', 'apepi-escola'),
-        'section'  => 'apepi_quemsomos_section',
-        'type'     => 'text',
-    ));
-
-    $wp_customize->add_setting('apepi_quemsomos_desc', array(
-        'default'           => 'A APEPI existe para transformar vidas por meio da Cannabis Medicinal, promovendo acesso, conhecimento, inovação e tratamento com qualidade e responsabilidade.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_quemsomos_desc', array(
-        'label'    => __('Descrição do Hero', 'apepi-escola'),
-        'section'  => 'apepi_quemsomos_section',
-        'type'     => 'textarea',
-    ));
-
-    $wp_customize->add_setting('apepi_quemsomos_founders_img', array(
-        'default'           => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80',
-        'sanitize_callback' => 'esc_url_raw',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'apepi_quemsomos_founders_img', array(
-        'label'    => __('Imagem dos Fundadores (Quem Somos)', 'apepi-escola'),
-        'section'  => 'apepi_quemsomos_section',
-        'settings' => 'apepi_quemsomos_founders_img',
-    )));
-
-    $wp_customize->add_setting('apepi_quemsomos_speech', array(
-        'default'           => 'A APEPI Escola iniciou com a ideia de Margarete Brito e Marcos Langenbach e ensinar as pessoas a cultivar seu próprio óleo.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-        'type'              => 'theme_mod',
-    ));
-    $wp_customize->add_control('apepi_quemsomos_speech', array(
-        'label'    => __('Balão de Fala (Imagem dos Fundadores)', 'apepi-escola'),
-        'section'  => 'apepi_quemsomos_section',
-        'type'     => 'textarea',
     ));
 }
 add_action('customize_register', 'apepi_escola_customize_register');
@@ -1532,7 +1397,7 @@ function apepi_shortcode_curso_hero($atts) {
       <div class="container course-hero-grid-p2">
         <div class="course-hero-left-p2">
           <span class="course-badge-sub" style="color: var(--secondary); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem;"><?php echo esc_html($badge_categoria); ?></span>
-          <h1 class="course-title-p2"><?php echo esc_html(get_the_title($post_id)); ?></h1>
+          <h1 class="font-serif course-title-p2"><?php echo esc_html(get_the_title($post_id)); ?></h1>
           <p class="course-subtitle-p2"><?php echo esc_html($subtitulo); ?></p>
           <div class="course-quick-highlights-p2">
             <div class="cqh-item">
@@ -1636,7 +1501,7 @@ function apepi_shortcode_lista_cursos($atts) {
         <div class="section-title-area">
           <div>
             <?php if (!empty($atts['badge'])) : ?><div class="section-badge"><?php echo esc_html($atts['badge']); ?></div><?php endif; ?>
-            <?php if (!empty($atts['title'])) : ?><h2 class="section-main-title"><?php echo esc_html($atts['title']); ?></h2><?php endif; ?>
+            <?php if (!empty($atts['title'])) : ?><h2 class="section-main-title font-serif"><?php echo esc_html($atts['title']); ?></h2><?php endif; ?>
           </div>
           <div class="section-arrows">
             <button class="arrow-btn prevFormBtn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1658,7 +1523,7 @@ function apepi_shortcode_lista_cursos($atts) {
                     <div class="card-badge-icon"><i class="<?php echo esc_attr($icone); ?>"></i></div>
                   </div>
                   <div class="card-content">
-                    <h3 class=""><?php the_title(); ?></h3>
+                    <h3 class="font-serif"><?php the_title(); ?></h3>
                     <p><?php echo wp_trim_words(get_the_excerpt(), 18, '...'); ?></p>
                     <a href="<?php the_permalink(); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
                   </div>
@@ -1675,7 +1540,7 @@ function apepi_shortcode_lista_cursos($atts) {
                   <div class="card-badge-icon"><i class="fa-solid fa-user-doctor"></i></div>
                 </div>
                 <div class="card-content">
-                  <h3 class="">Prescrição Médica</h3>
+                  <h3 class="font-serif">Prescrição Médica</h3>
                   <p>Aprenda a indicar e acompanhar tratamentos com Cannabis Medicinal.</p>
                   <a href="<?php echo esc_url(home_url('/cursos')); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
                 </div>
@@ -1687,7 +1552,7 @@ function apepi_shortcode_lista_cursos($atts) {
                   <div class="card-badge-icon"><i class="fa-solid fa-paw"></i></div>
                 </div>
                 <div class="card-content">
-                  <h3 class="">Prescrição Veterinária</h3>
+                  <h3 class="font-serif">Prescrição Veterinária</h3>
                   <p>Formação completa para veterinários na prescrição canabinoide.</p>
                   <a href="<?php echo esc_url(home_url('/cursos')); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
                 </div>
@@ -1699,7 +1564,7 @@ function apepi_shortcode_lista_cursos($atts) {
                   <div class="card-badge-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
                 </div>
                 <div class="card-content">
-                  <h3 class="">Cannabis na Rotina Profissional</h3>
+                  <h3 class="font-serif">Cannabis na Rotina Profissional</h3>
                   <p>Integração da Cannabis Medicinal na prática clínica multiprofissional.</p>
                   <a href="<?php echo esc_url(home_url('/cursos')); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
                 </div>
@@ -1742,7 +1607,7 @@ function apepi_shortcode_lista_professores($atts) {
         <div class="professores-header">
           <div>
             <?php if (!empty($atts['badge'])) : ?><div class="section-badge"><?php echo esc_html($atts['badge']); ?></div><?php endif; ?>
-            <?php if (!empty($atts['title'])) : ?><h2 class=""><?php echo esc_html($atts['title']); ?></h2><?php endif; ?>
+            <?php if (!empty($atts['title'])) : ?><h2 class="font-serif"><?php echo esc_html($atts['title']); ?></h2><?php endif; ?>
           </div>
           <a href="<?php echo esc_url(home_url('/quem-somos')); ?>" class="view-all-link">VER TODOS OS PROFESSORES &rarr;</a>
         </div>
@@ -1816,89 +1681,155 @@ function apepi_shortcode_lista_professores($atts) {
 add_shortcode('apepi_lista_professores', 'apepi_shortcode_lista_professores');
 add_shortcode('apepi_professores_grid', 'apepi_shortcode_lista_professores');
 
-// 6. Shortcode Página Quem Somos – Fidelidade Absoluta ref/missaoevalores.jfif
+// 6. Shortcode Página Quem Somos Completa
 function apepi_shortcode_pagina_quem_somos() {
     ob_start();
-    $qs_title        = apepi_get_option('apepi_quemsomos_title', "Missão\nVisão e Valores");
-    $qs_subtitle     = apepi_get_option('apepi_quemsomos_subtitle', 'Uma trajetória de saúde e cuidado');
-    $qs_desc         = apepi_get_option('apepi_quemsomos_desc', 'A APEPI existe para transformar vidas por meio da Cannabis Medicinal, promovendo acesso, conhecimento, inovação e tratamento com qualidade e responsabilidade.');
-    $qs_founders_img = apepi_get_option('apepi_quemsomos_founders_img', get_template_directory_uri() . '/assets/qs_founders_hero.png');
-    $qs_speech       = apepi_get_option('apepi_quemsomos_speech', 'A APEPI Escola iniciou com a ideia de <strong>Margarete Brito e Marcos Langenbach</strong> e ensinar as pessoas a cultivar seu próprio óleo.');
-
-    $missao_text     = apepi_get_option('apepi_quemsomos_missao_text', 'Promover saúde e qualidade de vida por meio do acesso ao conhecimento, formação e tratamentos seguros com Cannabis Medicinal.');
-    $visao_text      = apepi_get_option('apepi_quemsomos_visao_text', 'Ser referência nacional e internacional em ciência, educação e inovação em Cannabis Medicinal, transformando realidades e impulsionando o futuro da saúde.');
-    
-    $pilar1_img      = apepi_get_option('apepi_quemsomos_pilar1_img', get_template_directory_uri() . '/assets/qs_pilar1.png');
-    $pilar1_title    = apepi_get_option('apepi_quemsomos_pilar1_title', 'Parte da história');
-    $pilar1_text     = apepi_get_option('apepi_quemsomos_pilar1_text', 'Em mais de uma década, a APEPI ajudou a mudar leis e quebrar o preconceito sobre a planta. Ser associado APEPI é fazer parte da história da cannabis medicinal.');
-
-    $pilar2_img      = apepi_get_option('apepi_quemsomos_pilar2_img', get_template_directory_uri() . '/assets/qs_pilar2.png');
-    $pilar2_title    = apepi_get_option('apepi_quemsomos_pilar2_title', 'Pioneirismo e inovação');
-    $pilar2_text     = apepi_get_option('apepi_quemsomos_pilar2_text', 'Primeira e maior fazenda legal de cannabis no país, para garantir qualidade e inovação aos associados. É planta no chão e remédio na mão.');
-
-    $pilar3_img      = apepi_get_option('apepi_quemsomos_pilar3_img', get_template_directory_uri() . '/assets/qs_pilar3.png');
-    $pilar3_title    = apepi_get_option('apepi_quemsomos_pilar3_title', 'Tecnologia e sustentabilidade');
-    $pilar3_text     = apepi_get_option('apepi_quemsomos_pilar3_text', 'Controle avançado de cada planta, unindo plantio com insumos agroecológicos à pesquisa e maquinário de última geração.');
-
-    $pilar4_img      = apepi_get_option('apepi_quemsomos_pilar4_img', get_template_directory_uri() . '/assets/qs_pilar4.png');
-    $pilar4_title    = apepi_get_option('apepi_quemsomos_pilar4_title', 'Qualidade, segurança e união');
-    $pilar4_text     = apepi_get_option('apepi_quemsomos_pilar4_text', 'Remédios à base de cannabis com certificado de análise (COA), que garante a efetividade do tratamento a preço justo.');
-
-    $quote_p1        = apepi_get_option('apepi_quemsomos_quote_p1', 'Acreditamos que educar é cultivar. E cultivar conhecimento é transformar vidas.');
-    $quote_p2        = apepi_get_option('apepi_quemsomos_quote_p2', 'Vamos juntos por uma sociedade mais saudável, informada e consciente.');
     ?>
-        <div class="qs-page-exact-wrapper">
+    <div class="quem-somos-full-page-wrapper">
+      
+      <!-- HERO BANNER REFINADO -->
+      <section class="quem-somos-hero-banner">
+        <div class="container" style="max-width: 850px; margin: 0 auto;">
+          <span class="qs-banner-badge"><i class="fa-solid fa-leaf"></i> SOBRE NÓS</span>
+          <h2 class="font-serif">APEPI Escola</h2>
+          <p class="qs-banner-desc">Conheça o pilar educacional da associação pioneira em cannabis medicinal no Brasil.</p>
+          
+          <div class="qs-pills-row">
+            <span class="qs-pill-item"><i class="fa-solid fa-graduation-cap"></i> Pilar Educacional</span>
+            <span class="qs-pill-item"><i class="fa-solid fa-seedling"></i> Associação Pioneira</span>
+            <span class="qs-pill-item"><i class="fa-solid fa-microscope"></i> Ensino Baseado em Evidências</span>
+          </div>
 
-      <!-- ======================== 1. HERO QUEM SOMOS (FULL-WIDTH EDGE-TO-EDGE) ======================== -->
-      <section class="hero-home-exact hero-banner-degrade qs-hero-banner">
-        <div class="hero-bg-wrapper">
-          <img src="<?php echo esc_url($qs_founders_img); ?>" alt="Margarete Brito e Marcos Langenbach - Fundadores da APEPI" class="hero-bg-img">
-          <div class="hero-gradient-overlay"></div>
+          <a href="#nossos-cursos" class="btn-hero-action">
+            Conheça Nossos Cursos <i class="fa-solid fa-arrow-down"></i>
+          </a>
         </div>
+      </section>
 
-        <div class="container hero-container-exact qs-hero-container">
-          <div class="hero-content-exact qs-hero-content">
-            <span class="qs-kicker">QUEM SOMOS</span>
-            <h1 class="hero-title-exact"><?php echo nl2br(esc_html($qs_title)); ?></h1>
-            <div class="hero-green-divider"></div>
-            <h2 class="qs-subtitle"><?php echo esc_html($qs_subtitle); ?></h2>
-            <p class="hero-desc-exact"><?php echo esc_html($qs_desc); ?></p>
-
-            <!-- Refined Floating Organic Speech Balloon -->
-            <div class="qs-speech-bubble-organic">
-              <div class="qs-bubble-leaf-icon"><i class="fa-solid fa-leaf"></i></div>
-              <p><?php echo wp_kses($qs_speech, array('strong' => array(), 'em' => array())); ?></p>
+      <!-- 3 PILARES PRINCIPAIS -->
+      <section class="diferenciais-section-home" style="margin-bottom: 4rem;">
+        <div class="container">
+          <div class="diferenciais-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem;">
+            
+            <div class="diferencial-card" style="background: var(--surface, #ffffff); border-radius: 12px; padding: 2rem 1.5rem; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;">
+              <div class="dif-icon-holder" style="width: 54px; height: 54px; border-radius: 12px; background: rgba(76, 154, 42, 0.12); color: var(--secondary, #4C9A2A); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 1.25rem;">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; color: var(--primary, #003E19); margin-bottom: 0.75rem;" class="font-serif">Metodologia Prática</h3>
+              <p style="font-size: 0.925rem; color: var(--text-secondary, #3D5244); line-height: 1.6; margin: 0;">Ensino focado em casos clínicos reais, estudos científicos e vivência prática na prescrição de cannabis medicinal.</p>
             </div>
+
+            <div class="diferencial-card" style="background: var(--surface, #ffffff); border-radius: 12px; padding: 2rem 1.5rem; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;">
+              <div class="dif-icon-holder" style="width: 54px; height: 54px; border-radius: 12px; background: rgba(76, 154, 42, 0.12); color: var(--secondary, #4C9A2A); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 1.25rem;">
+                <i class="fa-solid fa-seedling"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; color: var(--primary, #003E19); margin-bottom: 0.75rem;" class="font-serif">Fazenda APEPI</h3>
+              <p style="font-size: 0.925rem; color: var(--text-secondary, #3D5244); line-height: 1.6; margin: 0;">Imersão técnica com visitas guiadas à maior fazenda de cultivo e pesquisa de cannabis do Brasil.</p>
+            </div>
+
+            <div class="diferencial-card" style="background: var(--surface, #ffffff); border-radius: 12px; padding: 2rem 1.5rem; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;">
+              <div class="dif-icon-holder" style="width: 54px; height: 54px; border-radius: 12px; background: rgba(76, 154, 42, 0.12); color: var(--secondary, #4C9A2A); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto 1.25rem;">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <h3 style="font-size: 1.25rem; color: var(--primary, #003E19); margin-bottom: 0.75rem;" class="font-serif">Pioneirismo</h3>
+              <p style="font-size: 0.925rem; color: var(--text-secondary, #3D5244); line-height: 1.6; margin: 0;">Tradição e reputação de uma associação que mudou a história do acesso à cannabis no país.</p>
+            </div>
+
           </div>
         </div>
       </section>
 
-      <!-- ======================== 2. MISSÃO, VISÃO E VALORES ======================== -->
-      <section class="qs-mvv-section">
-        <div class="container">
-          <div class="qs-mvv-grid">
+      <!-- EDUCAÇÃO COMO FERRAMENTA SOCIAL -->
+      <section class="fazenda-section-home" style="margin-bottom: 4rem;">
+        <div class="container fazenda-home-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
+          
+          <div class="fazenda-text-card" style="background: var(--surface, #ffffff); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 6px 20px rgba(0,0,0,0.06);">
+            <div class="section-badge" style="color: var(--secondary, #4C9A2A); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.75rem;">PROPÓSITO SOCIAL</div>
+            <h2 class="font-serif" style="font-size: 2.2rem; color: var(--primary, #003E19); margin-bottom: 1.25rem;">Educação como ferramenta social</h2>
+            <p style="color: var(--text-secondary, #3D5244); line-height: 1.7; font-size: 1.05rem; margin-bottom: 1rem;">
+              A <strong>APEPI Escola</strong> nasceu para difundir o conhecimento técnico e científico sobre o uso medicinal da cannabis. Mais do que oferecer cursos, temos o compromisso ético de democratizar a compreensão sobre o uso seguro e responsável da planta.
+            </p>
+            <p style="color: var(--text-secondary, #3D5244); line-height: 1.7; font-size: 1rem; margin-bottom: 2rem;">
+              Oferecemos cursos especializados sobre cannabis medicinal, capacitando profissionais da saúde, veterinários e pacientes com conhecimento científico e prático.
+            </p>
+            <a href="#nossos-cursos" class="btn btn-primary" style="background: var(--primary, #003E19); color: #ffffff; padding: 0.85rem 1.75rem; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+              Conheça Nossos Cursos <i class="fa-solid fa-arrow-down"></i>
+            </a>
+          </div>
+
+          <div class="fazenda-img-box" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.12);">
+            <img src="https://apepiescola.org/wp-content/uploads/2026/07/Pedro-aula-scaled.jpg" alt="Aula APEPI Escola" style="width: 100%; height: 100%; object-fit: cover; display: block; min-height: 380px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- METODOLOGIA 360 -->
+      <section class="fazenda-section-home" style="margin-bottom: 4rem;">
+        <div class="container fazenda-home-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: center;">
+          
+          <div class="fazenda-img-box" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.12);">
+            <img src="https://apepiescola.org/wp-content/uploads/2026/07/Metodologia-APEPI-Escola-scaled.jpeg" alt="Metodologia APEPI Escola" style="width: 100%; height: 100%; object-fit: cover; display: block; min-height: 380px;">
+          </div>
+
+          <div class="fazenda-text-card" style="background: var(--surface, #ffffff); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 6px 20px rgba(0,0,0,0.06);">
+            <div class="section-badge" style="color: var(--secondary, #4C9A2A); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 0.75rem;">NOSSA ABORDAGEM</div>
+            <h2 class="font-serif" style="font-size: 2.2rem; color: var(--primary, #003E19); margin-bottom: 1.25rem;">Metodologia 360</h2>
+            <p style="color: var(--text-secondary, #3D5244); line-height: 1.7; font-size: 1rem; margin-bottom: 1rem;">
+              A metodologia da APEPI Escola nasce da intersecção entre pesquisa científica de ponta e a experiência acumulada pela associação que ajudou a mudar a história da cannabis no Brasil. Cada conteúdo é desenvolvido com especialistas, revisado por evidências e estruturado para transformar conhecimento complexo em prática acessível.
+            </p>
+            <p style="color: var(--text-secondary, #3D5244); line-height: 1.7; font-size: 1rem; margin-bottom: 2rem;">
+              Cada programa parte das histórias reais de pacientes, passa pelo rigor da ciência e chega à prática clínica que transforma vidas. Somente a APEPI Escola oferece visitas técnicas à maior fazenda de cannabis do Brasil.
+            </p>
+            <a href="https://apepiescola.org/fazenda-sofia-langenbach/" class="btn btn-primary" style="background: var(--secondary, #4C9A2A); color: #ffffff; padding: 0.85rem 1.75rem; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+              Conheça a Fazenda APEPI <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FILOSOFIA: MISSÃO, VISÃO E VALORES -->
+      <section style="background: var(--bg-secondary, #F3EFE9); padding: 4rem 1.5rem; border-radius: 16px; margin-bottom: 4rem;">
+        <div class="container" style="max-width: 1100px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 3rem;">
+            <span class="section-badge" style="color: var(--secondary, #4C9A2A); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem;">NOSSOS PILARES</span>
+            <h2 class="font-serif" style="font-size: 2.4rem; color: var(--primary, #003E19); margin-top: 0.5rem;">Filosofia APEPI Escola</h2>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
             
-            <div class="qs-mvv-card">
-              <div class="qs-mvv-icon-circle"><i class="fa-solid fa-bullseye"></i></div>
-              <h3 class="qs-mvv-card-title">MISSÃO</h3>
-              <p class="qs-mvv-card-desc"><?php echo esc_html($missao_text); ?></p>
+            <div style="background: var(--surface, #ffffff); padding: 2.25rem 1.75rem; border-radius: 14px; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+              <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(0, 62, 25, 0.1); color: var(--primary, #003E19); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                <i class="fa-solid fa-bullseye"></i>
+              </div>
+              <h3 class="font-serif" style="font-size: 1.4rem; color: var(--primary, #003E19); margin-bottom: 0.85rem;">Missão</h3>
+              <p style="color: var(--text-secondary, #3D5244); line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                Desenvolver ações educacionais sobre o uso seguro e eficaz da cannabis medicinal, promovendo o acesso ao conhecimento científico, com foco na formação de profissionais e na conscientização da sociedade.
+              </p>
             </div>
 
-            <div class="qs-mvv-card">
-              <div class="qs-mvv-icon-circle"><i class="fa-solid fa-eye"></i></div>
-              <h3 class="qs-mvv-card-title">VISÃO</h3>
-              <p class="qs-mvv-card-desc"><?php echo esc_html($visao_text); ?></p>
+            <div style="background: var(--surface, #ffffff); padding: 2.25rem 1.75rem; border-radius: 14px; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+              <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(76, 154, 42, 0.12); color: var(--secondary, #4C9A2A); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <h3 class="font-serif" style="font-size: 1.4rem; color: var(--primary, #003E19); margin-bottom: 0.85rem;">Visão</h3>
+              <p style="color: var(--text-secondary, #3D5244); line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                Contribuir para a construção de um cenário legal e regulado no Brasil, no qual o uso terapêutico seja amplamente compreendido e aplicado de forma segura e ética, promovendo o bem-estar e a qualidade de vida.
+              </p>
             </div>
 
-            <div class="qs-mvv-card">
-              <div class="qs-mvv-icon-circle"><i class="fa-solid fa-gem"></i></div>
-              <h3 class="qs-mvv-card-title">VALORES</h3>
-              <ul class="qs-valores-checklist">
-                <li><span class="bullet-dot">•</span> Ética e transparência</li>
-                <li><span class="bullet-dot">•</span> Ciência e evidência</li>
-                <li><span class="bullet-dot">•</span> Respeito à vida</li>
-                <li><span class="bullet-dot">•</span> Inovação e excelência</li>
-                <li><span class="bullet-dot">•</span> Responsabilidade social e ambiental</li>
+            <div style="background: var(--surface, #ffffff); padding: 2.25rem 1.75rem; border-radius: 14px; border: 1px solid var(--border-color, #EAE3D8); box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+              <div style="width: 48px; height: 48px; border-radius: 10px; background: rgba(0, 62, 25, 0.1); color: var(--primary, #003E19); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem;">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <h3 class="font-serif" style="font-size: 1.4rem; color: var(--primary, #003E19); margin-bottom: 0.85rem;">Valores</h3>
+              <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; color: var(--text-secondary, #3D5244); font-size: 0.95rem;">
+                <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--secondary, #4C9A2A);"></i> Cuidado com a vida</li>
+                <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--secondary, #4C9A2A);"></i> Acesso ao conhecimento</li>
+                <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--secondary, #4C9A2A);"></i> Consciência e responsabilidade social</li>
+                <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--secondary, #4C9A2A);"></i> Empatia e respeito</li>
+                <li style="display: flex; align-items: center; gap: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--secondary, #4C9A2A);"></i> Transformação social</li>
               </ul>
             </div>
 
@@ -1906,133 +1837,14 @@ function apepi_shortcode_pagina_quem_somos() {
         </div>
       </section>
 
-      <!-- ======================== 3. TIMELINE ======================== -->
-      <section class="qs-timeline-section">
-        <div class="container">
-          <div class="qs-timeline-header text-center">
-            <h2 class="qs-timeline-title">DE ONDE VEMOS E PARA ONDE VAMOS</h2>
-            <p class="qs-timeline-subtitle">Do cultivo ao conhecimento. Do conhecimento ao cuidado. Do cuidado à transformação.</p>
-          </div>
-
-          <div class="qs-stepper-container">
-            <div class="qs-step-item">
-              <div class="qs-step-circle"><i class="fa-solid fa-seedling"></i></div>
-              <div class="qs-step-info">
-                <h4 class="qs-step-name">A IDEIA</h4>
-                <p class="qs-step-text">Ensinar as pessoas a cultivar seu próprio óleo com qualidade e segurança.</p>
-              </div>
-            </div>
-
-            <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-
-            <div class="qs-step-item">
-              <div class="qs-step-circle"><i class="fa-solid fa-graduation-cap"></i></div>
-              <div class="qs-step-info">
-                <h4 class="qs-step-name">A EVOLUÇÃO</h4>
-                <p class="qs-step-text">Expandimos o propósito e transformamos a experiência prática em formação especializada.</p>
-              </div>
-            </div>
-
-            <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-
-            <div class="qs-step-item qs-step-active">
-              <div class="qs-step-circle qs-step-circle-filled"><i class="fa-solid fa-plus"></i></div>
-              <div class="qs-step-info">
-                <h4 class="qs-step-name">A MISSÃO</h4>
-                <p class="qs-step-text">Criamos cursos para médicos, veterinários e profissionais de saúde, levando conhecimento científico e responsável sobre a Cannabis Medicinal.</p>
-              </div>
-            </div>
-
-            <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-
-            <div class="qs-step-item">
-              <div class="qs-step-circle"><i class="fa-solid fa-users"></i></div>
-              <div class="qs-step-info">
-                <h4 class="qs-step-name">O IMPACTO</h4>
-                <p class="qs-step-text">Formamos profissionais mais preparados e promovemos mais acesso, qualidade de vida e bem-estar para milhares de pacientes.</p>
-              </div>
-            </div>
-
-            <div class="qs-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-
-            <div class="qs-step-item">
-              <div class="qs-step-circle qs-step-circle-dark"><i class="fa-solid fa-leaf"></i></div>
-              <div class="qs-step-info">
-                <h4 class="qs-step-name">O FUTURO</h4>
-                <p class="qs-step-text">Continuamos inovando, pesquisando e educando para construir um futuro com mais saúde, liberdade e respeito à planta e às pessoas.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- CORPO DOCENTE (SHORTCODE DINÂMICO) -->
+      <section style="margin-bottom: 4rem;">
+        <?php echo do_shortcode('[apepi_lista_professores title="Nosso Corpo Docente" badge="ESPECIALISTAS DEDICADOS"]'); ?>
       </section>
 
-      <!-- ======================== 4. NOSSOS PILARES ======================== -->
-      <section class="qs-pilares-section">
-        <div class="container">
-          <div class="qs-pilares-header text-center">
-            <h2 class="qs-pilares-title">NOSSOS PILARES</h2>
-            <div class="qs-pilares-line"></div>
-          </div>
-
-          <div class="qs-pilares-grid">
-            
-            <div class="qs-pilar-card">
-              <div class="qs-pilar-photo-wrap">
-                <img src="<?php echo esc_url($pilar1_img); ?>" alt="<?php echo esc_attr($pilar1_title); ?>" class="qs-pilar-img">
-                <div class="qs-pilar-badge-icon"><i class="fa-solid fa-flag"></i></div>
-              </div>
-              <div class="qs-pilar-body">
-                <h3 class="qs-pilar-name"><?php echo esc_html($pilar1_title); ?></h3>
-                <p class="qs-pilar-text"><?php echo esc_html($pilar1_text); ?></p>
-              </div>
-            </div>
-
-            <div class="qs-pilar-card">
-              <div class="qs-pilar-photo-wrap">
-                <img src="<?php echo esc_url($pilar2_img); ?>" alt="<?php echo esc_attr($pilar2_title); ?>" class="qs-pilar-img">
-                <div class="qs-pilar-badge-icon"><i class="fa-solid fa-lightbulb"></i></div>
-              </div>
-              <div class="qs-pilar-body">
-                <h3 class="qs-pilar-name"><?php echo esc_html($pilar2_title); ?></h3>
-                <p class="qs-pilar-text"><?php echo esc_html($pilar2_text); ?></p>
-              </div>
-            </div>
-
-            <div class="qs-pilar-card">
-              <div class="qs-pilar-photo-wrap">
-                <img src="<?php echo esc_url($pilar3_img); ?>" alt="<?php echo esc_attr($pilar3_title); ?>" class="qs-pilar-img">
-                <div class="qs-pilar-badge-icon"><i class="fa-solid fa-leaf"></i></div>
-              </div>
-              <div class="qs-pilar-body">
-                <h3 class="qs-pilar-name"><?php echo esc_html($pilar3_title); ?></h3>
-                <p class="qs-pilar-text"><?php echo esc_html($pilar3_text); ?></p>
-              </div>
-            </div>
-
-            <div class="qs-pilar-card">
-              <div class="qs-pilar-photo-wrap">
-                <img src="<?php echo esc_url($pilar4_img); ?>" alt="<?php echo esc_attr($pilar4_title); ?>" class="qs-pilar-img">
-                <div class="qs-pilar-badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
-              </div>
-              <div class="qs-pilar-body">
-                <h3 class="qs-pilar-name"><?php echo esc_html($pilar4_title); ?></h3>
-                <p class="qs-pilar-text"><?php echo esc_html($pilar4_text); ?></p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- ======================== 5. BANNER FINAL ======================== -->
-      <section class="qs-quote-banner">
-        <div class="container qs-quote-banner-container">
-          <div class="qs-quote-leaf-icon"><i class="fa-solid fa-leaf"></i></div>
-          <div class="qs-quote-content">
-            <p class="qs-quote-primary"><?php echo esc_html($quote_p1); ?></p>
-            <p class="qs-quote-secondary"><?php echo esc_html($quote_p2); ?></p>
-          </div>
-        </div>
+      <!-- CATÁLOGO DE CURSOS (SHORTCODE DINÂMICO) -->
+      <section id="nossos-cursos" style="margin-bottom: 4rem;">
+        <?php echo do_shortcode('[apepi_lista_cursos title="Formações APEPI Escola" badge="CONHEÇA NOSSOS CURSOS"]'); ?>
       </section>
 
     </div>
@@ -2041,180 +1853,127 @@ function apepi_shortcode_pagina_quem_somos() {
 }
 add_shortcode('apepi_pagina_quem_somos', 'apepi_shortcode_pagina_quem_somos');
 
-
-// 7. Shortcode Página Fazenda – Fidelidade Absoluta ref/fazenda.jfif
+// 7. Shortcode Página Fazenda Sofia Langenbach Completa (Fidelidade Absoluta page_4.png)
 function apepi_shortcode_pagina_fazenda() {
     ob_start();
-    $wa_num           = apepi_get_option('apepi_whatsapp_number', '5521979570000');
-    $fazenda_title    = apepi_get_option('apepi_fazenda_title', "Visita à\nFazenda da APEPI");
-    $fazenda_subtitle = apepi_get_option('apepi_fazenda_subtitle', 'Aprendizado que nasce na prática');
-    $fazenda_desc     = apepi_get_option('apepi_fazenda_desc', 'Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
-    $fazenda_subdesc  = apepi_get_option('apepi_fazenda_subdesc', 'Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
-    $fazenda_img      = apepi_get_option('apepi_fazenda_main_img', get_template_directory_uri() . '/assets/fazenda_hero_photo.png');
-
-    $badge1           = apepi_get_option('apepi_fazenda_badge1', 'Para médicos, veterinários e profissionais da saúde');
-    $badge2           = apepi_get_option('apepi_fazenda_badge2', 'Imersão prática e conteúdo científico');
-    $badge3           = apepi_get_option('apepi_fazenda_badge3', 'Conexão entre teoria e prática com excelência');
-
-    $callout_left     = apepi_get_option('apepi_fazenda_callout_left', 'Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.');
-    $callout_right    = apepi_get_option('apepi_fazenda_callout_right', 'O dia de imersão para conhecer do cultivo até a produção dos óleos.');
-
-    $dest_lab_img     = get_template_directory_uri() . '/assets/faz_dest_lab.png';
-    $dest_cult_img    = get_template_directory_uri() . '/assets/faz_dest_cultivo.png';
-    $dest_proc_img    = get_template_directory_uri() . '/assets/faz_dest_processos.png';
-
-    $gal1             = get_template_directory_uri() . '/assets/faz_galeria_1.png';
-    $gal2             = get_template_directory_uri() . '/assets/faz_galeria_2.png';
-    $gal3             = get_template_directory_uri() . '/assets/faz_galeria_3.png';
-    $gal4             = get_template_directory_uri() . '/assets/faz_galeria_4.png';
+    $wa_num = apepi_get_option('apepi_whatsapp_number', '5521979570000');
     ?>
-    <div class="faz-page-exact-wrapper">
-
+    <div class="fazenda-full-page-wrapper">
       
-
-            <!-- ======================== 1. HERO COM DEGRADÊ ======================== -->
-      <section class="hero-home-exact hero-banner-degrade faz-hero-banner">
-        <div class="hero-bg-wrapper">
-          <img src="<?php echo esc_url($fazenda_img); ?>" alt="Visita à Fazenda da APEPI" class="hero-bg-img">
-          <div class="hero-gradient-overlay"></div>
+      <!-- Breadcrumb -->
+      <div class="breadcrumb-container" style="margin-bottom: 1.5rem;">
+        <div class="container">
+          <p class="breadcrumb">Início &gt; Fazenda de Cannabis &gt; Visita à Fazenda Sofia Langenbach</p>
         </div>
+      </div>
 
-        <div class="container hero-container-exact">
-          <div class="hero-content-exact faz-hero-content">
-            <h1 class="hero-title-exact"><?php echo nl2br(esc_html($fazenda_title)); ?></h1>
-            <div class="hero-green-divider"></div>
-            <h2 class="faz-hero-subtitle"><?php echo esc_html($fazenda_subtitle); ?></h2>
+      <!-- Hero Section (Fidelidade page_4.png / fazenda-hero-section) -->
+      <section class="fazenda-hero-section">
+        <div class="container fazenda-hero-grid">
+          <div class="fazenda-hero-left">
+            <h1 class="font-serif">Visita à<br>Fazenda Sofia Langenbach</h1>
+            <h2 class="sub-hero font-serif">Aprendizado que nasce na prática</h2>
+            <p class="fazenda-hero-desc">
+              Um marco da cannabis para fins medicinais no Brasil. Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.
+            </p>
+            <p class="fazenda-hero-sub-desc">
+              A Fazenda Sofia Langenbach nasce do sonho de Marcos Langenbach e Margarete Brito, fundadores da APEPI, de tornar o tratamento medicinal mais acessível. Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.
+            </p>
 
-            <p class="hero-desc-exact"><?php echo esc_html($fazenda_desc); ?></p>
-            <p class="hero-desc-exact" style="margin-top:-1rem;"><?php echo esc_html($fazenda_subdesc); ?></p>
-
-            <div class="faz-badges-row">
-              <div class="faz-badge-item">
-                <div class="faz-badge-icon"><i class="fa-solid fa-user-doctor"></i></div>
-                <span><?php echo esc_html($badge1); ?></span>
+            <div class="hero-quick-badges">
+              <div class="hq-badge">
+                <i class="fa-solid fa-user-doctor"></i>
+                <span>Para médicos, veterinários e profissionais da saúde</span>
               </div>
-              <div class="faz-badge-item">
-                <div class="faz-badge-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <span><?php echo esc_html($badge2); ?></span>
+              <div class="hq-badge">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Imersão prática e conteúdo científico</span>
               </div>
-              <div class="faz-badge-item">
-                <div class="faz-badge-icon"><i class="fa-solid fa-seedling"></i></div>
-                <span><?php echo esc_html($badge3); ?></span>
-              </div>
-            </div>
-
-            <!-- Callout Box Flutuante Verde -->
-            <div class="faz-callout-box">
-              <div class="faz-callout-col">
-                <div class="faz-callout-icon-wrap"><i class="fa-solid fa-users"></i></div>
-                <p><?php echo esc_html($callout_left); ?></p>
-              </div>
-              <div class="faz-callout-divider"></div>
-              <div class="faz-callout-col faz-callout-col-right">
-                <div class="faz-callout-icon-wrap"><i class="fa-solid fa-calendar-day"></i></div>
-                <p><?php echo esc_html($callout_right); ?></p>
+              <div class="hq-badge">
+                <i class="fa-solid fa-seedling"></i>
+                <span>Conexão entre teoria e prática com excelência</span>
               </div>
             </div>
 
+            <!-- Green Callout Card -->
+            <div class="green-callout-card">
+              <div class="gcc-icon"><i class="fa-solid fa-users"></i></div>
+              <div class="gcc-content">
+                <p>Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.</p>
+                <div class="gcc-meta"><i class="fa-solid fa-calendar-day"></i> O dia de imersão para conhecer do cultivo até a produção dos óleos.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fazenda-hero-right">
+            <img src="https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg" alt="Visita guiada à fazenda Sofia Langenbach da APEPI" class="fazenda-main-hero-img">
           </div>
         </div>
       </section>
 
-      <!-- ======================== 2. DESTAQUES DA EXPERIÊNCIA ======================== -->
-      <section class="faz-destaques-section">
+      <!-- Destaques da Experiência (Exact page_4.png Grid) -->
+      <section class="destaques-section">
         <div class="container">
-          <div class="faz-destaques-header text-center">
-            <h2 class="faz-destaques-title">DESTAQUES DA EXPERIÊNCIA</h2>
-            <div class="faz-destaques-line"></div>
-          </div>
-
-          <div class="faz-destaques-grid">
+          <h2 class="destaques-main-title font-serif">DESTAQUES DA EXPERIÊNCIA</h2>
+          <div class="destaques-grid">
             
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask-vial"></i></div>
+            <!-- Card 1: Plantando Sonhos -->
+            <div class="destaque-card">
+              <div class="dest-photo-header">
+                <img src="https://apepiescola.org/wp-content/uploads/2026/06/Curso-Basico-Cultivo-e-Extracao-de-Cannabis.png" alt="Plantando sonhos">
               </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
+              <div class="dest-body-content">
+                <div class="dest-icon-holder"><i class="fa-solid fa-seedling"></i></div>
+                <h3>Plantando sonhos</h3>
+                <p>Origem da fazenda e o Curso Básico de Cultivo e Extração "De Família para Família".</p>
               </div>
             </div>
 
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_cult_img); ?>" alt="Cultivo com excelência" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-seedling"></i></div>
+            <!-- Card 2: Saúde da Natureza -->
+            <div class="destaque-card">
+              <div class="dest-photo-header">
+                <img src="https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg" alt="Saúde que vem da natureza">
               </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Cultivo com<br>excelência</h3>
-                <p class="faz-dest-card-text">Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_proc_img); ?>" alt="Processos completos" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-leaf"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Processos<br>completos</h3>
-                <p class="faz-dest-card-text">Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.</p>
+              <div class="dest-body-content">
+                <div class="dest-icon-holder"><i class="fa-solid fa-tree"></i></div>
+                <h3>Saúde da natureza</h3>
+                <p>Cultivo agroecológico com 2.300 árvores nativas da Mata Atlântica e 115 placas solares.</p>
               </div>
             </div>
 
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask-vial"></i></div>
+            <!-- Card 3: Tecnologia e Cuidado -->
+            <div class="destaque-card">
+              <div class="dest-photo-header">
+                <img src="https://apepiescola.org/wp-content/uploads/2026/07/Lab-2-scaled.jpg" alt="Tecnologia e Cuidado">
               </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
+              <div class="dest-body-content">
+                <div class="dest-icon-holder"><i class="fa-solid fa-flask-vial"></i></div>
+                <h3>Tecnologia e Cuidado</h3>
+                <p>Controle, rastreabilidade, maquinário de ponta e Certificado de Análise (COA) Anvisa.</p>
               </div>
             </div>
 
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_cult_img); ?>" alt="Cultivo com excelência" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-seedling"></i></div>
+            <!-- Card 4: Estrutura Exclusiva -->
+            <div class="destaque-card">
+              <div class="dest-photo-header">
+                <img src="https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg" alt="Estrutura exclusiva">
               </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Cultivo com<br>excelência</h3>
-                <p class="faz-dest-card-text">Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.</p>
+              <div class="dest-body-content">
+                <div class="dest-icon-holder"><i class="fa-solid fa-house-chimney-medical"></i></div>
+                <h3>Estrutura exclusiva</h3>
+                <p>Fazenda integrada com tecnologia, segurança e boas práticas de cultivo e produção.</p>
               </div>
             </div>
 
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_proc_img); ?>" alt="Processos completos" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-leaf"></i></div>
+            <!-- Card 5: Aprenda na Maior -->
+            <div class="destaque-card">
+              <div class="dest-photo-header">
+                <img src="https://apepiescola.org/wp-content/uploads/2026/07/WhatsApp-Image-2023-10-03-at-14.17.15-e1783691657301.jpeg" alt="Aprenda na maior do Brasil">
               </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Processos<br>completos</h3>
-                <p class="faz-dest-card-text">Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.</p>
+              <div class="dest-body-content">
+                <div class="dest-icon-holder"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h3>Aprenda na Maior</h3>
+                <p>Módulo especial com visita técnica e vivências reais da semente ao paciente.</p>
               </div>
             </div>
 
@@ -2222,32 +1981,249 @@ function apepi_shortcode_pagina_fazenda() {
         </div>
       </section>
 
-      <!-- ======================== 3. LOGÍSTICA & INCLUSÕES ======================== -->
-      <section class="faz-logistica-section">
+      <!-- Programação do Dia Flowchart (Exact page_4.png Proof) -->
+      <section class="programacao-section">
         <div class="container">
-          <div class="faz-logistica-grid">
+          <h2 class="programacao-main-title font-serif">PROGRAMAÇÃO DO DIA</h2>
+          
+          <!-- Flowchart Row 1 -->
+          <div class="flowchart-row">
+            <!-- Step 1 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-bus"></i></div>
+              <strong>06h30 – 07h | Embarque (Rio)</strong>
+              <ul>
+                <li>Encontro na sede da APEPI</li>
+                <li>Check-in e entrega de crachás</li>
+                <li>Saída às 07h em ponto (não será possível aguardar atrasos)</li>
+              </ul>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <strong>09h | Encontro em Miguel Pereira</strong>
+              <ul>
+                <li>Chegada na rodoviária</li>
+                <li>Deslocamento conjunto até a fazenda</li>
+              </ul>
+              <div class="carro-gold-pill"><i class="fa-solid fa-car"></i> Para quem for de carro: encontro às 09h (pontualidade é essencial)</div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-house"></i></div>
+              <strong>09h30 – 10h | Chegada</strong>
+              <ul>
+                <li>Recepção na Fazenda Sofia Langenbach</li>
+                <li>Café da manhã de boas-vindas</li>
+              </ul>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-seedling"></i></div>
+              <strong>10h – 13h | Cultivo</strong>
+              <ul>
+                <li>Visita às áreas de:</li>
+                <li>Matrizeiro</li>
+                <li>Berçário</li>
+                <li>Cultivo</li>
+                <li>Beneficiamento</li>
+              </ul>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-utensils"></i></div>
+              <strong>13h – 14h | Almoço</strong>
+              <ul>
+                <li>Almoço servido na fazenda</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Flowchart Row 2 (Bottom) -->
+          <div class="flowchart-row-bottom">
+            <!-- Step 6 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-flask"></i></div>
+              <strong>14h – 16h | Laboratório</strong>
+              <ul>
+                <li>Visita ao laboratório</li>
+                <li>Roda de conversa com médico(a) coordenador(a)</li>
+              </ul>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-mug-hot"></i></div>
+              <strong>16h – 17h | Encerramento</strong>
+              <ul>
+                <li>Lanche da tarde</li>
+                <li>Entrega de kit (óleos + pomada APEPI)</li>
+                <li>Retorno para o Rio</li>
+              </ul>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="flow-step-card">
+              <div class="flow-step-icon"><i class="fa-solid fa-bus"></i></div>
+              <strong>Previsão de chegada: 20h</strong>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Serviços Inclusos -->
+      <section class="servicos-inclusos-section">
+        <div class="container services-grid">
+          <div class="service-inc-card">
+            <i class="fa-solid fa-bus"></i>
+            <h3>Transporte (ida e volta)</h3>
+            <p>Transporte confortável e seguro, com saída do Rio.</p>
+          </div>
+          <div class="service-inc-card">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Alimentação completa</h3>
+            <p>Café da manhã, almoço e lanche da tarde na fazenda.</p>
+          </div>
+          <div class="service-inc-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Equipamentos de proteção (EPI)</h3>
+            <p>Fornecidos para sua segurança durante toda a visita.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Photo Gallery -->
+      <section class="fazenda-gallery-section">
+        <div class="container gallery-grid">
+          <img src="https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg" alt="Estufas e cultivo da Fazenda">
+          <img src="https://apepiescola.org/wp-content/uploads/2026/06/Curso-Basico-Cultivo-e-Extracao-de-Cannabis.png" alt="Plantações em ambiente protegido">
+          <img src="https://apepiescola.org/wp-content/uploads/2026/07/WhatsApp-Image-2023-10-03-at-14.17.15-e1783691657301.jpeg" alt="Visita Prática na Fazenda">
+          <img src="https://apepiescola.org/wp-content/uploads/2026/07/Lab-2-scaled.jpg" alt="Laboratório de extração dos óleos">
+        </div>
+      </section>
+
+      <!-- Bottom CTA Banner -->
+      <section class="bottom-cta-banner">
+        <div class="container cta-banner-container">
+          <div class="cta-banner-content">
+            <div class="cta-icon-holder"><i class="fa-solid fa-seedling"></i></div>
+            <p class="cta-text font-serif">
+              Viva uma experiência única e transforme seu conhecimento em prática responsável.
+            </p>
+            <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $wa_num)); ?>" target="_blank" class="btn btn-primary btn-lg cta-btn-right">QUERO PARTICIPAR DA VISITA</a>
+          </div>
+          <span class="vagas-limitadas">Vagas limitadas</span>
+        </div>
+      </section>
+
+      <!-- PERGUNTAS FREQUENTES (FAQ ACCORDION) -->
+      <section class="p2-programa-section" style="margin: 4rem 0;">
+        <div class="container" style="max-width: 900px; margin: 0 auto;">
+          <div class="text-center" style="margin-bottom: 2.5rem;">
+            <span class="section-badge" style="color: var(--secondary, #4C9A2A); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem;">TIRE SUAS DÚVIDAS</span>
+            <h2 class="font-serif" style="font-size: 2.4rem; color: var(--primary, #003E19); margin-top: 0.5rem;">Perguntas Frequentes</h2>
+          </div>
+
+          <div class="p2-accordion-container">
             
-            <div class="faz-log-item">
-              <div class="faz-log-icon"><i class="fa-solid fa-bus"></i></div>
-              <div class="faz-log-info">
-                <h4>Transporte<br>(ida e volta)</h4>
-                <p>Transporte confortável e seguro, com saída do Rio.</p>
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Quanto custa cada frasco de óleo?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Cada frasco custa R$180,00. Você pode solicitar o envio com frete para todo o Brasil ou retirar em nossa sede em Botafogo, na cidade do Rio de Janeiro (RJ). Lembrando que para ter acesso aos óleos é necessário se associar à APEPI e ter receita médica válida.</p>
+                </div>
               </div>
             </div>
 
-            <div class="faz-log-item">
-              <div class="faz-log-icon"><i class="fa-solid fa-utensils"></i></div>
-              <div class="faz-log-info">
-                <h4>Alimentação completa</h4>
-                <p>Café da manhã, almoço e lanche da tarde na fazenda.</p>
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Em quanto tempo começo a sentir os efeitos?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>O tratamento é individualizado e varia de pessoa para pessoa. O tempo para surtir efeito também é variável, podendo levar algumas semanas ou meses, como ocorre com a maioria dos medicamentos farmacêuticos.</p>
+                </div>
               </div>
             </div>
 
-            <div class="faz-log-item">
-              <div class="faz-log-icon"><i class="fa-solid fa-shield-halved"></i></div>
-              <div class="faz-log-info">
-                <h4>Equipamentos<br>de proteção (EPI)</h4>
-                <p>Fornecidos para sua segurança durante toda a visita.</p>
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Preciso de receita médica para comprar os óleos?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Sim, os óleos são dispensados somente mediante receita médica. Mas, não se preocupe, temos médicos vinculados com experiência em tratamento com cannabis.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Qual é o valor da consulta?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Para acompanhar nossos associados desde o início, indicamos a consulta com nossos médicos vinculados que irão analisar as possibilidades do seu tratamento. A consulta é 100% online e custa R$290,00, podendo parcelar em até 6x sem juros no cartão de crédito. Lembrando que para ter acesso aos óleos é necessário passar pela consulta médica e ter receita válida.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">A consulta de retorno é o mesmo valor?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Após a sua primeira consulta, você tem direito a retornar em um prazo de 1 mês pelo valor de R$170 para o acompanhamento do seu tratamento. Após esse período, a consulta volta ao valor normal de R$290. Você pode conversar com o seu médico de confiança para que ele faça a sua prescrição. Se ele ainda não for prescritor de cannabis medicinal, converse com ele sobre a APEPI. Ficaremos felizes em conhecê-lo.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Já tenho receita. Posso me associar?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Sim! Se você já possui uma receita, pode se associar imediatamente. Aceitamos tanto a receita branca (simples) quanto, em um primeiro momento, a receita azul, desde que a prescrição esteja de acordo com as concentrações dos óleos disponíveis em nossa associação. A receita deve ser emitida por um profissional com registro ativo nos conselhos competentes (CRM, CRO ou CRMV). Caso sua receita não siga esse padrão, nossa equipe de acolhimento está à disposição para orientar você.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Ainda não tenho receita. Posso me associar?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Sim! Você também pode se associar mesmo sem receita. Ao se tornar associado, poderá agendar uma consulta com um dos nossos médicos especializados em medicina canabinoide ou com um profissional parceiro da nossa rede. Assim, você terá a orientação adequada para obter sua prescrição de forma segura e legal.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="p2-accordion-item">
+              <button class="p2-accordion-header accordion-trigger" type="button">
+                <span class="p2-acc-title">Não tenho cartão de crédito, consigo me associar mesmo assim?</span>
+                <i class="fa-solid fa-chevron-down p2-acc-arrow"></i>
+              </button>
+              <div class="p2-accordion-content accordion-panel">
+                <div class="p2-acc-inner">
+                  <p>Sim, porém para PIX ou boleto é válido apenas a contribuição anual. Entre em contato com nosso acolhimento que eles irão te auxiliar.</p>
+                </div>
               </div>
             </div>
 
@@ -2255,32 +2231,9 @@ function apepi_shortcode_pagina_fazenda() {
         </div>
       </section>
 
-      <!-- ======================== 4. GALERIA DE FOTOS ======================== -->
-      <section class="faz-galeria-section">
-        <div class="container">
-          <div class="faz-galeria-grid">
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal1); ?>" alt="Estufa de cultivo"></div>
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal2); ?>" alt="Florescimento"></div>
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal3); ?>" alt="Vista aérea da fazenda"></div>
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal4); ?>" alt="Extração em laboratório"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ======================== 5. CTA BANNER ======================== -->
-      <section class="faz-cta-banner">
-        <div class="container faz-cta-container">
-          <div class="faz-cta-left">
-            <div class="faz-cta-leaf-icon"><i class="fa-solid fa-leaf"></i></div>
-            <p class="faz-cta-text">Viva uma experiência única e transforme seu conhecimento em prática responsável.</p>
-          </div>
-          <div class="faz-cta-right">
-            <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $wa_num)); ?>" target="_blank" class="btn btn-faz-cta">
-              QUERO PARTICIPAR DA VISITA
-            </a>
-            <span class="faz-vagas-badge">Vagas limitadas</span>
-          </div>
-        </div>
+      <!-- CATÁLOGO DE CURSOS -->
+      <section id="nossos-cursos" style="margin-bottom: 4rem;">
+        <?php echo do_shortcode('[apepi_lista_cursos title="Formações com Imersão na Fazenda" badge="AULAS PRÁTICAS"]'); ?>
       </section>
 
     </div>
@@ -2290,202 +2243,466 @@ function apepi_shortcode_pagina_fazenda() {
 add_shortcode('apepi_pagina_fazenda', 'apepi_shortcode_pagina_fazenda');
 
 
-// 8. Shortcode Depoimentos de Alunos
-function apepi_shortcode_depoimentos($atts) {
+
+/* ============================================================
+   NOSSOS CURSOS PAGE — SHORTCODES + CUSTOMIZER
+   ============================================================ */
+
+/**
+ * Shortcode: Números APEPI Escola em Números (Nossos Cursos page)
+ */
+function apepi_shortcode_escola_numeros($atts) {
     $atts = shortcode_atts(array(
-        'limit' => 3,
-        'title' => 'O Que Dizem Nossos Formandos',
-        'badge' => 'DEPOIMENTOS DE ALUNOS',
-        'sub'   => 'A experiência de médicos e profissionais que transformaram sua prática clínica com a APEPI Escola.'
+        'badge' => 'APEPI ESCOLA EM NÚMEROS',
     ), $atts);
 
-    $limit = intval($atts['limit']);
-    if ($limit <= 0) $limit = 3;
-
-    $args = array(
-        'post_type'      => array('depoimento', 'depoimentos', 'jet-engine-depoimento'),
-        'posts_per_page' => $limit,
-        'post_status'    => 'publish'
+    $stats = array(
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num1_icon',  'fa-solid fa-award'),
+            'value' => apepi_get_option('apepi_nc_num1_value', '14 anos'),
+            'label' => apepi_get_option('apepi_nc_num1_label', 'de experiência na educação canábica'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num2_icon',  'fa-solid fa-users'),
+            'value' => apepi_get_option('apepi_nc_num2_value', '+1000'),
+            'label' => apepi_get_option('apepi_nc_num2_label', 'alunos formados e preparados para fazer a diferença'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num3_icon',  'fa-solid fa-play-circle'),
+            'value' => apepi_get_option('apepi_nc_num3_value', '+10h'),
+            'label' => apepi_get_option('apepi_nc_num3_label', 'de conteúdo — aulas online e ao vivo com especialistas referência na área'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num4_icon',  'fa-solid fa-graduation-cap'),
+            'value' => apepi_get_option('apepi_nc_num4_value', 'Formação completa'),
+            'label' => apepi_get_option('apepi_nc_num4_label', 'da teoria à prática, com segurança e responsabilidade'),
+        ),
+        array(
+            'icon'  => apepi_get_option('apepi_nc_num5_icon',  'fa-solid fa-book-open'),
+            'value' => apepi_get_option('apepi_nc_num5_value', 'E-books gratuitos'),
+            'label' => apepi_get_option('apepi_nc_num5_label', 'materiais exclusivos para aprofundar seu conhecimento'),
+        ),
     );
-    $query = new WP_Query($args);
 
     ob_start();
     ?>
-    <section class="course-testimonials-section">
+    <section class="nc-numeros-section">
       <div class="container">
-        <div class="testimonials-header text-center">
-          <?php if (!empty($atts['badge'])) : ?><div class="section-badge"><?php echo esc_html($atts['badge']); ?></div><?php endif; ?>
-          <?php if (!empty($atts['title'])) : ?><h2 class="section-main-title"><?php echo esc_html($atts['title']); ?></h2><?php endif; ?>
-          <?php if (!empty($atts['sub'])) : ?><p class="section-subtitle"><?php echo esc_html($atts['sub']); ?></p><?php endif; ?>
+        <div class="nc-numeros-header">
+          <div class="nc-numeros-badge">
+            <i class="fa-solid fa-leaf"></i>
+            <?php echo esc_html($atts['badge']); ?>
+            <i class="fa-solid fa-leaf"></i>
+          </div>
         </div>
-
-        <div class="course-testimonials-grid">
-          <?php
-          if ($query->have_posts()) :
-            while ($query->have_posts()) : $query->the_post();
-              $d_id    = get_the_ID();
-              $d_cargo = get_post_meta($d_id, '_depoimento_cargo', true);
-              if (!$d_cargo) $d_cargo = get_post_meta($d_id, 'cargo', true);
-              $d_thumb = has_post_thumbnail($d_id) ? get_the_post_thumbnail_url($d_id, 'large') : 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80';
-              ?>
-              <div class="course-testimonial-card">
-                <div class="test-video-thumb">
-                  <img src="<?php echo esc_url($d_thumb); ?>" alt="<?php the_title_attribute(); ?>">
-                  <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
-                </div>
-                <div class="test-card-content">
-                  <div class="test-stars">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                  </div>
-                  <p class="test-quote">"<?php echo esc_html(wp_strip_all_tags(get_the_content())); ?>"</p>
-                  <div class="test-author-info">
-                    <h4 class="test-author-name"><?php the_title(); ?></h4>
-                    <?php if (!empty($d_cargo)) : ?><p class="test-author-role"><?php echo esc_html($d_cargo); ?></p><?php endif; ?>
-                  </div>
-                </div>
-              </div>
-              <?php
-            endwhile;
-            wp_reset_postdata();
-          else :
-            ?>
-            <div class="course-testimonial-card">
-              <div class="test-video-thumb">
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dra. Mariana Costa">
-                <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
-              </div>
-              <div class="test-card-content">
-                <div class="test-stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="test-quote">"O curso me deu total segurança técnica e respaldo ético para começar a prescrever Cannabis aos meus pacientes neurológicos. A imersão na fazenda foi um divisor de águas."</p>
-                <div class="test-author-info">
-                  <h4 class="test-author-name">Dra. Mariana Costa</h4>
-                  <p class="test-author-role">Médica Neurologista • CRM 52 98412-1</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="course-testimonial-card">
-              <div class="test-video-thumb">
-                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Dr. Roberto Albuquerque">
-                <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
-              </div>
-              <div class="test-card-content">
-                <div class="test-stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="test-quote">"A clareza dos professores e o rigor científico das aulas superaram minhas expectativas. Hoje consigo acompanhar a evolução dos pacientes com muito mais precisão."</p>
-                <div class="test-author-info">
-                  <h4 class="test-author-name">Dr. Roberto Albuquerque</h4>
-                  <p class="test-author-role">Médico Psiquiatra • CRM 52 44781-0</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="course-testimonial-card">
-              <div class="test-video-thumb">
-                <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=600&q=80" alt="Dra. Luciana Paiva">
-                <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
-              </div>
-              <div class="test-card-content">
-                <div class="test-stars">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="test-quote">"Ver a seriedade do laboratório de extração e a conexão com a prática clínica me deu a certeza de que a APEPI Escola é a maior referência do país no tema."</p>
-                <div class="test-author-info">
-                  <h4 class="test-author-name">Dra. Luciana Paiva</h4>
-                  <p class="test-author-role">Médica de Família e Comunidade • CRM 52 61209-3</p>
-                </div>
-              </div>
-            </div>
-            <?php
-          endif;
-          ?>
+        <div class="nc-numeros-grid">
+          <?php foreach ($stats as $s) : ?>
+          <div class="nc-numero-item">
+            <div class="nc-numero-icon"><i class="<?php echo esc_attr($s['icon']); ?>"></i></div>
+            <div class="nc-numero-value"><?php echo esc_html($s['value']); ?></div>
+            <div class="nc-numero-label"><?php echo esc_html($s['label']); ?></div>
+          </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>
     <?php
     return ob_get_clean();
 }
-add_shortcode('apepi_depoimentos', 'apepi_shortcode_depoimentos');
-add_shortcode('apepi_depoimentos_grid', 'apepi_shortcode_depoimentos');
+add_shortcode('apepi_escola_numeros', 'apepi_shortcode_escola_numeros');
 
+/**
+ * Shortcode: Depoimentos (Nossos Cursos page)
+ */
+function apepi_shortcode_depoimentos_nc($atts) {
+    $atts = shortcode_atts(array(
+        'limit' => 6,
+    ), $atts);
 
-// ==========================================================================
-// SISTEMA NATIVO DE BREADCRUMBS DO WORDPRESS (APEPI ESCOLA)
-// ==========================================================================
-function apepi_breadcrumbs() {
-    // Se estiver na Home / Front Page, não exibe breadcrumb
-    if (is_front_page() || is_home()) {
-        return;
-    }
+    $badge    = apepi_get_option('apepi_nc_dep_badge',    'DEPOIMENTOS');
+    $title    = apepi_get_option('apepi_nc_dep_title',    'O que nossos alunos dizem');
+    $subtitle = apepi_get_option('apepi_nc_dep_subtitle', 'Histórias reais de médicos, veterinários e profissionais que transformaram sua prática com o conhecimento em Cannabis Medicinal.');
 
-    // Suporte a plugins de SEO consagrados (Yoast, RankMath) se ativos
-    if (function_exists('yoast_breadcrumb')) {
-        yoast_breadcrumb('<nav class="apepi-breadcrumbs-nav" aria-label="Breadcrumb"><div class="container">', '</div></nav>');
-        return;
-    }
-    if (function_exists('rank_math_the_breadcrumbs')) {
-        rank_math_the_breadcrumbs();
-        return;
-    }
+    // Try to pull from CPT depoimento first
+    $args = array(
+        'post_type'      => 'depoimento',
+        'posts_per_page' => intval($atts['limit']),
+        'post_status'    => 'publish',
+    );
+    $query = new WP_Query($args);
 
-    // Breadcrumbs Nativos APEPI
-    $separator = '<span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></span>';
-    $home_title = 'Início';
-    
-    echo '<nav class="apepi-breadcrumbs-nav" aria-label="Breadcrumbs">';
-    echo '<div class="container breadcrumbs-container">';
-    echo '<span class="breadcrumb-item"><a href="' . esc_url(home_url('/')) . '"><i class="fa-solid fa-house-chimney"></i> ' . esc_html($home_title) . '</a></span>';
+    $fallback_deps = array(
+        array(
+            'text'   => apepi_get_option('apepi_nc_dep1_text', 'O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes com muito mais consciência e resultados.'),
+            'name'   => apepi_get_option('apepi_nc_dep1_name', 'Dr. Rafael M.'),
+            'role'   => apepi_get_option('apepi_nc_dep1_role', 'Médico'),
+            'avatar' => apepi_get_option('apepi_nc_dep1_avatar', 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'),
+        ),
+        array(
+            'text'   => apepi_get_option('apepi_nc_dep2_text', 'Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo de olhos fechados!'),
+            'name'   => apepi_get_option('apepi_nc_dep2_name', 'Dra. Juliana T.'),
+            'role'   => apepi_get_option('apepi_nc_dep2_role', 'Médica Veterinária'),
+            'avatar' => apepi_get_option('apepi_nc_dep2_avatar', 'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=200&q=80'),
+        ),
+        array(
+            'text'   => apepi_get_option('apepi_nc_dep3_text', 'A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação. Um curso que vai muito além da teoria.'),
+            'name'   => apepi_get_option('apepi_nc_dep3_name', 'Dr. Lucas P.'),
+            'role'   => apepi_get_option('apepi_nc_dep3_role', 'Médico'),
+            'avatar' => apepi_get_option('apepi_nc_dep3_avatar', 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80'),
+        ),
+    );
 
-    if (is_singular('curso') || is_singular('cursos')) {
-        echo $separator;
-        echo '<span class="breadcrumb-item"><a href="' . esc_url(home_url('/#cursos')) . '">Cursos</a></span>';
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">' . esc_html(get_the_title()) . '</span>';
-    } elseif (is_singular('post')) {
-        $cats = get_the_category();
-        if (!empty($cats)) {
-            echo $separator;
-            echo '<span class="breadcrumb-item"><a href="' . esc_url(get_category_link($cats[0]->term_id)) . '">' . esc_html($cats[0]->name) . '</a></span>';
-        }
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">' . esc_html(get_the_title()) . '</span>';
-    } elseif (is_page()) {
-        global $post;
-        if ($post->post_parent) {
-            $anc = get_post_ancestors($post->ID);
-            $anc = array_reverse($anc);
-            foreach ($anc as $ancestor) {
-                echo $separator;
-                echo '<span class="breadcrumb-item"><a href="' . esc_url(get_permalink($ancestor)) . '">' . esc_html(get_the_title($ancestor)) . '</a></span>';
+    ob_start();
+    ?>
+    <section class="nc-depoimentos-section">
+      <div class="container">
+        <div class="nc-depoimentos-header">
+          <div class="nc-depoimentos-badge">
+            <i class="fa-solid fa-leaf"></i>
+            <?php echo esc_html($badge); ?>
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h2 class="font-serif"><?php echo esc_html($title); ?></h2>
+          <p><?php echo esc_html($subtitle); ?></p>
+        </div>
+
+        <div class="nc-depoimentos-carousel-wrapper" id="nc-dep-carousel">
+          <div class="nc-depoimentos-grid" id="nc-dep-grid">
+            <?php if ($query->have_posts()) :
+              while ($query->have_posts()) : $query->the_post();
+                $cargo   = get_post_meta(get_the_ID(), '_depoimento_cargo', true);
+                $avatar  = apepi_get_professor_image_url(get_the_ID());
+            ?>
+            <div class="nc-depoimento-card">
+              <div class="nc-dep-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="nc-dep-text"><?php echo wp_kses_post(get_the_excerpt()); ?></p>
+              <div class="nc-dep-author">
+                <img src="<?php echo esc_url($avatar); ?>" alt="<?php the_title_attribute(); ?>" class="nc-dep-avatar">
+                <div>
+                  <p class="nc-dep-name"><?php the_title(); ?></p>
+                  <?php if ($cargo) : ?><p class="nc-dep-role"><?php echo esc_html($cargo); ?></p><?php endif; ?>
+                </div>
+              </div>
+            </div>
+            <?php
+              endwhile;
+              wp_reset_postdata();
+            else :
+              foreach ($fallback_deps as $dep) : ?>
+            <div class="nc-depoimento-card">
+              <div class="nc-dep-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+              <p class="nc-dep-text"><?php echo esc_html($dep['text']); ?></p>
+              <div class="nc-dep-author">
+                <img src="<?php echo esc_url($dep['avatar']); ?>" alt="<?php echo esc_attr($dep['name']); ?>" class="nc-dep-avatar">
+                <div>
+                  <p class="nc-dep-name"><?php echo esc_html($dep['name']); ?></p>
+                  <p class="nc-dep-role"><?php echo esc_html($dep['role']); ?></p>
+                </div>
+              </div>
+            </div>
+            <?php endforeach;
+            endif; ?>
+          </div>
+        </div>
+
+        <div class="nc-carousel-arrows">
+          <button class="arrow-btn" id="nc-dep-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="arrow-btn" id="nc-dep-next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+    <script>
+    (function(){
+      var grid = document.getElementById('nc-dep-grid');
+      if (!grid) return;
+      var cards = Array.from(grid.children);
+      var perPage = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+      var current = 0;
+      var total = cards.length;
+      function show(idx) {
+        current = ((idx % total) + total) % total;
+        cards.forEach(function(c, i) {
+          c.style.display = (i >= current && i < current + perPage) ? '' : 'none';
+        });
+      }
+      show(0);
+      document.getElementById('nc-dep-prev').addEventListener('click', function(){ show(current - 1); });
+      document.getElementById('nc-dep-next').addEventListener('click', function(){ show(current + 1); });
+      window.addEventListener('resize', function(){
+        perPage = window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+        show(current);
+      });
+    })();
+    </script>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('apepi_depoimentos', 'apepi_shortcode_depoimentos_nc');
+add_shortcode('apepi_depoimentos_nc', 'apepi_shortcode_depoimentos_nc');
+
+/**
+ * Shortcode: Banner E-books (Nossos Cursos page)
+ */
+function apepi_shortcode_banner_ebooks($atts) {
+    $title     = apepi_get_option('apepi_nc_ebook_title',   'Conhecimento que vai além da sala de aula');
+    $subtitle  = apepi_get_option('apepi_nc_ebook_subtitle','Acesse nossos e-books gratuitos e aprofunde ainda mais seus estudos sobre Cannabis Medicinal.');
+    $btn_text  = apepi_get_option('apepi_nc_ebook_btn',     'BAIXAR E-BOOKS GRATUITOS');
+    $btn_url   = apepi_get_option('apepi_nc_ebook_url',     '#ebooks');
+    $cover_img = apepi_get_option('apepi_nc_ebook_cover',   '');
+
+    $default_cover = 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=300&q=80';
+    if (empty($cover_img)) $cover_img = $default_cover;
+
+    ob_start();
+    ?>
+    <section class="nc-ebook-banner-section">
+      <div class="container">
+        <div class="nc-ebook-banner-inner">
+          <div class="nc-ebook-img-wrap">
+            <img src="<?php echo esc_url($cover_img); ?>" alt="E-books APEPI Escola">
+          </div>
+          <div class="nc-ebook-text">
+            <h3 class="font-serif"><?php echo esc_html($title); ?></h3>
+            <p><?php echo esc_html($subtitle); ?></p>
+          </div>
+          <div class="nc-ebook-cta">
+            <a href="<?php echo esc_url($btn_url); ?>" class="nc-ebook-btn">
+              <i class="fa-solid fa-download"></i>
+              <?php echo esc_html($btn_text); ?>
+            </a>
+            <span class="nc-ebook-secure"><i class="fa-solid fa-lock"></i> 100% gratuitos e seguros.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode('apepi_banner_ebooks', 'apepi_shortcode_banner_ebooks');
+
+/**
+ * Master Shortcode: Página Nossos Cursos Completa
+ */
+function apepi_shortcode_pagina_nossos_cursos($atts) {
+    $atts = shortcode_atts(array(), $atts);
+    ob_start();
+    echo do_shortcode('[apepi_lista_cursos title="FORMAÇÕES" badge="NOSSO CATÁLOGO" limit="8"]');
+    echo do_shortcode('[apepi_escola_numeros]');
+    echo do_shortcode('[apepi_depoimentos]');
+    echo do_shortcode('[apepi_banner_ebooks]');
+    return ob_get_clean();
+}
+add_shortcode('apepi_pagina_nossos_cursos', 'apepi_shortcode_pagina_nossos_cursos');
+
+/**
+ * Admin options — Nossos Cursos page
+ */
+add_action('admin_menu', 'apepi_nc_add_admin_submenu');
+function apepi_nc_add_admin_submenu() {
+    add_submenu_page(
+        'apepi-escola-options',
+        'Nossos Cursos — Conteúdo',
+        'Nossos Cursos',
+        'manage_options',
+        'apepi-nc-options',
+        'apepi_nc_admin_page_callback'
+    );
+}
+
+function apepi_nc_admin_page_callback() {
+    if (isset($_POST['apepi_nc_save']) && check_admin_referer('apepi_nc_nonce_action', 'apepi_nc_nonce')) {
+        $fields = array(
+            // Números
+            'apepi_nc_num1_icon','apepi_nc_num1_value','apepi_nc_num1_label',
+            'apepi_nc_num2_icon','apepi_nc_num2_value','apepi_nc_num2_label',
+            'apepi_nc_num3_icon','apepi_nc_num3_value','apepi_nc_num3_label',
+            'apepi_nc_num4_icon','apepi_nc_num4_value','apepi_nc_num4_label',
+            'apepi_nc_num5_icon','apepi_nc_num5_value','apepi_nc_num5_label',
+            // Depoimentos
+            'apepi_nc_dep_badge','apepi_nc_dep_title','apepi_nc_dep_subtitle',
+            'apepi_nc_dep1_text','apepi_nc_dep1_name','apepi_nc_dep1_role','apepi_nc_dep1_avatar',
+            'apepi_nc_dep2_text','apepi_nc_dep2_name','apepi_nc_dep2_role','apepi_nc_dep2_avatar',
+            'apepi_nc_dep3_text','apepi_nc_dep3_name','apepi_nc_dep3_role','apepi_nc_dep3_avatar',
+            // E-books
+            'apepi_nc_ebook_title','apepi_nc_ebook_subtitle','apepi_nc_ebook_btn','apepi_nc_ebook_url','apepi_nc_ebook_cover',
+        );
+        foreach ($fields as $field) {
+            if (isset($_POST[$field])) {
+                $val = in_array($field, array('apepi_nc_dep1_text','apepi_nc_dep2_text','apepi_nc_dep3_text','apepi_nc_dep_subtitle','apepi_nc_ebook_subtitle'))
+                    ? sanitize_textarea_field($_POST[$field])
+                    : sanitize_text_field($_POST[$field]);
+                update_option($field, $val);
+                set_theme_mod($field, $val);
             }
         }
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">' . esc_html(get_the_title()) . '</span>';
-    } elseif (is_category()) {
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">' . single_cat_title('', false) . '</span>';
-    } elseif (is_tag()) {
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">' . single_tag_title('', false) . '</span>';
-    } elseif (is_search()) {
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">Busca: "' . get_search_query() . '"</span>';
-    } elseif (is_404()) {
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">Página Não Encontrada</span>';
-    } elseif (is_archive()) {
-        echo $separator;
-        echo '<span class="breadcrumb-item active" aria-current="page">' . get_the_archive_title() . '</span>';
+        echo '<div class="notice notice-success is-dismissible" style="margin-top:12px;"><p><strong>Configurações da página Nossos Cursos salvas com sucesso!</strong></p></div>';
     }
 
-    echo '</div>';
-    echo '</nav>';
+    // Load values
+    $v = function($key, $default = '') { return apepi_get_option($key, $default); };
+    ?>
+    <div class="wrap">
+        <h1 style="font-size:24px;font-weight:700;color:#003E19;">APEPI Escola — Nossos Cursos (Conteúdo da Página)</h1>
+        <p style="color:#555;font-size:14px;">Edite os textos, números, depoimentos e configurações do banner de e-books.</p>
+        <hr style="margin-bottom:20px;">
+
+        <form method="post" action="">
+            <?php wp_nonce_field('apepi_nc_nonce_action', 'apepi_nc_nonce'); ?>
+            <style>
+            .apepi-admin-card { background:#fff; border:1px solid #ccd0d4; border-radius:8px; padding:20px 24px; margin-bottom:20px; }
+            .apepi-admin-card h2 { margin-top:0; padding-bottom:10px; border-bottom:1px solid #eee; color:#003E19; font-size:17px; }
+            .nc-grid-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:10px; }
+            .nc-dep-group { border:1px solid #e8e8e8; border-radius:6px; padding:14px; margin-bottom:12px; background:#fafafa; }
+            .nc-dep-group h4 { margin:0 0 10px; color:#444; font-size:14px; }
+            </style>
+
+            <!-- 1. APEPI em Números -->
+            <div class="apepi-admin-card">
+                <h2>1. Seção "APEPI Escola em Números" (5 itens)</h2>
+                <?php
+                $nums = array(
+                    1 => array('Ícone FA', '14 anos', 'de experiência na educação canábica', 'fa-solid fa-award'),
+                    2 => array('Ícone FA', '+1000', 'alunos formados e preparados para fazer a diferença', 'fa-solid fa-users'),
+                    3 => array('Ícone FA', '+10h', 'de conteúdo — aulas online e ao vivo', 'fa-solid fa-play-circle'),
+                    4 => array('Ícone FA', 'Formação completa', 'da teoria à prática, com segurança', 'fa-solid fa-graduation-cap'),
+                    5 => array('Ícone FA', 'E-books gratuitos', 'materiais exclusivos para aprofundar', 'fa-solid fa-book-open'),
+                );
+                foreach ($nums as $n => $def) : ?>
+                <div class="nc-grid-row">
+                    <div>
+                        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:3px;">Item <?php echo $n; ?> — Ícone FontAwesome</label>
+                        <input type="text" name="apepi_nc_num<?php echo $n; ?>_icon" value="<?php echo esc_attr($v("apepi_nc_num{$n}_icon", $def[3])); ?>" class="regular-text" placeholder="<?php echo esc_attr($def[3]); ?>">
+                    </div>
+                    <div>
+                        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:3px;">Valor / Número</label>
+                        <input type="text" name="apepi_nc_num<?php echo $n; ?>_value" value="<?php echo esc_attr($v("apepi_nc_num{$n}_value", $def[1])); ?>" class="regular-text">
+                    </div>
+                    <div>
+                        <label style="font-size:12px;font-weight:600;display:block;margin-bottom:3px;">Legenda / Descrição</label>
+                        <input type="text" name="apepi_nc_num<?php echo $n; ?>_label" value="<?php echo esc_attr($v("apepi_nc_num{$n}_label", $def[2])); ?>" class="regular-text">
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- 2. Depoimentos -->
+            <div class="apepi-admin-card">
+                <h2>2. Seção "Depoimentos" — Textos e Cabeçalho</h2>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="apepi_nc_dep_badge">Badge (ex: DEPOIMENTOS)</label></th>
+                        <td><input type="text" id="apepi_nc_dep_badge" name="apepi_nc_dep_badge" value="<?php echo esc_attr($v('apepi_nc_dep_badge','DEPOIMENTOS')); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_dep_title">Título Principal</label></th>
+                        <td><input type="text" id="apepi_nc_dep_title" name="apepi_nc_dep_title" value="<?php echo esc_attr($v('apepi_nc_dep_title','O que nossos alunos dizem')); ?>" class="large-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_dep_subtitle">Subtítulo / Descrição</label></th>
+                        <td><textarea id="apepi_nc_dep_subtitle" name="apepi_nc_dep_subtitle" rows="2" class="large-text"><?php echo esc_textarea($v('apepi_nc_dep_subtitle','Histórias reais...')); ?></textarea></td>
+                    </tr>
+                </table>
+
+                <p style="margin-top:16px;font-size:13px;color:#555;">⚠️ Os depoimentos abaixo são usados como <strong>fallback</strong> quando não há posts do tipo "Depoimento" cadastrados no WordPress.</p>
+
+                <?php $dep_defaults = array(
+                    1 => array(
+                        'text' => 'O curso mudou completamente minha visão sobre o tratamento com Cannabis. Hoje me sinto seguro para prescrever e acompanhar meus pacientes.',
+                        'name' => 'Dr. Rafael M.',
+                        'role' => 'Médico',
+                        'avatar' => 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80',
+                    ),
+                    2 => array(
+                        'text' => 'Conteúdo completo, professores excelentes e uma didática que facilita o entendimento mesmo dos temas mais complexos. Recomendo!',
+                        'name' => 'Dra. Juliana T.',
+                        'role' => 'Médica Veterinária',
+                        'avatar' => 'https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=200&q=80',
+                    ),
+                    3 => array(
+                        'text' => 'A parte prática e a visita à fazenda foram experiências incríveis que fizeram toda a diferença na minha formação.',
+                        'name' => 'Dr. Lucas P.',
+                        'role' => 'Médico',
+                        'avatar' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80',
+                    ),
+                );
+                foreach ($dep_defaults as $d => $dd) : ?>
+                <div class="nc-dep-group">
+                    <h4>Depoimento <?php echo $d; ?></h4>
+                    <table class="form-table" style="margin:0;">
+                        <tr>
+                            <th style="width:130px;"><label>Texto</label></th>
+                            <td><textarea name="apepi_nc_dep<?php echo $d; ?>_text" rows="2" class="large-text"><?php echo esc_textarea($v("apepi_nc_dep{$d}_text", $dd['text'])); ?></textarea></td>
+                        </tr>
+                        <tr>
+                            <th><label>Nome</label></th>
+                            <td><input type="text" name="apepi_nc_dep<?php echo $d; ?>_name" value="<?php echo esc_attr($v("apepi_nc_dep{$d}_name", $dd['name'])); ?>" class="regular-text"></td>
+                        </tr>
+                        <tr>
+                            <th><label>Cargo / Profissão</label></th>
+                            <td><input type="text" name="apepi_nc_dep<?php echo $d; ?>_role" value="<?php echo esc_attr($v("apepi_nc_dep{$d}_role", $dd['role'])); ?>" class="regular-text"></td>
+                        </tr>
+                        <tr>
+                            <th><label>URL da Foto</label></th>
+                            <td><input type="text" name="apepi_nc_dep<?php echo $d; ?>_avatar" value="<?php echo esc_attr($v("apepi_nc_dep{$d}_avatar", $dd['avatar'])); ?>" class="large-text" placeholder="https://..."></td>
+                        </tr>
+                    </table>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- 3. Banner E-books -->
+            <div class="apepi-admin-card">
+                <h2>3. Banner "E-books Gratuitos" (rodapé da página Nossos Cursos)</h2>
+                <table class="form-table">
+                    <tr>
+                        <th><label for="apepi_nc_ebook_title">Título</label></th>
+                        <td><input type="text" id="apepi_nc_ebook_title" name="apepi_nc_ebook_title" value="<?php echo esc_attr($v('apepi_nc_ebook_title','Conhecimento que vai além da sala de aula')); ?>" class="large-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_subtitle">Subtítulo / Descrição</label></th>
+                        <td><textarea id="apepi_nc_ebook_subtitle" name="apepi_nc_ebook_subtitle" rows="2" class="large-text"><?php echo esc_textarea($v('apepi_nc_ebook_subtitle','Acesse nossos e-books gratuitos...')); ?></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_btn">Texto do Botão</label></th>
+                        <td><input type="text" id="apepi_nc_ebook_btn" name="apepi_nc_ebook_btn" value="<?php echo esc_attr($v('apepi_nc_ebook_btn','BAIXAR E-BOOKS GRATUITOS')); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_url">Link do Botão</label></th>
+                        <td><input type="text" id="apepi_nc_ebook_url" name="apepi_nc_ebook_url" value="<?php echo esc_attr($v('apepi_nc_ebook_url','#ebooks')); ?>" class="regular-text"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="apepi_nc_ebook_cover">URL da Capa do E-book (imagem)</label></th>
+                        <td>
+                            <div style="display:flex;gap:10px;align-items:center;">
+                                <input type="text" id="apepi_nc_ebook_cover" name="apepi_nc_ebook_cover" value="<?php echo esc_attr($v('apepi_nc_ebook_cover','')); ?>" class="large-text" placeholder="https://...">
+                                <button type="button" class="button apepi-upload-btn">Selecionar</button>
+                            </div>
+                            <?php $cover = $v('apepi_nc_ebook_cover',''); if ($cover) : ?>
+                            <img src="<?php echo esc_url($cover); ?>" style="max-height:70px;margin-top:8px;border:1px solid #ddd;border-radius:4px;" alt="E-book cover preview">
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <p class="submit">
+                <input type="submit" name="apepi_nc_save" class="button button-primary button-hero" value="Salvar Configurações da Página Nossos Cursos">
+            </p>
+        </form>
+    </div>
+    <script>
+    jQuery(document).ready(function($){
+        $('.apepi-upload-btn').off('click').on('click', function(e) {
+            e.preventDefault();
+            var btn = $(this);
+            var targetInput = btn.prev('input');
+            wp.media({ title: 'Selecionar Imagem', button: { text: 'Usar esta Imagem' }, multiple: false })
+              .on('select', function() {
+                  var att = this.state().get('selection').first().toJSON();
+                  targetInput.val(att.url);
+              }.bind(this)).open();
+        });
+    });
+    </script>
+    <?php
 }
-add_shortcode('apepi_breadcrumbs', function() {
-    ob_start();
-    apepi_breadcrumbs();
-    return ob_get_clean();
-});
