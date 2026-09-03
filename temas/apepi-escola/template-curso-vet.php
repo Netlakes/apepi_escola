@@ -12,7 +12,7 @@ get_header();
   <div class="container course-hero-grid">
     <div class="course-hero-left">
       <span class="course-badge-sub">FORMAÇÃO PROFISSIONAL ESPECIALIZADA</span>
-      <h1 class="font-serif course-title">Cannabis na Medicina Veterinária</h1>
+      <h1 class="course-title">Cannabis na Medicina Veterinária</h1>
       <p class="family-tagline">Capacitação clínica, dosagem e prescrição segura para cães, gatos e animais de grande porte.</p>
       
       <p class="course-intro-desc">

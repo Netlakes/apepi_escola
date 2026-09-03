@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Theme Toggle Logic (Light Mode Warm Cream as Default)
+  // Theme Toggle Logic (Dark Mode "Terra, Madeira e Folhas" as Default)
   const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const storedTheme = localStorage.getItem('apepi_theme') || 'light';
+  const storedTheme = localStorage.getItem('apepi_theme') || 'dark';
 
   applyTheme(storedTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(newTheme);
       localStorage.setItem('apepi_theme', newTheme);
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Mobile Menu Toggling
+  // Mobile Navigation & Dropdown Accordion Support
   const mobileBtn = document.getElementById('mobileMenuBtn');
   const navLinks = document.getElementById('navLinks');
 
@@ -59,13 +59,50 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close menu when any nav link is clicked
+    // Handle Dropdown Clicks on Mobile
+    const dropdownParents = navLinks.querySelectorAll('.menu-item-has-children, .has-dropdown');
+    dropdownParents.forEach(parentItem => {
+      const parentLink = parentItem.querySelector(':scope > a');
+      if (parentLink) {
+        parentLink.addEventListener('click', (e) => {
+          // If on mobile/tablet view
+          if (window.innerWidth <= 1024) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Toggle current dropdown
+            const isOpen = parentItem.classList.contains('dropdown-open');
+            
+            // Close other sibling dropdowns
+            dropdownParents.forEach(other => {
+              if (other !== parentItem) {
+                other.classList.remove('dropdown-open');
+              }
+            });
+
+            if (!isOpen) {
+              parentItem.classList.add('dropdown-open');
+            } else {
+              parentItem.classList.remove('dropdown-open');
+            }
+          }
+        });
+      }
+    });
+
+    // Close mobile nav when clicking a leaf link (link without dropdown)
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        const icon = mobileBtn.querySelector('i');
-        if (icon) {
-          icon.className = 'fa-solid fa-bars';
+      link.addEventListener('click', (e) => {
+        const parentLi = link.parentElement;
+        const hasChildren = parentLi.classList.contains('menu-item-has-children') || parentLi.classList.contains('has-dropdown');
+        
+        // If clicking a sub-link or regular item without dropdown, close mobile menu
+        if (!hasChildren || window.innerWidth > 1024) {
+          navLinks.classList.remove('show');
+          const icon = mobileBtn.querySelector('i');
+          if (icon) {
+            icon.className = 'fa-solid fa-bars';
+          }
         }
       });
     });
@@ -81,57 +118,43 @@ document.addEventListener('DOMContentLoaded', () => {
       const isAlreadyActive = parent.classList.contains('active');
 
       // Collapse all accordions in this container
-      const siblingItems = parent.parentElement.querySelectorAll('.accordion-item, .p2-accordion-item');
+      const siblingItems = parent.parentElement.querySelectorAll('.accordion-item');
       siblingItems.forEach(item => {
         item.classList.remove('active');
-        const p = item.querySelector('.accordion-panel, .p2-accordion-content');
+        const p = item.querySelector('.accordion-panel');
         if (p) p.style.maxHeight = null;
       });
 
       // Toggle clicked one
       if (!isAlreadyActive) {
         parent.classList.add('active');
-        if (panel) {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-        }
+        panel.style.maxHeight = panel.scrollHeight + 'px';
       }
     });
   });
 
-  // Universal Formations Carousel Logic
-  document.querySelectorAll('.formations-section, .courses-slider-section, section').forEach(section => {
-    const wrapper = section.querySelector('.formations-carousel-wrapper');
-    if (!wrapper) return;
+  // Home Formations Carousel Logic
+  const formationsGrid = document.getElementById('formationsGrid');
+  const prevForm = document.getElementById('prevForm');
+  const nextForm = document.getElementById('nextForm');
 
-    const prevBtn = section.querySelector('#prevForm, .prevFormBtn, .arrow-btn[aria-label="Anterior"], .arrow-btn:first-child');
-    const nextBtn = section.querySelector('#nextForm, .nextFormBtn, .arrow-btn[aria-label="Próximo"], .arrow-btn:last-child');
+  if (formationsGrid && prevForm && nextForm) {
+    const scrollAmount = 340; // width of card + gap
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const card = section.querySelector('.formation-card');
-        const cardWidth = card ? card.offsetWidth : 310;
-        const scrollAmount = cardWidth + 28; // card width + gap
-        wrapper.scrollBy({
-          left: -scrollAmount,
-          behavior: 'smooth'
-        });
+    prevForm.addEventListener('click', () => {
+      formationsGrid.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
       });
-    }
+    });
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const card = section.querySelector('.formation-card');
-        const cardWidth = card ? card.offsetWidth : 310;
-        const scrollAmount = cardWidth + 28; // card width + gap
-        wrapper.scrollBy({
-          left: scrollAmount,
-          behavior: 'smooth'
-        });
+    nextForm.addEventListener('click', () => {
+      formationsGrid.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
       });
-    }
-  });
+    });
+  }
 
   // Smooth Scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

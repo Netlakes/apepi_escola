@@ -11,7 +11,7 @@ get_header();
   <?php
   if (have_posts()) :
     while (have_posts()) : the_post();
-      echo '<h1 class="font-serif section-main-title" style="margin-bottom: 1.5rem;">' . get_the_title() . '</h1>';
+      echo '<h1 class="section-main-title" style="margin-bottom: 1.5rem;">' . get_the_title() . '</h1>';
       echo '<div class="page-body-content" style="line-height: 1.8;">';
       the_content();
       echo '</div>';

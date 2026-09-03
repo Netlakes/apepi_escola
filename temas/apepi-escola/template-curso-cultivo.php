@@ -12,7 +12,7 @@ get_header();
   <div class="container course-hero-grid">
     <div class="course-hero-left">
       <span class="course-badge-sub">IMERSÃO PRÁTICA NA FAZENDA</span>
-      <h1 class="font-serif course-title">Curso de Cultivo Agroecológico & Extração</h1>
+      <h1 class="course-title">Curso de Cultivo Agroecológico & Extração</h1>
       <p class="family-tagline">Aprenda a cultivar, cuidar e extrair extratos medicinais de alta pureza com fundamentação técnica.</p>
       
       <p class="course-intro-desc">

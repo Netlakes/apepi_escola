@@ -12,7 +12,7 @@ get_header();
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
       <article>
         <span class="section-badge"><?php the_category(', '); ?></span>
-        <h1 class="font-serif section-main-title" style="margin-top: 0.5rem; margin-bottom: 1rem;"><?php the_title(); ?></h1>
+        <h1 class="section-main-title" style="margin-top: 0.5rem; margin-bottom: 1rem;"><?php the_title(); ?></h1>
         <p class="post-meta" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem;">
           Publicado em <?php echo get_the_date(); ?> por <?php the_author(); ?>
         </p>

@@ -14,7 +14,7 @@ $hero_cta1_text = apepi_get_option('apepi_hero_cta_text', 'CONHEÇA NOSSOS CURSO
 $hero_cta1_url  = apepi_get_option('apepi_hero_cta_url', '#cursos');
 $hero_cta2_text = apepi_get_option('apepi_hero_cta2_text', 'CONHEÇA A FAZENDA');
 $hero_cta2_url  = apepi_get_option('apepi_hero_cta2_url', home_url('/fazenda'));
-$hero_bg_img    = apepi_get_option('apepi_hero_bg_image', get_template_directory_uri() . '/assets/hero_lab_clean.png');
+$hero_bg_img    = apepi_get_option('apepi_hero_bg_image', get_template_directory_uri() . '/assets/home_hero_photo.png');
 $wa_num         = apepi_get_option('apepi_whatsapp_number', '5521979570000');
 
 // Estatísticas
@@ -128,7 +128,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
       <div class="section-title-area">
         <div>
           <div class="section-badge">CONHEÇA NOSSAS</div>
-          <h2 class="section-main-title font-serif">FORMAÇÕES</h2>
+          <h2 class="section-main-title">FORMAÇÕES</h2>
         </div>
         <div class="section-arrows">
           <button class="arrow-btn prevFormBtn" id="prevForm" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -158,7 +158,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
                   <div class="card-badge-icon"><i class="<?php echo esc_attr($icone); ?>"></i></div>
                 </div>
                 <div class="card-content">
-                  <h3 class="font-serif"><?php the_title(); ?></h3>
+                  <h3 class=""><?php the_title(); ?></h3>
                   <p><?php echo wp_trim_words(get_the_excerpt(), 18, '...'); ?></p>
                   <a href="<?php the_permalink(); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
                 </div>
@@ -175,7 +175,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
                 <div class="card-badge-icon"><i class="fa-solid fa-user-doctor"></i></div>
               </div>
               <div class="card-content">
-                <h3 class="font-serif">Prescrição Médica</h3>
+                <h3 class="">Prescrição Médica</h3>
                 <p>Aprenda a indicar e acompanhar tratamentos com Cannabis Medicinal.</p>
                 <a href="<?php echo esc_url(home_url('/course-detail')); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
               </div>
@@ -187,7 +187,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
                 <div class="card-badge-icon"><i class="fa-solid fa-paw"></i></div>
               </div>
               <div class="card-content">
-                <h3 class="font-serif">Prescrição Veterinária</h3>
+                <h3 class="">Prescrição Veterinária</h3>
                 <p>Formação completa para veterinários na prescrição canabinoide.</p>
                 <a href="<?php echo esc_url(home_url('/course-detail-vet')); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
               </div>
@@ -199,7 +199,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
                 <div class="card-badge-icon"><i class="fa-solid fa-briefcase-medical"></i></div>
               </div>
               <div class="card-content">
-                <h3 class="font-serif">Cannabis na Rotina Profissional</h3>
+                <h3 class="">Cannabis na Rotina Profissional</h3>
                 <p>Integração da Cannabis Medicinal na prática clínica multiprofissional.</p>
                 <a href="<?php echo esc_url(home_url('/course-detail')); ?>" class="saiba-mais-btn">SAIBA MAIS &rarr;</a>
               </div>
@@ -221,7 +221,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
       </div>
       <div class="fazenda-text-card">
         <div class="section-badge">CONHEÇA NOSSA</div>
-        <h2 class="font-serif">Fazenda Experimental</h2>
+        <h2 class="">Fazenda Experimental</h2>
         <p>
           A maior fazenda de Cannabis Medicinal do Brasil. Estrutura completa de cultivo, processamento, pesquisa e desenvolvimento com os mais altos padrões de qualidade.
         </p>
@@ -230,10 +230,101 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
     </div>
   </section>
 
+  <!-- E-Books Gratuitos Section -->
+  <section class="ebooks-section-home" id="ebooks">
+    <div class="container">
+      <div class="ebooks-header">
+        <div class="section-badge">CONHECIMENTO PARA SUA PRÁTICA</div>
+        <h2 class="ebooks-main-title">5 E-BOOKS GRATUITOS</h2>
+        <p class="ebooks-subtitle">Conteúdos exclusivos para aprofundar seus conhecimentos em Cannabis Medicinal.</p>
+        <p class="ebooks-cta-text"><strong>Escolha um e-book e baixe gratuitamente.</strong></p>
+      </div>
+
+      <div class="ebooks-grid">
+
+        <!-- Ebook 1 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80" alt="Cannabis e a Vida">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">CANNABIS<br>E A VIDA</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Cannabis e a vida</h3>
+            <p>Entenda a Cannabis Medicinal e sua relação com saúde, bem-estar e qualidade de vida.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 2 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=400&q=80" alt="Médicos Prescritores">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">MÉDICOS<br>PRESCRITORES</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Médicos prescritores</h3>
+            <p>Um guia completo sobre a prescrição de Cannabis Medicinal na prática clínica.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 3 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=400&q=80" alt="Cultivo e Extração">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">CULTIVO E<br>EXTRAÇÃO</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Cultivo e extração</h3>
+            <p>Conheça as etapas do cultivo, processamento e extração da Cannabis Medicinal.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 4 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=80" alt="Rotinas do Prescritor">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">ROTINAS DO<br>PRESCRITOR</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Rotinas do Prescritor</h3>
+            <p>Ferramentas e orientações para apoiar o médico no dia a dia da prática clínica.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+        <!-- Ebook 5 -->
+        <div class="ebook-card">
+          <div class="ebook-cover-holder">
+            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80" alt="Vida e Saúde de Cannabis">
+            <div class="ebook-cover-overlay">
+              <span class="ebook-cover-title">VIDA E SAÚDE<br>DE CANNABIS</span>
+            </div>
+          </div>
+          <div class="ebook-card-body">
+            <h3>Vida e saúde de cannabis</h3>
+            <p>Informação científica sobre os benefícios e possibilidades terapêuticas da Cannabis.</p>
+            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Diferenciais Section -->
   <section class="diferenciais-section-home">
     <div class="container">
-      <h2 class="diferenciais-title font-serif">O que torna a APEPI diferente?</h2>
+      <h2 class="diferenciais-title">O que torna a APEPI diferente?</h2>
       <div class="diferenciais-grid">
         <div class="diferencial-card">
           <div class="dif-icon-holder"><i class="fa-solid fa-seedling"></i></div>
@@ -259,156 +350,6 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
     </div>
   </section>
 
-  <!-- Professores Section (Loop Dinâmico do CPT Professor com Fallback) -->
-  <section class="professores-section-home">
-    <div class="container">
-      <div class="professores-header">
-        <div>
-          <div class="section-badge">NOSSOS PROFESSORES</div>
-          <h2 class="font-serif">Referência em Cannabis Medicinal</h2>
-        </div>
-        <a href="<?php echo esc_url(home_url('/quem-somos')); ?>" class="view-all-link">VER TODOS OS PROFESSORES &rarr;</a>
-      </div>
-
-      <div class="professores-grid">
-        <?php
-        $args_prof = array(
-          'post_type'      => array('professor', 'professores', 'jet-engine-professor', 'teacher', 'docente'),
-          'posts_per_page' => 10,
-          'post_status'    => 'publish',
-        );
-        $query_prof = new WP_Query($args_prof);
-
-        if ($query_prof->have_posts()) :
-          while ($query_prof->have_posts()) : $query_prof->the_post();
-            $prof_id       = get_the_ID();
-            $especialidade = apepi_get_professor_cargo($prof_id);
-            $crm           = apepi_get_professor_crm($prof_id);
-            $thumb         = apepi_get_professor_image_url($prof_id);
-            ?>
-            <div class="professor-card">
-              <div class="prof-img-holder">
-                <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>">
-              </div>
-              <div class="prof-info">
-                <h3><?php the_title(); ?></h3>
-                <?php if ($especialidade) : ?><p class="prof-sub"><?php echo esc_html($especialidade); ?></p><?php endif; ?>
-                <?php if ($crm) : ?><p class="prof-crm"><?php echo esc_html($crm); ?></p><?php endif; ?>
-              </div>
-            </div>
-            <?php
-          endwhile;
-          wp_reset_postdata();
-        else :
-          // Fallback de demonstração
-          ?>
-          <div class="professor-card">
-            <div class="prof-img-holder">
-              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=500&q=80" alt="Dr. Pedro da Costa Mello Neto">
-            </div>
-            <div class="prof-info">
-              <h3>Dr. Pedro da Costa Mello Neto</h3>
-              <p class="prof-sub">Médico</p>
-              <p class="prof-crm">CRM 52 011296-4</p>
-            </div>
-          </div>
-
-          <div class="professor-card">
-            <div class="prof-img-holder">
-              <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=500&q=80" alt="Dra. Aline Barros">
-            </div>
-            <div class="prof-info">
-              <h3>Dra. Aline Barros</h3>
-              <p class="prof-sub">Médica • Psiquiatra</p>
-              <p class="prof-crm">CRM 52 60737-4</p>
-            </div>
-          </div>
-
-          <div class="professor-card">
-            <div class="prof-img-holder">
-              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=500&q=80" alt="Dr. Carlos Zimmer Jr.">
-            </div>
-            <div class="prof-info">
-              <h3>Dr. Carlos Zimmer Jr.</h3>
-              <p class="prof-sub">Médico • Anestesiologista</p>
-              <p class="prof-crm">CRM 52 34188-8</p>
-            </div>
-          </div>
-          <?php
-        endif;
-        ?>
-      </div>
-    </div>
-  </section>
-
-  <!-- Depoimentos Section (Loop Dinâmico do CPT Depoimento com Fallback) -->
-  <section class="depoimentos-section-home">
-    <div class="container">
-      <div class="depoimentos-header">
-        <div>
-          <div class="section-badge">DEPOIMENTOS</div>
-          <h2 class="font-serif">O que dizem os nossos alunos</h2>
-        </div>
-        <a href="#cursos" class="view-all-link">VER TODOS OS DEPOIMENTOS &rarr;</a>
-      </div>
-
-      <div class="depoimentos-grid">
-        <?php
-        $args_dep = array(
-          'post_type'      => 'depoimento',
-          'posts_per_page' => 4,
-          'post_status'    => 'publish',
-        );
-        $query_dep = new WP_Query($args_dep);
-
-        if ($query_dep->have_posts()) :
-          while ($query_dep->have_posts()) : $query_dep->the_post();
-            $cargo = get_post_meta(get_the_ID(), '_depoimento_cargo', true);
-            $thumb = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'medium') : 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80';
-            ?>
-            <div class="depoimento-video-card">
-              <div class="video-thumbnail-box">
-                <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>">
-                <button class="video-play-btn" aria-label="Play video"><i class="fa-solid fa-circle-play"></i></button>
-              </div>
-              <div class="video-card-info">
-                <h3><?php the_title(); ?></h3>
-                <?php if ($cargo) : ?><p><?php echo esc_html($cargo); ?></p><?php endif; ?>
-              </div>
-            </div>
-            <?php
-          endwhile;
-          wp_reset_postdata();
-        else :
-          // Fallback de demonstração
-          ?>
-          <div class="depoimento-video-card">
-            <div class="video-thumbnail-box">
-              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dra. Camila Toledo">
-              <button class="video-play-btn" aria-label="Play video"><i class="fa-solid fa-circle-play"></i></button>
-            </div>
-            <div class="video-card-info">
-              <h3>Dra. Camila Toledo</h3>
-              <p>Médica Veterinária</p>
-            </div>
-          </div>
-
-          <div class="depoimento-video-card">
-            <div class="video-thumbnail-box">
-              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Dr. Eduardo Ramos">
-              <button class="video-play-btn" aria-label="Play video"><i class="fa-solid fa-circle-play"></i></button>
-            </div>
-            <div class="video-card-info">
-              <h3>Dr. Eduardo Ramos</h3>
-              <p>Médico Neurologista</p>
-            </div>
-          </div>
-          <?php
-        endif;
-        ?>
-      </div>
-    </div>
-  </section>
-
 <?php
 get_footer();
+

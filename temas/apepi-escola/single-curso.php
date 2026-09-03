@@ -67,7 +67,7 @@ else :
     <div class="container hero-grid">
       <div class="hero-text">
         <span class="hero-pre-title"><?php echo esc_html($badge_categoria); ?></span>
-        <h1 class="font-serif hero-title"><?php the_title(); ?></h1>
+        <h1 class="hero-title"><?php the_title(); ?></h1>
         <p class="hero-desc"><?php echo esc_html($subtitulo); ?></p>
         
         <div class="hero-features-strip">
@@ -206,7 +206,7 @@ else :
         <div class="p2-col-diferencial">
           <div class="p2-diferencial-card">
             <div class="p2-dif-badge">DIFERENCIAL EXCLUSIVO</div>
-            <h3 class="font-serif p2-dif-title"><?php echo esc_html($dif_titulo); ?></h3>
+            <h3 class="p2-dif-title"><?php echo esc_html($dif_titulo); ?></h3>
             <p class="p2-dif-desc"><?php echo esc_html($dif_desc); ?></p>
             <ul class="p2-dif-list">
               <?php
@@ -458,7 +458,111 @@ else :
     </div>
   </section>
 
-  <!-- 6. Bottom Banner CTA -->
+  <!-- 6. Depoimentos dos Alunos -->
+  <section class="course-testimonials-section">
+    <div class="container">
+      <div class="testimonials-header text-center">
+        <div class="section-badge">DEPOIMENTOS DE ALUNOS</div>
+        <h2 class="section-main-title">O Que Dizem Nossos Formandos</h2>
+        <p class="section-subtitle">A experiência de médicos e profissionais que transformaram sua prática clínica com a APEPI Escola.</p>
+      </div>
+
+      <div class="course-testimonials-grid">
+        <?php
+        $args_dep = array(
+            'post_type'      => array('depoimento', 'depoimentos', 'jet-engine-depoimento'),
+            'posts_per_page' => 3,
+            'post_status'    => 'publish',
+        );
+        $query_dep = new WP_Query($args_dep);
+
+        if ($query_dep->have_posts()) :
+          while ($query_dep->have_posts()) : $query_dep->the_post();
+            $d_id    = get_the_ID();
+            $d_cargo = get_post_meta($d_id, '_depoimento_cargo', true);
+            if (!$d_cargo) $d_cargo = get_post_meta($d_id, 'cargo', true);
+            $d_thumb = has_post_thumbnail($d_id) ? get_the_post_thumbnail_url($d_id, 'large') : 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80';
+            ?>
+            <div class="course-testimonial-card">
+              <div class="test-video-thumb">
+                <img src="<?php echo esc_url($d_thumb); ?>" alt="<?php the_title_attribute(); ?>">
+                <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+              </div>
+              <div class="test-card-content">
+                <div class="test-stars">
+                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="test-quote">"<?php echo esc_html(wp_strip_all_tags(get_the_content())); ?>"</p>
+                <div class="test-author-info">
+                  <h4 class="test-author-name"><?php the_title(); ?></h4>
+                  <?php if (!empty($d_cargo)) : ?><p class="test-author-role"><?php echo esc_html($d_cargo); ?></p><?php endif; ?>
+                </div>
+              </div>
+            </div>
+            <?php
+          endwhile;
+          wp_reset_postdata();
+        else :
+          // Fallback de demonstração
+          ?>
+          <div class="course-testimonial-card">
+            <div class="test-video-thumb">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" alt="Dra. Mariana Costa">
+              <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <div class="test-card-content">
+              <div class="test-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="test-quote">"O curso me deu total segurança técnica e respaldo ético para começar a prescrever Cannabis aos meus pacientes neurológicos. A imersão na fazenda foi um divisor de águas."</p>
+              <div class="test-author-info">
+                <h4 class="test-author-name">Dra. Mariana Costa</h4>
+                <p class="test-author-role">Médica Neurologista • CRM 52 98412-1</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-testimonial-card">
+            <div class="test-video-thumb">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Dr. Roberto Albuquerque">
+              <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <div class="test-card-content">
+              <div class="test-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="test-quote">"A clareza dos professores e o rigor científico das aulas superaram minhas expectativas. Hoje consigo acompanhar a evolução dos pacientes com muito mais precisão."</p>
+              <div class="test-author-info">
+                <h4 class="test-author-name">Dr. Roberto Albuquerque</h4>
+                <p class="test-author-role">Médico Psiquiatra • CRM 52 44781-0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="course-testimonial-card">
+            <div class="test-video-thumb">
+              <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=600&q=80" alt="Dra. Luciana Paiva">
+              <button class="test-play-btn" aria-label="Assistir Depoimento"><i class="fa-solid fa-play"></i></button>
+            </div>
+            <div class="test-card-content">
+              <div class="test-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="test-quote">"Ver a seriedade do laboratório de extração e a conexão com a prática clínica me deu a certeza de que a APEPI Escola é a maior referência do país no tema."</p>
+              <div class="test-author-info">
+                <h4 class="test-author-name">Dra. Luciana Paiva</h4>
+                <p class="test-author-role">Médica de Família e Comunidade • CRM 52 61209-3</p>
+              </div>
+            </div>
+          </div>
+          <?php
+        endif;
+        ?>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Bottom Banner CTA -->
   <section class="p2-bottom-cta-banner">
     <div class="container p2-bottom-cta-container">
       <div class="p2-bottom-cta-left">
