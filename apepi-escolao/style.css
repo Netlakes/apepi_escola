@@ -681,13 +681,13 @@ p.muted {
 .hero-floating-card {
   width: 100%;
   max-width: 350px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.40);
   border-radius: var(--radius-lg);
   padding: 2rem 1.75rem;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
 }
 
 .card-benefits-list {
@@ -6384,12 +6384,18 @@ body.dark-theme .p2-prof-avatar {
   background: #17110C;
 }
 
-[data-theme="dark"] .course-floating-white-card-p2,
+[data-theme="dark"] .course-floating-white-card-p2 {
+  background: #261A12;
+  border-color: rgba(247, 240, 230, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  color: #F7F0E6;
+}
+
 [data-theme="dark"] .hero-floating-card,
 body.dark-theme .hero-floating-card {
-  background: rgba(38, 26, 18, 0.78) !important;
-  border-color: rgba(247, 240, 230, 0.18) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.08) !important;
+  background: rgba(23, 17, 12, 0.42) !important;
+  border-color: rgba(247, 240, 230, 0.20) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.06) !important;
   color: #F7F0E6;
 }
 
