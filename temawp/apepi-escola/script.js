@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Theme Toggle Logic (Dark Mode "Terra, Madeira e Folhas" as Default)
+  // Theme Toggle Logic (Light Mode as Default on first access)
   const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const storedTheme = localStorage.getItem('apepi_theme') || 'dark';
+  const storedTheme = localStorage.getItem('apepi_theme') || 'light';
 
   applyTheme(storedTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(newTheme);
       localStorage.setItem('apepi_theme', newTheme);
@@ -135,24 +135,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Home Formations Carousel Logic
   const formationsGrid = document.getElementById('formationsGrid');
+  const formationsWrapper = formationsGrid ? formationsGrid.closest('.formations-carousel-wrapper') : null;
   const prevForm = document.getElementById('prevForm');
   const nextForm = document.getElementById('nextForm');
 
-  if (formationsGrid && prevForm && nextForm) {
-    const scrollAmount = 340; // width of card + gap
+  if (formationsWrapper && prevForm && nextForm) {
+    const getScrollStep = () => {
+      const firstCard = formationsGrid.querySelector('.formation-card');
+      return firstCard ? firstCard.offsetWidth + 28 : 340;
+    };
 
-    prevForm.addEventListener('click', () => {
-      formationsGrid.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
-      });
+    prevForm.addEventListener('click', (e) => {
+      e.preventDefault();
+      const step = getScrollStep();
+      const maxScroll = formationsWrapper.scrollWidth - formationsWrapper.clientWidth;
+      if (maxScroll <= 0) return;
+      if (formationsWrapper.scrollLeft <= 10) {
+        formationsWrapper.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        formationsWrapper.scrollBy({ left: -step, behavior: 'smooth' });
+      }
     });
 
-    nextForm.addEventListener('click', () => {
-      formationsGrid.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+    nextForm.addEventListener('click', (e) => {
+      e.preventDefault();
+      const step = getScrollStep();
+      const maxScroll = formationsWrapper.scrollWidth - formationsWrapper.clientWidth;
+      if (maxScroll <= 0) return;
+      if (formationsWrapper.scrollLeft >= maxScroll - 10) {
+        formationsWrapper.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        formationsWrapper.scrollBy({ left: step, behavior: 'smooth' });
+      }
     });
   }
 

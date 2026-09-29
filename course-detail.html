@@ -262,8 +262,14 @@
             <li><i class="fa-solid fa-circle-check"></i> Entenda os padrões de qualidade e boas práticas</li>
             <li><i class="fa-solid fa-circle-check"></i> Vivencie uma experiência que conecta teoria e prática</li>
           </ul>
-          <div class="dif-image-holder">
-            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80" alt="Visita à Fazenda da APEPI">
+          <div class="dif-image-holder" id="fazendaImageHolder">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80" alt="Visita à Fazenda da APEPI" id="fazendaImg">
+            <label class="img-edit-overlay" for="fazendaFileInput" title="Trocar imagem da fazenda">
+              <button class="img-edit-btn" type="button" onclick="document.getElementById('fazendaFileInput').click()">
+                <i class="fa-solid fa-camera"></i> Trocar Imagem
+              </button>
+            </label>
+            <input type="file" id="fazendaFileInput" accept="image/*" onchange="previewFazendaImg(event)">
           </div>
           <a href="fazenda.html" class="btn btn-primary w-full text-center">CONHEÇA NOSSA FAZENDA &rarr;</a>
         </div>
@@ -274,7 +280,11 @@
   <!-- Corpo Docente -->
   <section class="corpo-docente-section">
     <div class="container">
-      <h2 class="sub-section-title">CORPO DOCENTE</h2>
+      <div class="testimonials-header text-center">
+        <div class="section-badge">CORPO DOCENTE</div>
+        <h2 class="section-main-title">Especialistas e Referências Clínicas</h2>
+        <p class="section-subtitle">Aprenda diretamente com médicos, pesquisadores e profissionais pioneiros na medicina canábica.</p>
+      </div>
       
       <div class="docentes-grid-wrapper">
         <div class="docentes-grid">
@@ -486,5 +496,17 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    function previewFazendaImg(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById('fazendaImg');
+        if (img) img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
 </body>
 </html>

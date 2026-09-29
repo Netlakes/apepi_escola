@@ -51,10 +51,35 @@ else :
     $dif_titulo       = apepi_get_course_meta($post_id, 'dif_titulo', 'Visita à Fazenda Experimental');
     $dif_desc         = apepi_get_course_meta($post_id, 'dif_desc', 'Experiência prática e imersiva na Fazenda de Cannabis Medicinal da APEPI.');
     $dif_topicos_raw  = apepi_get_course_meta($post_id, 'dif_topicos', '');
-    $dif_imagem       = apepi_get_course_meta($post_id, 'dif_imagem', 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80');
+    
+    // Imagem da Fazenda (Prioriza o campo do curso, fallback para opção do tema ou imagem local oficial)
+    $default_dif_img  = apepi_get_option('apepi_fazenda_main_img', get_template_directory_uri() . '/assets/fazenda_apepi.jpg');
+    $dif_imagem       = apepi_get_course_meta($post_id, 'dif_imagem', $default_dif_img);
+    if (empty($dif_imagem) || strpos($dif_imagem, 'photo-1585320806297-9794b3e4eeae') !== false) {
+        $dif_imagem = $default_dif_img;
+    }
     $dif_link         = apepi_get_course_meta($post_id, 'dif_link', home_url('/fazenda'));
 
     $modulos_raw      = apepi_get_course_meta($post_id, 'modulos', '');
+
+    // Detecção se este é o curso de veterinária ("Uso Veterinário...")
+    $tipo_docente     = apepi_get_course_meta($post_id, 'tipo_docente', 'auto');
+    $is_vet_course    = false;
+    if ($tipo_docente === 'veterinaria') {
+        $is_vet_course = true;
+    } else if ($tipo_docente === 'medicina') {
+        $is_vet_course = false;
+    } else {
+        // Modo auto: detecta por slug, título ou termos de taxonomia
+        global $post;
+        $current_slug  = isset($post->post_name) ? strtolower($post->post_name) : '';
+        $current_title = strtolower(get_the_title($post_id));
+        if (strpos($current_slug, 'veterin') !== false || strpos($current_title, 'veterin') !== false) {
+            $is_vet_course = true;
+        } else if (has_term(array('veterinaria', 'medicina-veterinaria', 'veterinario'), 'categoria_curso', $post_id) || has_term(array('veterinaria', 'medicina-veterinaria', 'veterinario'), 'category', $post_id)) {
+            $is_vet_course = true;
+        }
+    }
   ?>
 
   <!-- 1. Hero Topo do Curso (Configurações Idênticas ao Hero da Home) -->
@@ -377,82 +402,162 @@ else :
   <!-- 5. Corpo Docente (Professores) -->
   <section class="p2-professores-section">
     <div class="container">
-      <div class="p2-col-title-badge">CORPO DOCENTE</div>
+      <div class="testimonials-header text-center">
+        <div class="section-badge">CORPO DOCENTE</div>
+        <h2 class="section-main-title">Especialistas e Referências Clínicas</h2>
+        <p class="section-subtitle"><?php echo $is_vet_course ? 'Aprenda diretamente com médicos veterinários e pesquisadores pioneiros na medicina canábica animal.' : 'Aprenda diretamente com médicos, pesquisadores e profissionais pioneiros na medicina canábica.'; ?></p>
+      </div>
       
       <div class="p2-professores-grid">
         <?php
-        $args_profs = array(
-          'post_type'      => array('professor', 'professores', 'jet-engine-professor', 'teacher', 'docente'),
-          'posts_per_page' => 10,
-          'post_status'    => 'publish',
-        );
-        $query_profs = new WP_Query($args_profs);
+        if ($is_vet_course) :
+          // 1. Tenta buscar professores veterinários cadastrados no CPT
+          $args_profs = array(
+            'post_type'      => array('professor', 'professores', 'jet-engine-professor', 'teacher', 'docente'),
+            'posts_per_page' => 10,
+            'post_status'    => 'publish',
+            'tax_query'      => array(
+              'relation' => 'OR',
+              array(
+                'taxonomy' => 'categoria_professor',
+                'field'    => 'slug',
+                'terms'    => array('veterinaria', 'medicina-veterinaria', 'veterinario'),
+              ),
+              array(
+                'taxonomy' => 'categoria_curso',
+                'field'    => 'slug',
+                'terms'    => array('veterinaria', 'medicina-veterinaria', 'veterinario'),
+              ),
+            ),
+          );
+          $query_profs = new WP_Query($args_profs);
 
-        if ($query_profs->have_posts()) :
-          while ($query_profs->have_posts()) : $query_profs->the_post();
-            $prof_id = get_the_ID();
-            $p_thumb = apepi_get_professor_image_url($prof_id);
-            $p_cargo = apepi_get_professor_cargo($prof_id);
-            $p_crm   = apepi_get_professor_crm($prof_id);
+          if ($query_profs->have_posts()) :
+            while ($query_profs->have_posts()) : $query_profs->the_post();
+              $prof_id = get_the_ID();
+              $p_thumb = apepi_get_professor_image_url($prof_id);
+              $p_cargo = apepi_get_professor_cargo($prof_id);
+              $p_crm   = apepi_get_professor_crm($prof_id);
+              ?>
+              <div class="p2-prof-card">
+                <div class="p2-prof-avatar">
+                  <img src="<?php echo esc_url($p_thumb); ?>" alt="<?php the_title_attribute(); ?>">
+                </div>
+                <h4 class="p2-prof-name"><?php the_title(); ?></h4>
+                <p class="p2-prof-role"><?php echo esc_html($p_cargo); ?></p>
+                <p class="p2-prof-crm"><?php echo esc_html($p_crm); ?></p>
+              </div>
+              <?php
+            endwhile;
+            wp_reset_postdata();
+          else :
+            // Fallback nativo: 5 profissionais veterinários reais enviados
+            $vet_assets = get_template_directory_uri() . '/assets/veterinarios/';
             ?>
             <div class="p2-prof-card">
-              <div class="p2-prof-avatar">
-                <img src="<?php echo esc_url($p_thumb); ?>" alt="<?php the_title_attribute(); ?>">
-              </div>
-              <h4 class="p2-prof-name"><?php the_title(); ?></h4>
-              <p class="p2-prof-role"><?php echo esc_html($p_cargo); ?></p>
-              <p class="p2-prof-crm"><?php echo esc_html($p_crm); ?></p>
+              <div class="p2-prof-avatar"><img src="<?php echo esc_url($vet_assets . 'aline-goulart.jpg'); ?>" alt="Dra. Aline Goulart"></div>
+              <h4 class="p2-prof-name">Dra. Aline Goulart</h4>
+              <p class="p2-prof-role">Médica Veterinária • Endocanabinologia</p>
+              <p class="p2-prof-crm">CRMV-SP</p>
+            </div>
+
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="<?php echo esc_url($vet_assets . 'cynthia-martinelli.jpg'); ?>" alt="Dra. Cynthia Martinelli"></div>
+              <h4 class="p2-prof-name">Dra. Cynthia Martinelli</h4>
+              <p class="p2-prof-role">Médica Veterinária • Geriatria Animal</p>
+              <p class="p2-prof-crm">CRMV-RJ 6480</p>
+            </div>
+
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="<?php echo esc_url($vet_assets . 'isabel-nilles.jpg'); ?>" alt="Dra. Isabel Nilles"></div>
+              <h4 class="p2-prof-name">Dra. Isabel Nilles</h4>
+              <p class="p2-prof-role">Médica Veterinária • Fisiologia Canabinoide</p>
+              <p class="p2-prof-crm">Pesquisadora UFRRJ / LACAM</p>
+            </div>
+
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="<?php echo esc_url($vet_assets . 'joao-gabriel.jpg'); ?>" alt="João Gabriel Soares"></div>
+              <h4 class="p2-prof-name">João Gabriel Soares</h4>
+              <p class="p2-prof-role">Especialista • Farmacologia & Controle</p>
+              <p class="p2-prof-crm">Gestor Técnico e Docente APEPI</p>
+            </div>
+
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="<?php echo esc_url($vet_assets . 'magda-medeiros.jpg'); ?>" alt="Dra. Magda Medeiros"></div>
+              <h4 class="p2-prof-name">Dra. Magda Medeiros</h4>
+              <p class="p2-prof-role">Médica Veterinária • Neurologia & Acupuntura</p>
+              <p class="p2-prof-crm">Profa. Titular UFRRJ • CRMV-RJ</p>
             </div>
             <?php
-          endwhile;
-          wp_reset_postdata();
+          endif;
         else :
-          // Fallback de demonstração idêntico à imagem page_2.png
-          ?>
-          <div class="p2-prof-card">
-            <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=80" alt="Dr. Pedro da Costa Mello Neto"></div>
-            <h4 class="p2-prof-name">Dr. Pedro da Costa Mello Neto</h4>
-            <p class="p2-prof-role">Médico</p>
-            <p class="p2-prof-crm">CRM 52 011296-4</p>
-          </div>
+          // Caso padrão (Cursos de Medicina Humana / Geral)
+          $args_profs = array(
+            'post_type'      => array('professor', 'professores', 'jet-engine-professor', 'teacher', 'docente'),
+            'posts_per_page' => 10,
+            'post_status'    => 'publish',
+          );
+          $query_profs = new WP_Query($args_profs);
 
-          <div class="p2-prof-card">
-            <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80" alt="Dra. Aline Barros"></div>
-            <h4 class="p2-prof-name">Dra. Aline Barros</h4>
-            <p class="p2-prof-role">Médica • Psiquiatra</p>
-            <p class="p2-prof-crm">CRM 52 60737-4</p>
-          </div>
+          if ($query_profs->have_posts()) :
+            while ($query_profs->have_posts()) : $query_profs->the_post();
+              $prof_id = get_the_ID();
+              $p_thumb = apepi_get_professor_image_url($prof_id);
+              $p_cargo = apepi_get_professor_cargo($prof_id);
+              $p_crm   = apepi_get_professor_crm($prof_id);
+              ?>
+              <div class="p2-prof-card">
+                <div class="p2-prof-avatar">
+                  <img src="<?php echo esc_url($p_thumb); ?>" alt="<?php the_title_attribute(); ?>">
+                </div>
+                <h4 class="p2-prof-name"><?php the_title(); ?></h4>
+                <p class="p2-prof-role"><?php echo esc_html($p_cargo); ?></p>
+                <p class="p2-prof-crm"><?php echo esc_html($p_crm); ?></p>
+              </div>
+              <?php
+            endwhile;
+            wp_reset_postdata();
+          else :
+            // Fallback de demonstração com médicos humanos
+            ?>
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=80" alt="Dr. Pedro da Costa Mello Neto"></div>
+              <h4 class="p2-prof-name">Dr. Pedro da Costa Mello Neto</h4>
+              <p class="p2-prof-role">Médico</p>
+              <p class="p2-prof-crm">CRM 52 011296-4</p>
+            </div>
 
-          <div class="p2-prof-card">
-            <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80" alt="Dr. Carlos Zimmer Jr."></div>
-            <h4 class="p2-prof-name">Dr. Carlos Zimmer Jr.</h4>
-            <p class="p2-prof-role">Médico • Anestesiologista</p>
-            <p class="p2-prof-crm">CRM 52 34188-8</p>
-          </div>
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80" alt="Dra. Aline Barros"></div>
+              <h4 class="p2-prof-name">Dra. Aline Barros</h4>
+              <p class="p2-prof-role">Médica • Psiquiatra</p>
+              <p class="p2-prof-crm">CRM 52 60737-4</p>
+            </div>
 
-          <div class="p2-prof-card">
-            <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1594824813566-88855ce78907?auto=format&fit=crop&w=300&q=80" alt="Dra. Patricia Moreira"></div>
-            <h4 class="p2-prof-name">Dra. Patricia Moreira</h4>
-            <p class="p2-prof-role">Médica Veterinária</p>
-            <p class="p2-prof-crm">CRMV-RJ 12 345</p>
-          </div>
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80" alt="Dr. Carlos Zimmer Jr."></div>
+              <h4 class="p2-prof-name">Dr. Carlos Zimmer Jr.</h4>
+              <p class="p2-prof-role">Médico • Anestesiologista</p>
+              <p class="p2-prof-crm">CRM 52 34188-8</p>
+            </div>
 
-          <div class="p2-prof-card">
-            <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&q=80" alt="Dr. Victor Vilhena Barroso"></div>
-            <h4 class="p2-prof-name">Dr. Victor Vilhena Barroso</h4>
-            <p class="p2-prof-role">Médico</p>
-            <p class="p2-prof-crm">CRM 52 81058-2</p>
-          </div>
-          <?php
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1594824813566-88855ce78907?auto=format&fit=crop&w=300&q=80" alt="Dra. Patricia Moreira"></div>
+              <h4 class="p2-prof-name">Dra. Patricia Moreira</h4>
+              <p class="p2-prof-role">Médica Veterinária</p>
+              <p class="p2-prof-crm">CRMV-RJ 12 345</p>
+            </div>
+
+            <div class="p2-prof-card">
+              <div class="p2-prof-avatar"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&q=80" alt="Dr. Victor Vilhena Barroso"></div>
+              <h4 class="p2-prof-name">Dr. Victor Vilhena Barroso</h4>
+              <p class="p2-prof-role">Médico</p>
+              <p class="p2-prof-crm">CRM 52 81058-2</p>
+            </div>
+            <?php
+          endif;
         endif;
         ?>
-
-        <!-- 6th Card: Ver Todos -->
-        <a href="<?php echo esc_url(home_url('/#professores')); ?>" class="p2-prof-card p2-prof-card-more">
-          <div class="p2-prof-more-icon"><i class="fa-solid fa-users"></i></div>
-          <h4 class="p2-prof-name">Veja todos os professores</h4>
-          <span class="p2-prof-more-arrow">&rarr;</span>
-        </a>
 
       </div>
     </div>

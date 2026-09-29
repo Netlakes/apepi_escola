@@ -108,6 +108,25 @@ function apepi_get_logo_url($type = 'light') {
 }
 
 /**
+ * Helper para extrair YouTube ID e retornar URL de embed segura
+ */
+function apepi_get_youtube_embed_url($url_or_id) {
+    $url_or_id = trim($url_or_id);
+    if (empty($url_or_id)) {
+        return '';
+    }
+    // Se já for só o ID (11 caracteres alfanuméricos/traço/underline)
+    if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $url_or_id)) {
+        return 'https://www.youtube-nocookie.com/embed/' . $url_or_id;
+    }
+    // Se for URL completa ou encurtada do YouTube
+    if (preg_match('/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/', $url_or_id, $matches)) {
+        return 'https://www.youtube-nocookie.com/embed/' . $matches[1];
+    }
+    return '';
+}
+
+/**
  * Enfileirar Estilos e Scripts
  */
 function apepi_escola_scripts() {
@@ -162,6 +181,13 @@ function apepi_escola_admin_page_callback() {
             'apepi_fazenda_title', 'apepi_fazenda_subtitle', 'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_fazenda_main_img',
             'apepi_fazenda_badge1', 'apepi_fazenda_badge2', 'apepi_fazenda_badge3',
             'apepi_fazenda_callout_left', 'apepi_fazenda_callout_right',
+            'apepi_fazenda_cta_text',
+            'apepi_fazenda_video1', 'apepi_fazenda_video2', 'apepi_fazenda_video3', 'apepi_fazenda_video4',
+            'apepi_fazenda_destaques_title',
+            'apepi_fazenda_dest1_title', 'apepi_fazenda_dest1_desc', 'apepi_fazenda_dest1_img', 'apepi_fazenda_dest1_icon',
+            'apepi_fazenda_dest2_title', 'apepi_fazenda_dest2_desc', 'apepi_fazenda_dest2_img', 'apepi_fazenda_dest2_icon',
+            'apepi_fazenda_dest3_title', 'apepi_fazenda_dest3_desc', 'apepi_fazenda_dest3_img', 'apepi_fazenda_dest3_icon',
+            'apepi_fazenda_dest4_title', 'apepi_fazenda_dest4_desc', 'apepi_fazenda_dest4_img', 'apepi_fazenda_dest4_icon',
             'apepi_quemsomos_title', 'apepi_quemsomos_subtitle', 'apepi_quemsomos_desc', 'apepi_quemsomos_founders_img', 'apepi_quemsomos_speech',
             'apepi_quemsomos_missao_text', 'apepi_quemsomos_visao_text',
             'apepi_quemsomos_pilar1_img', 'apepi_quemsomos_pilar1_title', 'apepi_quemsomos_pilar1_text',
@@ -181,7 +207,7 @@ function apepi_escola_admin_page_callback() {
 
         foreach ($fields as $field) {
             if (isset($_POST[$field])) {
-                $is_textarea = in_array($field, array('apepi_hero_title', 'apepi_hero_desc', 'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_quemsomos_desc', 'apepi_quemsomos_speech', 'apepi_contato_hero_desc', 'apepi_contato_banner_text'));
+                $is_textarea = in_array($field, array('apepi_hero_title', 'apepi_hero_desc', 'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_fazenda_dest1_desc', 'apepi_fazenda_dest2_desc', 'apepi_fazenda_dest3_desc', 'apepi_fazenda_dest4_desc', 'apepi_quemsomos_desc', 'apepi_quemsomos_speech', 'apepi_contato_hero_desc', 'apepi_contato_banner_text'));
                 $val = $is_textarea ? sanitize_textarea_field($_POST[$field]) : sanitize_text_field($_POST[$field]);
                 update_option($field, $val);
                 set_theme_mod($field, $val);
@@ -219,11 +245,44 @@ function apepi_escola_admin_page_callback() {
     $stat_hours  = apepi_get_option('apepi_stat_hours', '2.400+');
     $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
 
-    $fazenda_title    = apepi_get_option('apepi_fazenda_title', 'Visita à Fazenda Sofia Langenbach');
+    $fazenda_title    = apepi_get_option('apepi_fazenda_title', 'Visita à Fazenda da APEPI');
     $fazenda_subtitle = apepi_get_option('apepi_fazenda_subtitle', 'Aprendizado que nasce na prática');
-    $fazenda_desc     = apepi_get_option('apepi_fazenda_desc', 'Um marco da cannabis para fins medicinais no Brasil. Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
-    $fazenda_subdesc  = apepi_get_option('apepi_fazenda_subdesc', 'A Fazenda Sofia Langenbach nasce do sonho de Marcos Langenbach e Margarete Brito, fundadores da APEPI, de tornar o tratamento medicinal mais acessível. Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
-    $fazenda_img      = apepi_get_option('apepi_fazenda_main_img', 'https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg');
+    $fazenda_desc     = apepi_get_option('apepi_fazenda_desc', 'Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
+    $fazenda_subdesc  = apepi_get_option('apepi_fazenda_subdesc', 'Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
+    $fazenda_img      = apepi_get_option('apepi_fazenda_main_img', 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1000&q=80');
+
+    $faz_badge1       = apepi_get_option('apepi_fazenda_badge1', 'Para médicos, veterinários e profissionais da saúde');
+    $faz_badge2       = apepi_get_option('apepi_fazenda_badge2', 'Imersão prática e conteúdo científico');
+    $faz_badge3       = apepi_get_option('apepi_fazenda_badge3', 'Conexão entre teoria e prática com excelência');
+    $faz_callout_l    = apepi_get_option('apepi_fazenda_callout_left', 'Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.');
+    $faz_callout_r    = apepi_get_option('apepi_fazenda_callout_right', 'O dia de imersão para conhecer do cultivo até a produção dos óleos.');
+    $faz_cta_txt      = apepi_get_option('apepi_fazenda_cta_text', 'Viva uma experiência única e transforme seu conhecimento em prática responsável.');
+
+    $faz_vid1         = apepi_get_option('apepi_fazenda_video1', 'https://youtu.be/a2SPamnnxr0');
+    $faz_vid2         = apepi_get_option('apepi_fazenda_video2', 'https://youtu.be/Ddb2VmBXrYc');
+    $faz_vid3         = apepi_get_option('apepi_fazenda_video3', 'https://youtu.be/Gpn76rvZBNQ');
+    $faz_vid4         = apepi_get_option('apepi_fazenda_video4', 'https://youtu.be/3UGWGmO5Ljw');
+
+    $faz_dest_title   = apepi_get_option('apepi_fazenda_destaques_title', 'DESTAQUES DA EXPERIÊNCIA');
+    $faz_dest1_t      = apepi_get_option('apepi_fazenda_dest1_title', 'Laboratório de extração');
+    $faz_dest1_d      = apepi_get_option('apepi_fazenda_dest1_desc', 'Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.');
+    $faz_dest1_i      = apepi_get_option('apepi_fazenda_dest1_img', get_template_directory_uri() . '/assets/faz_dest_lab.png');
+    $faz_dest1_ic     = apepi_get_option('apepi_fazenda_dest1_icon', 'fa-solid fa-flask-vial');
+
+    $faz_dest2_t      = apepi_get_option('apepi_fazenda_dest2_title', 'Cultivo com excelência');
+    $faz_dest2_d      = apepi_get_option('apepi_fazenda_dest2_desc', 'Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.');
+    $faz_dest2_i      = apepi_get_option('apepi_fazenda_dest2_img', get_template_directory_uri() . '/assets/faz_dest_cultivo.png');
+    $faz_dest2_ic     = apepi_get_option('apepi_fazenda_dest2_icon', 'fa-solid fa-seedling');
+
+    $faz_dest3_t      = apepi_get_option('apepi_fazenda_dest3_title', 'Processos completos');
+    $faz_dest3_d      = apepi_get_option('apepi_fazenda_dest3_desc', 'Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.');
+    $faz_dest3_i      = apepi_get_option('apepi_fazenda_dest3_img', get_template_directory_uri() . '/assets/faz_dest_processos.png');
+    $faz_dest3_ic     = apepi_get_option('apepi_fazenda_dest3_icon', 'fa-solid fa-leaf');
+
+    $faz_dest4_t      = apepi_get_option('apepi_fazenda_dest4_title', 'Pesquisa e Inovação');
+    $faz_dest4_d      = apepi_get_option('apepi_fazenda_dest4_desc', 'Desenvolvimento contínuo de genética, ciência e saúde para os associados APEPI.');
+    $faz_dest4_i      = apepi_get_option('apepi_fazenda_dest4_img', get_template_directory_uri() . '/assets/faz_dest_lab.png');
+    $faz_dest4_ic     = apepi_get_option('apepi_fazenda_dest4_icon', 'fa-solid fa-microscope');
 
     $qs_title         = apepi_get_option('apepi_quemsomos_title', 'Missão e Valores');
     $qs_subtitle      = apepi_get_option('apepi_quemsomos_subtitle', 'Uma trajetória de saúde e cuidado');
@@ -429,6 +488,126 @@ function apepi_escola_admin_page_callback() {
                     <tr>
                         <th scope="row"><label for="apepi_stat_cases">Casos Clínicos Discutidos</label></th>
                         <td><input type="text" id="apepi_stat_cases" name="apepi_stat_cases" value="<?php echo esc_attr($stat_cases); ?>" class="regular-text"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 6. Fazenda Experimental & Destaques da Experiência -->
+            <div class="apepi-admin-card">
+                <h2>6. Fazenda Experimental & Destaques da Experiência</h2>
+                <table class="form-table">
+                    <tr>
+                        <th scope="row"><label for="apepi_fazenda_main_img">Imagem Principal da Fazenda</label></th>
+                        <td>
+                            <div class="apepi-flex-input">
+                                <input type="text" id="apepi_fazenda_main_img" name="apepi_fazenda_main_img" value="<?php echo esc_attr($fazenda_img); ?>" class="regular-text">
+                                <button type="button" class="button apepi-upload-btn">Selecionar na Galeria</button>
+                            </div>
+                            <img src="<?php echo esc_url($fazenda_img); ?>" class="apepi-img-preview" style="max-height:80px;" alt="Preview Fazenda">
+                            <p class="description">Imagem exibida na Home e no topo da Página da Fazenda.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><strong>Selos / Badges do Banner</strong></th>
+                        <td>
+                            <p><label>Selo 1:</label><br><input type="text" name="apepi_fazenda_badge1" value="<?php echo esc_attr($faz_badge1); ?>" class="large-text"></p>
+                            <p><label>Selo 2:</label><br><input type="text" name="apepi_fazenda_badge2" value="<?php echo esc_attr($faz_badge2); ?>" class="large-text"></p>
+                            <p><label>Selo 3:</label><br><input type="text" name="apepi_fazenda_badge3" value="<?php echo esc_attr($faz_badge3); ?>" class="large-text"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><strong>Callout Flutuante Verde (Hero)</strong></th>
+                        <td>
+                            <p><label>Texto Esquerdo (Equipe de professores):</label><br><textarea name="apepi_fazenda_callout_left" rows="2" class="large-text"><?php echo esc_textarea($faz_callout_l); ?></textarea></p>
+                            <p><label>Texto Direito (Dia de imersão):</label><br><textarea name="apepi_fazenda_callout_right" rows="2" class="large-text"><?php echo esc_textarea($faz_callout_r); ?></textarea></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="apepi_fazenda_destaques_title">Título da Seção de Destaques</label></th>
+                        <td><input type="text" id="apepi_fazenda_destaques_title" name="apepi_fazenda_destaques_title" value="<?php echo esc_attr($faz_dest_title); ?>" class="regular-text"></td>
+                    </tr>
+                    <!-- Destaque 1 -->
+                    <tr>
+                        <th scope="row"><strong>Destaque 1 (Card)</strong></th>
+                        <td>
+                            <p><label>Título:</label><br><input type="text" name="apepi_fazenda_dest1_title" value="<?php echo esc_attr($faz_dest1_t); ?>" class="regular-text"></p>
+                            <p><label>Descrição:</label><br><textarea name="apepi_fazenda_dest1_desc" rows="2" class="large-text"><?php echo esc_textarea($faz_dest1_d); ?></textarea></p>
+                            <p><label>Ícone (FontAwesome):</label><br><input type="text" name="apepi_fazenda_dest1_icon" value="<?php echo esc_attr($faz_dest1_ic); ?>" class="regular-text"></p>
+                            <p><label>Imagem:</label><br>
+                            <div class="apepi-flex-input">
+                                <input type="text" name="apepi_fazenda_dest1_img" value="<?php echo esc_attr($faz_dest1_i); ?>" class="regular-text">
+                                <button type="button" class="button apepi-upload-btn">Selecionar</button>
+                            </div>
+                            <img src="<?php echo esc_url($faz_dest1_i); ?>" class="apepi-img-preview" style="max-height:50px;">
+                            </p>
+                        </td>
+                    </tr>
+                    <!-- Destaque 2 -->
+                    <tr>
+                        <th scope="row"><strong>Destaque 2 (Card)</strong></th>
+                        <td>
+                            <p><label>Título:</label><br><input type="text" name="apepi_fazenda_dest2_title" value="<?php echo esc_attr($faz_dest2_t); ?>" class="regular-text"></p>
+                            <p><label>Descrição:</label><br><textarea name="apepi_fazenda_dest2_desc" rows="2" class="large-text"><?php echo esc_textarea($faz_dest2_d); ?></textarea></p>
+                            <p><label>Ícone (FontAwesome):</label><br><input type="text" name="apepi_fazenda_dest2_icon" value="<?php echo esc_attr($faz_dest2_ic); ?>" class="regular-text"></p>
+                            <p><label>Imagem:</label><br>
+                            <div class="apepi-flex-input">
+                                <input type="text" name="apepi_fazenda_dest2_img" value="<?php echo esc_attr($faz_dest2_i); ?>" class="regular-text">
+                                <button type="button" class="button apepi-upload-btn">Selecionar</button>
+                            </div>
+                            <img src="<?php echo esc_url($faz_dest2_i); ?>" class="apepi-img-preview" style="max-height:50px;">
+                            </p>
+                        </td>
+                    </tr>
+                    <!-- Destaque 3 -->
+                    <tr>
+                        <th scope="row"><strong>Destaque 3 (Card)</strong></th>
+                        <td>
+                            <p><label>Título:</label><br><input type="text" name="apepi_fazenda_dest3_title" value="<?php echo esc_attr($faz_dest3_t); ?>" class="regular-text"></p>
+                            <p><label>Descrição:</label><br><textarea name="apepi_fazenda_dest3_desc" rows="2" class="large-text"><?php echo esc_textarea($faz_dest3_d); ?></textarea></p>
+                            <p><label>Ícone (FontAwesome):</label><br><input type="text" name="apepi_fazenda_dest3_icon" value="<?php echo esc_attr($faz_dest3_ic); ?>" class="regular-text"></p>
+                            <p><label>Imagem:</label><br>
+                            <div class="apepi-flex-input">
+                                <input type="text" name="apepi_fazenda_dest3_img" value="<?php echo esc_attr($faz_dest3_i); ?>" class="regular-text">
+                                <button type="button" class="button apepi-upload-btn">Selecionar</button>
+                            </div>
+                            <img src="<?php echo esc_url($faz_dest3_i); ?>" class="apepi-img-preview" style="max-height:50px;">
+                            </p>
+                        </td>
+                    </tr>
+                    <!-- Destaque 4 -->
+                    <tr>
+                        <th scope="row"><strong>Destaque 4 (Card)</strong></th>
+                        <td>
+                            <p><label>Título:</label><br><input type="text" name="apepi_fazenda_dest4_title" value="<?php echo esc_attr($faz_dest4_t); ?>" class="regular-text"></p>
+                            <p><label>Descrição:</label><br><textarea name="apepi_fazenda_dest4_desc" rows="2" class="large-text"><?php echo esc_textarea($faz_dest4_d); ?></textarea></p>
+                            <p><label>Ícone (FontAwesome):</label><br><input type="text" name="apepi_fazenda_dest4_icon" value="<?php echo esc_attr($faz_dest4_ic); ?>" class="regular-text"></p>
+                            <p><label>Imagem:</label><br>
+                            <div class="apepi-flex-input">
+                                <input type="text" name="apepi_fazenda_dest4_img" value="<?php echo esc_attr($faz_dest4_i); ?>" class="regular-text">
+                                <button type="button" class="button apepi-upload-btn">Selecionar</button>
+                            </div>
+                            <img src="<?php echo esc_url($faz_dest4_i); ?>" class="apepi-img-preview" style="max-height:50px;">
+                            </p>
+                        </td>
+                    </tr>
+                    <!-- Vídeos do YouTube -->
+                    <tr>
+                        <th scope="row"><strong>Vídeos da Fazenda (YouTube)</strong></th>
+                        <td>
+                            <p><label>Vídeo 1 (URL ou ID do YouTube):</label><br><input type="text" name="apepi_fazenda_video1" value="<?php echo esc_attr($faz_vid1); ?>" class="large-text"></p>
+                            <p><label>Vídeo 2 (URL ou ID do YouTube):</label><br><input type="text" name="apepi_fazenda_video2" value="<?php echo esc_attr($faz_vid2); ?>" class="large-text"></p>
+                            <p><label>Vídeo 3 (URL ou ID do YouTube):</label><br><input type="text" name="apepi_fazenda_video3" value="<?php echo esc_attr($faz_vid3); ?>" class="large-text"></p>
+                            <p><label>Vídeo 4 (URL ou ID do YouTube):</label><br><input type="text" name="apepi_fazenda_video4" value="<?php echo esc_attr($faz_vid4); ?>" class="large-text"></p>
+                            <p class="description">Insira a URL do YouTube (ex: <code>https://youtu.be/a2SPamnnxr0</code>) ou apenas o ID do vídeo.</p>
+                        </td>
+                    </tr>
+                    <!-- Banner de Ação CTA Final -->
+                    <tr>
+                        <th scope="row"><label for="apepi_fazenda_cta_text">Texto do Banner CTA (Final)</label></th>
+                        <td>
+                            <textarea id="apepi_fazenda_cta_text" name="apepi_fazenda_cta_text" rows="2" class="large-text"><?php echo esc_textarea($faz_cta_txt); ?></textarea>
+                            <p class="description">Texto de chamada exibido no banner verde ao final da página da Fazenda.</p>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -814,7 +993,7 @@ function apepi_escola_customize_register($wp_customize) {
     ));
 
     $wp_customize->add_setting('apepi_fazenda_main_img', array(
-        'default'           => 'https://apepiescola.org/wp-content/uploads/2026/07/fazenda.jpg',
+        'default'           => 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1000&q=80',
         'sanitize_callback' => 'esc_url_raw',
         'type'              => 'theme_mod',
     ));
@@ -823,6 +1002,50 @@ function apepi_escola_customize_register($wp_customize) {
         'section'  => 'apepi_fazenda_section',
         'settings' => 'apepi_fazenda_main_img',
     )));
+
+    // Destaques da Experiência
+    $wp_customize->add_setting('apepi_fazenda_destaques_title', array('default' => 'DESTAQUES DA EXPERIÊNCIA', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_destaques_title', array('label' => __('Título dos Destaques da Experiência', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+
+    // Destaque 1
+    $wp_customize->add_setting('apepi_fazenda_dest1_title', array('default' => 'Laboratório de extração', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest1_title', array('label' => __('Destaque 1: Título', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest1_desc', array('default' => 'Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest1_desc', array('label' => __('Destaque 1: Descrição', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_fazenda_dest1_icon', array('default' => 'fa-solid fa-flask-vial', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest1_icon', array('label' => __('Destaque 1: Ícone FontAwesome', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest1_img', array('default' => '', 'sanitize_callback' => 'esc_url_raw', 'type' => 'theme_mod'));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'apepi_fazenda_dest1_img', array('label' => __('Destaque 1: Imagem', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'settings' => 'apepi_fazenda_dest1_img')));
+
+    // Destaque 2
+    $wp_customize->add_setting('apepi_fazenda_dest2_title', array('default' => 'Cultivo com excelência', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest2_title', array('label' => __('Destaque 2: Título', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest2_desc', array('default' => 'Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest2_desc', array('label' => __('Destaque 2: Descrição', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_fazenda_dest2_icon', array('default' => 'fa-solid fa-seedling', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest2_icon', array('label' => __('Destaque 2: Ícone FontAwesome', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest2_img', array('default' => '', 'sanitize_callback' => 'esc_url_raw', 'type' => 'theme_mod'));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'apepi_fazenda_dest2_img', array('label' => __('Destaque 2: Imagem', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'settings' => 'apepi_fazenda_dest2_img')));
+
+    // Destaque 3
+    $wp_customize->add_setting('apepi_fazenda_dest3_title', array('default' => 'Processos completos', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest3_title', array('label' => __('Destaque 3: Título', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest3_desc', array('default' => 'Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest3_desc', array('label' => __('Destaque 3: Descrição', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_fazenda_dest3_icon', array('default' => 'fa-solid fa-leaf', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest3_icon', array('label' => __('Destaque 3: Ícone FontAwesome', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest3_img', array('default' => '', 'sanitize_callback' => 'esc_url_raw', 'type' => 'theme_mod'));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'apepi_fazenda_dest3_img', array('label' => __('Destaque 3: Imagem', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'settings' => 'apepi_fazenda_dest3_img')));
+
+    // Destaque 4
+    $wp_customize->add_setting('apepi_fazenda_dest4_title', array('default' => 'Pesquisa e Inovação', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest4_title', array('label' => __('Destaque 4: Título', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest4_desc', array('default' => 'Desenvolvimento contínuo de genética, ciência e saúde para os associados APEPI.', 'sanitize_callback' => 'sanitize_textarea_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest4_desc', array('label' => __('Destaque 4: Descrição', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'textarea'));
+    $wp_customize->add_setting('apepi_fazenda_dest4_icon', array('default' => 'fa-solid fa-microscope', 'sanitize_callback' => 'sanitize_text_field', 'type' => 'theme_mod'));
+    $wp_customize->add_control('apepi_fazenda_dest4_icon', array('label' => __('Destaque 4: Ícone FontAwesome', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'type' => 'text'));
+    $wp_customize->add_setting('apepi_fazenda_dest4_img', array('default' => '', 'sanitize_callback' => 'esc_url_raw', 'type' => 'theme_mod'));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'apepi_fazenda_dest4_img', array('label' => __('Destaque 4: Imagem', 'apepi-escola'), 'section' => 'apepi_fazenda_section', 'settings' => 'apepi_fazenda_dest4_img')));
 
     // 7. Página Quem Somos
     $wp_customize->add_section('apepi_quemsomos_section', array(
@@ -1021,6 +1244,7 @@ function apepi_get_course_meta($post_id, $field, $default = '') {
         'dif_topicos'      => array('_curso_dif_topicos', 'dif_topicos', 'diferencial_topicos', 'topicos_diferencial'),
         'dif_imagem'       => array('_curso_dif_imagem', 'dif_imagem', 'diferencial_imagem', 'imagem_fazenda'),
         'dif_link'         => array('_curso_dif_link', 'dif_link', 'diferencial_link', 'link_fazenda'),
+        'tipo_docente'     => array('_curso_tipo_docente', 'tipo_docente', 'segmento_docente'),
         'modulos'          => array('_curso_modulos', 'modulos', 'conteudo_programatico', 'ementa'),
         'icone'            => array('_curso_icone', 'icone', 'icon', 'fa_icon'),
         'thumb_imagem'     => array('_curso_thumb_imagem', 'thumb_imagem', 'imagem_thumb', 'thumbnail', 'thumb_image', 'card_imagem'),
@@ -1189,6 +1413,8 @@ function apepi_escola_curso_metabox_callback($post) {
     $dif_imagem  = get_post_meta($post->ID, '_curso_dif_imagem', true);
     $dif_link    = get_post_meta($post->ID, '_curso_dif_link', true);
     $modulos     = get_post_meta($post->ID, '_curso_modulos', true);
+    $tipo_docente= get_post_meta($post->ID, '_curso_tipo_docente', true);
+    if (empty($tipo_docente)) $tipo_docente = 'auto';
     ?>
     <style>
         .apepi-mb-section { background:#fcfcfc; border:1px solid #e0e0e0; border-radius:8px; padding:15px; margin-bottom:15px; }
@@ -1303,15 +1529,37 @@ function apepi_escola_curso_metabox_callback($post) {
             <textarea id="apepi_curso_dif_topicos" name="apepi_curso_dif_topicos" rows="3"><?php echo esc_textarea($dif_topicos); ?></textarea>
         </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="display:grid; grid-template-columns:1.2fr 0.8fr; gap:12px; align-items:start;">
             <div class="apepi-meta-field">
-                <label for="apepi_curso_dif_imagem"><?php _e('URL da Imagem da Fazenda/Diferencial', 'apepi-escola'); ?></label>
-                <input type="text" id="apepi_curso_dif_imagem" name="apepi_curso_dif_imagem" value="<?php echo esc_attr($dif_imagem); ?>" placeholder="https://...">
+                <label for="apepi_curso_dif_imagem"><?php _e('Imagem da Fazenda / Diferencial (.p2-fazenda-img)', 'apepi-escola'); ?></label>
+                <div style="display:flex; gap:8px; align-items:center; margin-bottom: 6px;">
+                    <input type="text" id="apepi_curso_dif_imagem" name="apepi_curso_dif_imagem" value="<?php echo esc_attr($dif_imagem); ?>" placeholder="<?php echo esc_url(get_template_directory_uri() . '/assets/fazenda_apepi.jpg'); ?>">
+                    <button type="button" class="button button-secondary" id="apepi_upload_dif_btn"><?php _e('Galeria / Enviar', 'apepi-escola'); ?></button>
+                    <button type="button" class="button" id="apepi_remove_dif_btn" title="<?php _e('Remover / Restaurar Padrão', 'apepi-escola'); ?>">✕</button>
+                </div>
+                <div id="apepi_dif_preview_box" style="margin-top: 6px;">
+                    <img id="apepi_dif_preview_img" src="<?php echo esc_url($dif_imagem ? $dif_imagem : get_template_directory_uri() . '/assets/fazenda_apepi.jpg'); ?>" style="max-width:220px; max-height:130px; object-fit:cover; border-radius:6px; border:1px solid #ccc; display:block;" alt="Pré-visualização da Imagem da Fazenda">
+                </div>
+                <p class="description" style="margin-top: 4px; font-size:11px; color:#666;"><?php _e('Imagem editável exibida no card do diferencial da Fazenda. Use o botão para escolher ou enviar qualquer foto da biblioteca de mídia.', 'apepi-escola'); ?></p>
             </div>
             <div class="apepi-meta-field">
                 <label for="apepi_curso_dif_link"><?php _e('Link do Botão "CONHEÇA NOSSA FAZENDA"', 'apepi-escola'); ?></label>
                 <input type="text" id="apepi_curso_dif_link" name="apepi_curso_dif_link" value="<?php echo esc_attr($dif_link); ?>" placeholder="<?php echo esc_url(home_url('/fazenda')); ?>">
             </div>
+        </div>
+    </div>
+
+    <!-- Section: Segmentação do Corpo Docente -->
+    <div class="apepi-mb-section">
+        <h4>4. Corpo Docente / Professores Exibidos</h4>
+        <div class="apepi-meta-field">
+            <label for="apepi_curso_tipo_docente"><?php _e('Tipo de Especialistas a Exibir no Curso', 'apepi-escola'); ?></label>
+            <select id="apepi_curso_tipo_docente" name="apepi_curso_tipo_docente" style="width:100%; max-width:420px; padding:6px 10px; border-radius:4px; border:1px solid #ccc;">
+                <option value="auto" <?php selected($tipo_docente, 'auto'); ?>><?php _e('Automático (Detecta Veterinária por título ou slug)', 'apepi-escola'); ?></option>
+                <option value="veterinaria" <?php selected($tipo_docente, 'veterinaria'); ?>><?php _e('Especialistas Veterinários (Dra. Aline, Dra. Cynthia, Dra. Isabel, João Gabriel, Dra. Magda)', 'apepi-escola'); ?></option>
+                <option value="medicina" <?php selected($tipo_docente, 'medicina'); ?>><?php _e('Corpo Docente de Medicina Geral / Humano', 'apepi-escola'); ?></option>
+            </select>
+            <p class="description" style="margin-top: 4px; font-size:11px; color:#666;"><?php _e('No curso de veterinária, os 5 profissionais reais serão exibidos automaticamente com suas fotos e credenciais.', 'apepi-escola'); ?></p>
         </div>
     </div>
 
@@ -1356,6 +1604,27 @@ function apepi_escola_curso_metabox_callback($post) {
                 $('#apepi_hero_preview_img').attr('src', attachment.url);
             }).open();
         });
+
+        // Media uploader para Imagem da Fazenda / Diferencial (.p2-fazenda-img)
+        $('#apepi_upload_dif_btn').on('click', function(e) {
+            e.preventDefault();
+            var frame = wp.media({
+                title: 'Selecionar Imagem da Fazenda / Diferencial',
+                button: { text: 'Usar esta imagem' },
+                multiple: false
+            });
+            frame.on('select', function() {
+                var attachment = frame.state().get('selection').first().toJSON();
+                $('#apepi_curso_dif_imagem').val(attachment.url);
+                $('#apepi_dif_preview_img').attr('src', attachment.url);
+            }).open();
+        });
+
+        $('#apepi_remove_dif_btn').on('click', function(e) {
+            e.preventDefault();
+            $('#apepi_curso_dif_imagem').val('');
+            $('#apepi_dif_preview_img').attr('src', '<?php echo esc_url(get_template_directory_uri() . "/assets/fazenda_apepi.jpg"); ?>');
+        });
     });
     </script>
     <?php
@@ -1383,6 +1652,7 @@ function apepi_escola_save_curso_meta($post_id) {
         'apepi_curso_dif_topicos'     => '_curso_dif_topicos',
         'apepi_curso_dif_imagem'      => '_curso_dif_imagem',
         'apepi_curso_dif_link'        => '_curso_dif_link',
+        'apepi_curso_tipo_docente'    => '_curso_tipo_docente',
         'apepi_curso_modulos'         => '_curso_modulos',
     );
 
@@ -1744,8 +2014,8 @@ add_shortcode('apepi_curso_pagina_completa', 'apepi_shortcode_curso_pagina_compl
 function apepi_shortcode_lista_cursos($atts) {
     $atts = shortcode_atts(array(
         'limit' => 10,
-        'title' => 'FORMAÇÕES',
-        'badge' => 'NOSSO CATÁLOGO'
+        'title' => 'CURSOS',
+        'badge' => 'CONHEÇA NOSSOS'
     ), $atts);
 
     $limit = intval($atts['limit']);
@@ -1954,22 +2224,22 @@ function apepi_shortcode_pagina_quem_somos() {
     $qs_founders_img = apepi_get_option('apepi_quemsomos_founders_img', get_template_directory_uri() . '/assets/qs_founders_hero.png');
     $qs_speech       = apepi_get_option('apepi_quemsomos_speech', 'A APEPI Escola iniciou com a ideia de <strong>Margarete Brito e Marcos Langenbach</strong> e ensinar as pessoas a cultivar seu próprio óleo.');
 
-    $missao_text     = apepi_get_option('apepi_quemsomos_missao_text', 'Promover saúde e qualidade de vida por meio do acesso ao conhecimento, formação e tratamentos seguros com Cannabis Medicinal.');
-    $visao_text      = apepi_get_option('apepi_quemsomos_visao_text', 'Ser referência nacional e internacional em ciência, educação e inovação em Cannabis Medicinal, transformando realidades e impulsionando o futuro da saúde.');
+    $missao_text     = apepi_get_option('apepi_quemsomos_missao_text', 'Formar quem cuida com cannabis medicinal — profissionais de saúde e famílias — unindo base científica, prática na fazenda de cultivo de cannabis e compromisso ético.');
+    $visao_text      = apepi_get_option('apepi_quemsomos_visao_text', 'Um Brasil em que quem cuida — no consultório ou em casa — tenha formação para usar a cannabis medicinal com segurança.');
     
-    $pilar1_img      = apepi_get_option('apepi_quemsomos_pilar1_img', get_template_directory_uri() . '/assets/qs_pilar1.png');
+    $pilar1_img      = apepi_get_option('apepi_quemsomos_pilar1_img', get_template_directory_uri() . '/assets/qs_pilar1.jfif');
     $pilar1_title    = apepi_get_option('apepi_quemsomos_pilar1_title', 'Parte da história');
-    $pilar1_text     = apepi_get_option('apepi_quemsomos_pilar1_text', 'Em mais de uma década, a APEPI ajudou a mudar leis e quebrar o preconceito sobre a planta. Ser associado APEPI é fazer parte da história da cannabis medicinal.');
+    $pilar1_text     = apepi_get_option('apepi_quemsomos_pilar1_text', 'Em mais de uma década, a APEPI ajudou a mudar leis e a quebrar o preconceito sobre a planta. Estudar aqui é aprender com quem atravessou essa história.');
 
-    $pilar2_img      = apepi_get_option('apepi_quemsomos_pilar2_img', get_template_directory_uri() . '/assets/qs_pilar2.png');
-    $pilar2_title    = apepi_get_option('apepi_quemsomos_pilar2_title', 'Pioneirismo e inovação');
-    $pilar2_text     = apepi_get_option('apepi_quemsomos_pilar2_text', 'Primeira e maior fazenda legal de cannabis no país, para garantir qualidade e inovação aos associados. É planta no chão e remédio na mão.');
+    $pilar2_img      = apepi_get_option('apepi_quemsomos_pilar2_img', get_template_directory_uri() . '/assets/qs_pilar2.jfif');
+    $pilar2_title    = apepi_get_option('apepi_quemsomos_pilar2_title', 'Sala de aula na fazenda');
+    $pilar2_text     = apepi_get_option('apepi_quemsomos_pilar2_text', 'A fazenda da APEPI, com autorização judicial para cultivo e pesquisa, é sala de aula: da semente ao óleo que chega ao paciente.');
 
-    $pilar3_img      = apepi_get_option('apepi_quemsomos_pilar3_img', get_template_directory_uri() . '/assets/qs_pilar3.png');
-    $pilar3_title    = apepi_get_option('apepi_quemsomos_pilar3_title', 'Tecnologia e sustentabilidade');
-    $pilar3_text     = apepi_get_option('apepi_quemsomos_pilar3_text', 'Controle avançado de cada planta, unindo plantio com insumos agroecológicos à pesquisa e maquinário de última geração.');
+    $pilar3_img      = apepi_get_option('apepi_quemsomos_pilar3_img', get_template_directory_uri() . '/assets/qs_pilar3.jfif');
+    $pilar3_title    = apepi_get_option('apepi_quemsomos_pilar3_title', 'Quem ensina, atende');
+    $pilar3_text     = apepi_get_option('apepi_quemsomos_pilar3_text', 'Professores com experiência clínica, acadêmica e de pesquisa em cannabis medicinal — e casos reais discutidos com quem atende pacientes todos os dias.');
 
-    $pilar4_img      = apepi_get_option('apepi_quemsomos_pilar4_img', get_template_directory_uri() . '/assets/qs_pilar4.png');
+    $pilar4_img      = apepi_get_option('apepi_quemsomos_pilar4_img', get_template_directory_uri() . '/assets/qs_pilar4.jfif');
     $pilar4_title    = apepi_get_option('apepi_quemsomos_pilar4_title', 'Qualidade, segurança e união');
     $pilar4_text     = apepi_get_option('apepi_quemsomos_pilar4_text', 'Remédios à base de cannabis com certificado de análise (COA), que garante a efetividade do tratamento a preço justo.');
 
@@ -2039,7 +2309,7 @@ function apepi_shortcode_pagina_quem_somos() {
       <section class="qs-timeline-section">
         <div class="container">
           <div class="qs-timeline-header text-center">
-            <h2 class="qs-timeline-title">DE ONDE VEMOS E PARA ONDE VAMOS</h2>
+            <h2 class="qs-timeline-title">DE ONDE VIEMOS E PARA ONDE VAMOS</h2>
             <p class="qs-timeline-subtitle">Do cultivo ao conhecimento. Do conhecimento ao cuidado. Do cuidado à transformação.</p>
           </div>
 
@@ -2048,7 +2318,7 @@ function apepi_shortcode_pagina_quem_somos() {
               <div class="qs-step-circle"><i class="fa-solid fa-seedling"></i></div>
               <div class="qs-step-info">
                 <h4 class="qs-step-name">A IDEIA</h4>
-                <p class="qs-step-text">Ensinar as pessoas a cultivar seu próprio óleo com qualidade e segurança.</p>
+                <p class="qs-step-text">Começamos ensinando famílias a cultivar em casa: foi assim que o conhecimento da APEPI virou aula.</p>
               </div>
             </div>
 
@@ -2068,7 +2338,7 @@ function apepi_shortcode_pagina_quem_somos() {
               <div class="qs-step-circle qs-step-circle-filled"><i class="fa-solid fa-plus"></i></div>
               <div class="qs-step-info">
                 <h4 class="qs-step-name">A MISSÃO</h4>
-                <p class="qs-step-text">Criamos cursos para médicos, veterinários e profissionais de saúde, levando conhecimento científico e responsável sobre a Cannabis Medicinal.</p>
+                <p class="qs-step-text">Criamos cursos para médicos, veterinários, profissionais de saúde e famílias, levando conhecimento científico e responsável sobre a cannabis medicinal.</p>
               </div>
             </div>
 
@@ -2078,7 +2348,7 @@ function apepi_shortcode_pagina_quem_somos() {
               <div class="qs-step-circle"><i class="fa-solid fa-users"></i></div>
               <div class="qs-step-info">
                 <h4 class="qs-step-name">O IMPACTO</h4>
-                <p class="qs-step-text">Formamos profissionais mais preparados e promovemos mais acesso, qualidade de vida e bem-estar para milhares de pacientes.</p>
+                <p class="qs-step-text">Formamos profissionais mais preparados — e assim ampliamos o acesso ao tratamento com cannabis medicinal em todo o país.</p>
               </div>
             </div>
 
@@ -2088,7 +2358,7 @@ function apepi_shortcode_pagina_quem_somos() {
               <div class="qs-step-circle qs-step-circle-dark"><i class="fa-solid fa-leaf"></i></div>
               <div class="qs-step-info">
                 <h4 class="qs-step-name">O FUTURO</h4>
-                <p class="qs-step-text">Continuamos inovando, pesquisando e educando para construir um futuro com mais saúde, liberdade e respeito à planta e às pessoas.</p>
+                <p class="qs-step-text">Seguimos inovando, pesquisando e educando para construir um futuro com mais acesso, liberdade e respeito à planta e às pessoas.</p>
               </div>
             </div>
           </div>
@@ -2187,15 +2457,43 @@ function apepi_shortcode_pagina_fazenda() {
 
     $callout_left     = apepi_get_option('apepi_fazenda_callout_left', 'Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.');
     $callout_right    = apepi_get_option('apepi_fazenda_callout_right', 'O dia de imersão para conhecer do cultivo até a produção dos óleos.');
+    $cta_text         = apepi_get_option('apepi_fazenda_cta_text', 'Viva uma experiência única e transforme seu conhecimento em prática responsável.');
 
-    $dest_lab_img     = get_template_directory_uri() . '/assets/faz_dest_lab.png';
-    $dest_cult_img    = get_template_directory_uri() . '/assets/faz_dest_cultivo.png';
-    $dest_proc_img    = get_template_directory_uri() . '/assets/faz_dest_processos.png';
+    $destaques_title = apepi_get_option('apepi_fazenda_destaques_title', 'DESTAQUES DA EXPERIÊNCIA');
 
-    $gal1             = get_template_directory_uri() . '/assets/faz_galeria_1.png';
-    $gal2             = get_template_directory_uri() . '/assets/faz_galeria_2.png';
-    $gal3             = get_template_directory_uri() . '/assets/faz_galeria_3.png';
-    $gal4             = get_template_directory_uri() . '/assets/faz_galeria_4.png';
+    $dest_items = array(
+        array(
+            'title' => apepi_get_option('apepi_fazenda_dest1_title', "Laboratório\nde extração"),
+            'desc'  => apepi_get_option('apepi_fazenda_dest1_desc', 'Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.'),
+            'img'   => apepi_get_option('apepi_fazenda_dest1_img', get_template_directory_uri() . '/assets/faz_dest_lab.png'),
+            'icon'  => apepi_get_option('apepi_fazenda_dest1_icon', 'fa-solid fa-flask-vial'),
+        ),
+        array(
+            'title' => apepi_get_option('apepi_fazenda_dest2_title', "Cultivo com\nexcelência"),
+            'desc'  => apepi_get_option('apepi_fazenda_dest2_desc', 'Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.'),
+            'img'   => apepi_get_option('apepi_fazenda_dest2_img', get_template_directory_uri() . '/assets/faz_dest_cultivo.png'),
+            'icon'  => apepi_get_option('apepi_fazenda_dest2_icon', 'fa-solid fa-seedling'),
+        ),
+        array(
+            'title' => apepi_get_option('apepi_fazenda_dest3_title', "Processos\ncompletos"),
+            'desc'  => apepi_get_option('apepi_fazenda_dest3_desc', 'Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.'),
+            'img'   => apepi_get_option('apepi_fazenda_dest3_img', get_template_directory_uri() . '/assets/faz_dest_processos.png'),
+            'icon'  => apepi_get_option('apepi_fazenda_dest3_icon', 'fa-solid fa-leaf'),
+        ),
+        array(
+            'title' => apepi_get_option('apepi_fazenda_dest4_title', "Pesquisa e\nInovação"),
+            'desc'  => apepi_get_option('apepi_fazenda_dest4_desc', 'Desenvolvimento contínuo de genética, ciência e saúde para os associados APEPI.'),
+            'img'   => apepi_get_option('apepi_fazenda_dest4_img', get_template_directory_uri() . '/assets/faz_dest_lab.png'),
+            'icon'  => apepi_get_option('apepi_fazenda_dest4_icon', 'fa-solid fa-microscope'),
+        ),
+    );
+
+    $video_urls = array(
+        apepi_get_option('apepi_fazenda_video1', 'https://youtu.be/a2SPamnnxr0'),
+        apepi_get_option('apepi_fazenda_video2', 'https://youtu.be/Ddb2VmBXrYc'),
+        apepi_get_option('apepi_fazenda_video3', 'https://youtu.be/Gpn76rvZBNQ'),
+        apepi_get_option('apepi_fazenda_video4', 'https://youtu.be/3UGWGmO5Ljw'),
+    );
     ?>
     <div class="faz-page-exact-wrapper">
 
@@ -2253,100 +2551,26 @@ function apepi_shortcode_pagina_fazenda() {
       <section class="faz-destaques-section">
         <div class="container">
           <div class="faz-destaques-header text-center">
-            <h2 class="faz-destaques-title">DESTAQUES DA EXPERIÊNCIA</h2>
+            <h2 class="faz-destaques-title"><?php echo esc_html($destaques_title); ?></h2>
             <div class="faz-destaques-line"></div>
           </div>
 
           <div class="faz-destaques-grid">
-            
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask-vial"></i></div>
+            <?php foreach ($dest_items as $item) : ?>
+              <?php 
+                $img_url = !empty($item['img']) ? $item['img'] : get_template_directory_uri() . '/assets/faz_dest_lab.png'; 
+              ?>
+              <div class="faz-dest-card">
+                <div class="faz-dest-photo-wrap">
+                  <img src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr(wp_strip_all_tags($item['title'])); ?>" class="faz-dest-img">
+                  <div class="faz-dest-badge-icon"><i class="<?php echo esc_attr($item['icon']); ?>"></i></div>
+                </div>
+                <div class="faz-dest-card-body">
+                  <h3 class="faz-dest-card-title"><?php echo nl2br(esc_html($item['title'])); ?></h3>
+                  <p class="faz-dest-card-text"><?php echo esc_html($item['desc']); ?></p>
+                </div>
               </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_cult_img); ?>" alt="Cultivo com excelência" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-seedling"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Cultivo com<br>excelência</h3>
-                <p class="faz-dest-card-text">Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_proc_img); ?>" alt="Processos completos" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-leaf"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Processos<br>completos</h3>
-                <p class="faz-dest-card-text">Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask-vial"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_lab_img); ?>" alt="Laboratório de extração" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-flask"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Laboratório<br>de extração</h3>
-                <p class="faz-dest-card-text">Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_cult_img); ?>" alt="Cultivo com excelência" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-seedling"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Cultivo com<br>excelência</h3>
-                <p class="faz-dest-card-text">Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.</p>
-              </div>
-            </div>
-
-            <div class="faz-dest-card">
-              <div class="faz-dest-photo-wrap">
-                <img src="<?php echo esc_url($dest_proc_img); ?>" alt="Processos completos" class="faz-dest-img">
-                <div class="faz-dest-badge-icon"><i class="fa-solid fa-leaf"></i></div>
-              </div>
-              <div class="faz-dest-card-body">
-                <h3 class="faz-dest-card-title">Processos<br>completos</h3>
-                <p class="faz-dest-card-text">Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.</p>
-              </div>
-            </div>
-
+            <?php endforeach; ?>
           </div>
         </div>
       </section>
@@ -2384,14 +2608,24 @@ function apepi_shortcode_pagina_fazenda() {
         </div>
       </section>
 
-      <!-- ======================== 4. GALERIA DE FOTOS ======================== -->
+      <!-- ======================== 4. GALERIA DE VÍDEOS ======================== -->
       <section class="faz-galeria-section">
         <div class="container">
           <div class="faz-galeria-grid">
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal1); ?>" alt="Estufa de cultivo"></div>
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal2); ?>" alt="Florescimento"></div>
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal3); ?>" alt="Vista aérea da fazenda"></div>
-            <div class="faz-gal-item"><img src="<?php echo esc_url($gal4); ?>" alt="Extração em laboratório"></div>
+            <?php foreach ($video_urls as $v_url) : ?>
+              <?php $embed_src = apepi_get_youtube_embed_url($v_url); ?>
+              <?php if (!empty($embed_src)) : ?>
+                <div class="faz-gal-item faz-video-item">
+                  <iframe 
+                    src="<?php echo esc_url($embed_src); ?>" 
+                    title="Vídeo Fazenda APEPI" 
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              <?php endif; ?>
+            <?php endforeach; ?>
           </div>
         </div>
       </section>
@@ -2401,7 +2635,7 @@ function apepi_shortcode_pagina_fazenda() {
         <div class="container faz-cta-container">
           <div class="faz-cta-left">
             <div class="faz-cta-leaf-icon"><i class="fa-solid fa-leaf"></i></div>
-            <p class="faz-cta-text">Viva uma experiência única e transforme seu conhecimento em prática responsável.</p>
+            <p class="faz-cta-text"><?php echo esc_html($cta_text); ?></p>
           </div>
           <div class="faz-cta-right">
             <a href="https://wa.me/<?php echo esc_attr(preg_replace('/[^0-9]/', '', $wa_num)); ?>" target="_blank" class="btn btn-faz-cta">
@@ -2667,64 +2901,6 @@ function apepi_shortcode_escola_numeros() {
 add_shortcode('apepi_escola_numeros', 'apepi_shortcode_escola_numeros');
 
 
-// Shortcode: Banner E-Books Gratuitos (Grid de Cards Profissionais)
-function apepi_shortcode_banner_ebooks() {
-    $eb_title    = apepi_get_option('apepi_nc_ebook_title', 'Materiais Gratuitos APEPI');
-    $eb_sub      = apepi_get_option('apepi_nc_ebook_subtitle', 'Baixe nossos E-books e guias práticos sobre Cannabis Medicinal e amplie seu conhecimento.');
-    $eb_btn      = apepi_get_option('apepi_nc_ebook_btn', 'BAIXAR TODOS OS E-BOOKS');
-    $eb_url      = apepi_get_option('apepi_nc_ebook_url', '#ebooks');
-
-    ob_start();
-    ?>
-    <section class="nc-ebooks-banner-section" id="ebooks">
-      <div class="container">
-        <div class="nc-ebooks-header text-center">
-          <span class="nc-badge-gold"><i class="fa-solid fa-book-open"></i> MATERIAL DE APOIO</span>
-          <h2 class="nc-ebooks-title"><?php echo esc_html($eb_title); ?></h2>
-          <p class="nc-ebooks-sub"><?php echo esc_html($eb_sub); ?></p>
-        </div>
-
-        <div class="nc-ebooks-cards-grid">
-          
-          <div class="nc-ebook-card-box">
-            <div class="nc-ebook-badge">PRESCRIÇÃO</div>
-            <div class="nc-ebook-icon-wrap"><i class="fa-solid fa-book-medical"></i></div>
-            <h4>Guia Prático de Prescrição</h4>
-            <p>Posologia, terpenos, canabinoides e acompanhamento clínico de pacientes.</p>
-            <a href="<?php echo esc_url($eb_url); ?>" class="btn-ebook-download"><i class="fa-solid fa-download"></i> Baixar E-book</a>
-          </div>
-
-          <div class="nc-ebook-card-box">
-            <div class="nc-ebook-badge">LEGISLAÇÃO</div>
-            <div class="nc-ebook-icon-wrap"><i class="fa-solid fa-scale-balanced"></i></div>
-            <h4>Aspectos Jurídicos & Regulatórios</h4>
-            <p>Habeas Corpus, direitos do paciente e regulamentação da Anvisa.</p>
-            <a href="<?php echo esc_url($eb_url); ?>" class="btn-ebook-download"><i class="fa-solid fa-download"></i> Baixar E-book</a>
-          </div>
-
-          <div class="nc-ebook-card-box">
-            <div class="nc-ebook-badge">CULTIVO</div>
-            <div class="nc-ebook-icon-wrap"><i class="fa-solid fa-seedling"></i></div>
-            <h4>Cultivo & Extração Medicinal</h4>
-            <p>Boas práticas agrícolas, controle de qualidade e extração artesanal segura.</p>
-            <a href="<?php echo esc_url($eb_url); ?>" class="btn-ebook-download"><i class="fa-solid fa-download"></i> Baixar E-book</a>
-          </div>
-
-        </div>
-
-        <div class="nc-ebooks-footer-action text-center">
-          <a href="<?php echo esc_url($eb_url); ?>" class="btn btn-primary btn-lg nc-ebooks-master-btn">
-            <i class="fa-solid fa-file-pdf"></i> <?php echo esc_html($eb_btn); ?>
-          </a>
-        </div>
-      </div>
-    </section>
-    <?php
-    return ob_get_clean();
-}
-add_shortcode('apepi_banner_ebooks', 'apepi_shortcode_banner_ebooks');
-
-
 // Shortcode: Template da Página "Nossos Cursos" (100% Fiel à Imagem de Referência)
 function apepi_shortcode_pagina_nossos_cursos() {
     ob_start();
@@ -2855,7 +3031,7 @@ function apepi_shortcode_pagina_nossos_cursos() {
                 <div class="ref-course-card">
                   <div class="ref-course-img-wrap">
                     <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>">
-                    <div class="ref-course-leaf-badge"><i class="<?php echo esc_attr($icone); ?>"></i></div>
+                    <div class="ref-course-leaf-badge"><img src="<?php echo esc_url($assets_url . 'folha.png'); ?>" alt="Folha APEPI" class="ref-course-folha-img"></div>
                   </div>
                   <div class="ref-course-body">
                     <h3><?php the_title(); ?></h3>
@@ -2876,7 +3052,7 @@ function apepi_shortcode_pagina_nossos_cursos() {
                 <div class="ref-course-card">
                   <div class="ref-course-img-wrap">
                     <img src="<?php echo esc_url($card['img']); ?>" alt="<?php echo esc_attr($card['title']); ?>">
-                    <div class="ref-course-leaf-badge"><i class="fa-solid fa-cannabis"></i></div>
+                    <div class="ref-course-leaf-badge"><img src="<?php echo esc_url($assets_url . 'folha.png'); ?>" alt="Folha APEPI" class="ref-course-folha-img"></div>
                   </div>
                   <div class="ref-course-body">
                     <h3><?php echo esc_html($card['title']); ?></h3>
@@ -2908,34 +3084,44 @@ function apepi_shortcode_pagina_nossos_cursos() {
           </div>
           <div class="ref-nc-numeros-grid">
             
-            <div class="ref-num-item">
-              <div class="ref-num-icon"><i class="fa-solid fa-award"></i></div>
-              <h2 class="ref-num-big"><?php echo esc_html($n1_big); ?></h2>
+            <div class="ref-cnt-card ref-num-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-solid fa-award"></i>
+              </div>
+              <h3 class="ref-num-big"><?php echo esc_html($n1_big); ?></h3>
               <p class="ref-num-desc"><?php echo esc_html($n1_desc); ?></p>
             </div>
 
-            <div class="ref-num-item">
-              <div class="ref-num-icon"><i class="fa-solid fa-users"></i></div>
-              <h2 class="ref-num-big"><?php echo esc_html($n2_big); ?></h2>
+            <div class="ref-cnt-card ref-num-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <h3 class="ref-num-big"><?php echo esc_html($n2_big); ?></h3>
               <p class="ref-num-desc"><?php echo esc_html($n2_desc); ?></p>
             </div>
 
-            <div class="ref-num-item">
-              <div class="ref-num-icon"><i class="fa-solid fa-circle-play"></i></div>
-              <h2 class="ref-num-big"><?php echo esc_html($n3_big); ?></h2>
+            <div class="ref-cnt-card ref-num-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-solid fa-circle-play"></i>
+              </div>
+              <h3 class="ref-num-big"><?php echo esc_html($n3_big); ?></h3>
               <?php if (!empty($n3_sub)) : ?><p class="ref-num-sub-label"><?php echo esc_html($n3_sub); ?></p><?php endif; ?>
               <p class="ref-num-desc"><?php echo esc_html($n3_desc); ?></p>
             </div>
 
-            <div class="ref-num-item">
-              <div class="ref-num-icon"><i class="fa-solid fa-cannabis"></i></div>
-              <h2 class="ref-num-title"><?php echo esc_html($n4_title); ?></h2>
+            <div class="ref-cnt-card ref-num-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <img src="<?php echo esc_url($assets_url . 'folha.png'); ?>" alt="Folha APEPI" class="ref-cnt-folha-img">
+              </div>
+              <h3 class="ref-num-title"><?php echo esc_html($n4_title); ?></h3>
               <p class="ref-num-desc"><?php echo esc_html($n4_desc); ?></p>
             </div>
 
-            <div class="ref-num-item">
-              <div class="ref-num-icon"><i class="fa-solid fa-download"></i></div>
-              <h2 class="ref-num-title"><?php echo esc_html($n5_title); ?></h2>
+            <div class="ref-cnt-card ref-num-card text-center">
+              <div class="ref-cnt-icon-circle">
+                <i class="fa-solid fa-download"></i>
+              </div>
+              <h3 class="ref-num-title"><?php echo esc_html($n5_title); ?></h3>
               <p class="ref-num-desc"><?php echo esc_html($n5_desc); ?></p>
             </div>
 
@@ -3010,30 +3196,6 @@ function apepi_shortcode_pagina_nossos_cursos() {
         </div>
       </section>
 
-      <!-- BANNER E-BOOKS GRATUITOS -->
-      <section class="ref-nc-ebook-banner-section">
-        <div class="container">
-          <div class="ref-nc-ebook-box">
-            
-            <div class="ref-nc-ebook-left">
-              <img src="<?php echo esc_url($assets_url . 'ebook_cannabis_vida.png'); ?>" alt="E-books Cannabis e a Vida" class="ref-ebook-3d-img">
-            </div>
-
-            <div class="ref-nc-ebook-center">
-              <h2><?php echo esc_html($eb_title); ?></h2>
-              <p><?php echo esc_html($eb_sub); ?></p>
-            </div>
-
-            <div class="ref-nc-ebook-right">
-              <a href="<?php echo esc_url($eb_url); ?>" class="ref-btn-download-green">
-                <i class="fa-solid fa-download"></i> <?php echo esc_html($eb_btn); ?>
-              </a>
-              <span class="ref-ebook-guarantee"><i class="fa-solid fa-lock"></i> 100% gratuitos e seguros.</span>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       <!-- BANNER RODAPÉ INSTITUCIONAL -->
       <section class="ref-nc-footer-banner">
@@ -3100,10 +3262,7 @@ function apepi_shortcode_pagina_contato() {
             <div class="ref-cnt-attendant-col">
               <div class="ref-cnt-attendant-wrap">
                 <div class="ref-cnt-blob-bg"></div>
-                <div class="ref-cnt-leaf-float">
-                  <i class="fa-solid fa-cannabis"></i>
-                </div>
-                <img src="<?php echo esc_url($assets_url . 'contato_attendant.png'); ?>" alt="Atendimento APEPI Escola" class="ref-cnt-attendant-img">
+                <img src="<?php echo esc_url($assets_url . 'atendente.png'); ?>" alt="Atendimento APEPI Escola" class="ref-cnt-attendant-img">
               </div>
             </div>
 
@@ -3114,18 +3273,10 @@ function apepi_shortcode_pagina_contato() {
               <p class="ref-cnt-desc"><?php echo esc_html($hero_desc); ?></p>
             </div>
 
-            <!-- DIREITA: BALÃO DE DIÁLOGO E DESENHO FOLIAR -->
+            <!-- DIREITA: BALÃO DE DIÁLOGO -->
             <div class="ref-cnt-bubble-col">
               <div class="ref-cnt-speech-graphic-wrap">
-                <div class="ref-speech-bubble-green">
-                  <div class="ref-speech-inner-icons">
-                    <i class="fa-solid fa-cannabis ref-speech-leaf"></i>
-                    <i class="fa-solid fa-comments ref-speech-lines"></i>
-                  </div>
-                </div>
-                <div class="ref-speech-leaf-drawing">
-                  <i class="fa-solid fa-leaf"></i>
-                </div>
+                <img src="<?php echo esc_url($assets_url . 'balao.png'); ?>" alt="Balão Atendimento APEPI Escola" class="ref-cnt-balao-img">
               </div>
             </div>
 
@@ -3206,9 +3357,6 @@ function apepi_shortcode_pagina_contato() {
         <div class="container">
           <div class="ref-cnt-banner-box">
             <div class="ref-cnt-banner-left">
-              <div class="ref-cnt-leaf-badge">
-                <i class="fa-solid fa-cannabis"></i>
-              </div>
               <p><?php echo esc_html($banner_text); ?></p>
             </div>
             <div class="ref-cnt-banner-divider"></div>

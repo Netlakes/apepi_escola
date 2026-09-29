@@ -1,7 +1,7 @@
 import zipfile
 import os
 
-theme_dir = r"d:\antigravity_projects\apepi_escola\temas\apepi-escola"
+theme_dir = r"d:\antigravity_projects\apepi_escola\apepi-escolao"
 zip_path = r"d:\antigravity_projects\apepi_escola\apepi-escola.zip"
 
 if os.path.exists(zip_path):

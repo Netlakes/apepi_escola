@@ -127,8 +127,8 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
     <div class="container">
       <div class="section-title-area">
         <div>
-          <div class="section-badge">CONHEÇA NOSSAS</div>
-          <h2 class="section-main-title">FORMAÇÕES</h2>
+          <div class="section-badge">CONHEÇA NOSSOS</div>
+          <h2 class="section-main-title">CURSOS</h2>
         </div>
         <div class="section-arrows">
           <button class="arrow-btn prevFormBtn" id="prevForm" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
@@ -213,113 +213,24 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
     </div>
   </section>
 
-  <!-- Fazenda Experimental Section -->
+  <!-- Fazenda de cultivo de cannabis Section -->
   <section class="fazenda-section-home">
     <div class="container fazenda-home-grid">
       <div class="fazenda-img-box">
-        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1000&q=80" alt="Estufa de cultivo de Cannabis na Fazenda Sofia Langenbach" class="fazenda-home-main-img">
+        <?php $fazenda_home_img = apepi_get_option('apepi_fazenda_main_img', 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1000&q=80'); ?>
+        <img src="<?php echo esc_url($fazenda_home_img); ?>" alt="Estufa de cultivo de Cannabis na Fazenda Sofia Langenbach" class="fazenda-home-main-img">
       </div>
       <div class="fazenda-text-card">
         <div class="section-badge">CONHEÇA NOSSA</div>
-        <h2 class="">Fazenda Experimental</h2>
+        <h2 class="">Fazenda de cultivo de cannabis</h2>
         <p>
-          A maior fazenda de Cannabis Medicinal do Brasil. Estrutura completa de cultivo, processamento, pesquisa e desenvolvimento com os mais altos padrões de qualidade.
+          Localizada em Paty do Alferes, no Rio de Janeiro, a Fazenda Sofia Langenbach conta com uma estrutura completa para cultivo, processamento, pesquisa e desenvolvimento, seguindo os mais altos padrões de qualidade.
         </p>
         <a href="<?php echo esc_url(home_url('/fazenda')); ?>" class="btn btn-primary">CONHEÇA A FAZENDA &rarr;</a>
       </div>
     </div>
   </section>
 
-  <!-- E-Books Gratuitos Section -->
-  <section class="ebooks-section-home" id="ebooks">
-    <div class="container">
-      <div class="ebooks-header">
-        <div class="section-badge">CONHECIMENTO PARA SUA PRÁTICA</div>
-        <h2 class="ebooks-main-title">5 E-BOOKS GRATUITOS</h2>
-        <p class="ebooks-subtitle">Conteúdos exclusivos para aprofundar seus conhecimentos em Cannabis Medicinal.</p>
-        <p class="ebooks-cta-text"><strong>Escolha um e-book e baixe gratuitamente.</strong></p>
-      </div>
-
-      <div class="ebooks-grid">
-
-        <!-- Ebook 1 -->
-        <div class="ebook-card">
-          <div class="ebook-cover-holder">
-            <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=400&q=80" alt="Cannabis e a Vida">
-            <div class="ebook-cover-overlay">
-              <span class="ebook-cover-title">CANNABIS<br>E A VIDA</span>
-            </div>
-          </div>
-          <div class="ebook-card-body">
-            <h3>Cannabis e a vida</h3>
-            <p>Entenda a Cannabis Medicinal e sua relação com saúde, bem-estar e qualidade de vida.</p>
-            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
-          </div>
-        </div>
-
-        <!-- Ebook 2 -->
-        <div class="ebook-card">
-          <div class="ebook-cover-holder">
-            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=400&q=80" alt="Médicos Prescritores">
-            <div class="ebook-cover-overlay">
-              <span class="ebook-cover-title">MÉDICOS<br>PRESCRITORES</span>
-            </div>
-          </div>
-          <div class="ebook-card-body">
-            <h3>Médicos prescritores</h3>
-            <p>Um guia completo sobre a prescrição de Cannabis Medicinal na prática clínica.</p>
-            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
-          </div>
-        </div>
-
-        <!-- Ebook 3 -->
-        <div class="ebook-card">
-          <div class="ebook-cover-holder">
-            <img src="https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=400&q=80" alt="Cultivo e Extração">
-            <div class="ebook-cover-overlay">
-              <span class="ebook-cover-title">CULTIVO E<br>EXTRAÇÃO</span>
-            </div>
-          </div>
-          <div class="ebook-card-body">
-            <h3>Cultivo e extração</h3>
-            <p>Conheça as etapas do cultivo, processamento e extração da Cannabis Medicinal.</p>
-            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
-          </div>
-        </div>
-
-        <!-- Ebook 4 -->
-        <div class="ebook-card">
-          <div class="ebook-cover-holder">
-            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=400&q=80" alt="Rotinas do Prescritor">
-            <div class="ebook-cover-overlay">
-              <span class="ebook-cover-title">ROTINAS DO<br>PRESCRITOR</span>
-            </div>
-          </div>
-          <div class="ebook-card-body">
-            <h3>Rotinas do Prescritor</h3>
-            <p>Ferramentas e orientações para apoiar o médico no dia a dia da prática clínica.</p>
-            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
-          </div>
-        </div>
-
-        <!-- Ebook 5 -->
-        <div class="ebook-card">
-          <div class="ebook-cover-holder">
-            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80" alt="Vida e Saúde de Cannabis">
-            <div class="ebook-cover-overlay">
-              <span class="ebook-cover-title">VIDA E SAÚDE<br>DE CANNABIS</span>
-            </div>
-          </div>
-          <div class="ebook-card-body">
-            <h3>Vida e saúde de cannabis</h3>
-            <p>Informação científica sobre os benefícios e possibilidades terapêuticas da Cannabis.</p>
-            <a href="#" class="ebook-download-link">BAIXAR E-BOOK &nbsp;&rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- Diferenciais Section -->
   <section class="diferenciais-section-home">
@@ -328,7 +239,7 @@ $stat_cases  = apepi_get_option('apepi_stat_cases', '1.500+');
       <div class="diferenciais-grid">
         <div class="diferencial-card">
           <div class="dif-icon-holder"><i class="fa-solid fa-seedling"></i></div>
-          <h3>Fazenda Experimental</h3>
+          <h3>Fazenda de cultivo de cannabis</h3>
           <p>Vivência prática em uma das maiores estruturas de cultivo de Cannabis Medicinal do Brasil.</p>
         </div>
         <div class="diferencial-card">
