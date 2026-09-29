@@ -207,7 +207,13 @@ function apepi_escola_admin_page_callback() {
 
         foreach ($fields as $field) {
             if (isset($_POST[$field])) {
-                $is_textarea = in_array($field, array('apepi_hero_title', 'apepi_hero_desc', 'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_fazenda_dest1_desc', 'apepi_fazenda_dest2_desc', 'apepi_fazenda_dest3_desc', 'apepi_fazenda_dest4_desc', 'apepi_quemsomos_desc', 'apepi_quemsomos_speech', 'apepi_contato_hero_desc', 'apepi_contato_banner_text'));
+                $is_textarea = in_array($field, array(
+                    'apepi_hero_title', 'apepi_hero_desc',
+                    'apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_fazenda_callout_left', 'apepi_fazenda_callout_right', 'apepi_fazenda_cta_text',
+                    'apepi_fazenda_dest1_desc', 'apepi_fazenda_dest2_desc', 'apepi_fazenda_dest3_desc', 'apepi_fazenda_dest4_desc',
+                    'apepi_quemsomos_desc', 'apepi_quemsomos_speech',
+                    'apepi_contato_hero_desc', 'apepi_contato_banner_text'
+                ));
                 $val = $is_textarea ? sanitize_textarea_field($_POST[$field]) : sanitize_text_field($_POST[$field]);
                 update_option($field, $val);
                 set_theme_mod($field, $val);
@@ -612,9 +618,9 @@ function apepi_escola_admin_page_callback() {
                 </table>
             </div>
 
-            <!-- 6. Rodapé e Direitos Autorais -->
+            <!-- 7. Rodapé e Direitos Autorais -->
             <div class="apepi-admin-card">
-                <h2>6. Rodapé e Direitos Autorais</h2>
+                <h2>7. Rodapé e Direitos Autorais</h2>
                 <table class="form-table">
                     <tr>
                         <th scope="row"><label for="apepi_footer_copyright">Texto de Direitos Autorais</label></th>
@@ -1891,6 +1897,194 @@ function apepi_escola_save_depoimento_meta($post_id) {
 add_action('save_post', 'apepi_escola_save_depoimento_meta');
 
 /**
+ * Meta Box para a Página Fazenda (Páginas -> Editar)
+ */
+function apepi_escola_add_fazenda_metaboxes() {
+    add_meta_box(
+        'apepi_fazenda_details',
+        __('APEPI Escola — Configurações e Vídeos da Página Fazenda', 'apepi-escola'),
+        'apepi_escola_fazenda_metabox_callback',
+        'page',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'apepi_escola_add_fazenda_metaboxes');
+
+function apepi_escola_fazenda_metabox_callback($post) {
+    wp_nonce_field('apepi_save_fazenda_meta', 'apepi_fazenda_meta_nonce');
+
+    $get_fval = function($key, $def = '') use ($post) {
+        $meta = get_post_meta($post->ID, '_' . $key, true);
+        if ($meta !== '' && $meta !== false && $meta !== null) {
+            return $meta;
+        }
+        return apepi_get_option($key, $def);
+    };
+
+    $badge1       = $get_fval('apepi_fazenda_badge1', 'Para médicos, veterinários e profissionais da saúde');
+    $badge2       = $get_fval('apepi_fazenda_badge2', 'Imersão prática e conteúdo científico');
+    $badge3       = $get_fval('apepi_fazenda_badge3', 'Conexão entre teoria e prática com excelência');
+    $callout_left = $get_fval('apepi_fazenda_callout_left', 'Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.');
+    $callout_right= $get_fval('apepi_fazenda_callout_right', 'O dia de imersão para conhecer do cultivo até a produção dos óleos.');
+    $cta_text     = $get_fval('apepi_fazenda_cta_text', 'Viva uma experiência única e transforme seu conhecimento em prática responsável.');
+
+    $vid1         = $get_fval('apepi_fazenda_video1', 'https://youtu.be/a2SPamnnxr0');
+    $vid2         = $get_fval('apepi_fazenda_video2', 'https://youtu.be/Ddb2VmBXrYc');
+    $vid3         = $get_fval('apepi_fazenda_video3', 'https://youtu.be/Gpn76rvZBNQ');
+    $vid4         = $get_fval('apepi_fazenda_video4', 'https://youtu.be/3UGWGmO5Ljw');
+
+    $faz_title    = $get_fval('apepi_fazenda_title', "Visita à\nFazenda da APEPI");
+    $faz_subtitle = $get_fval('apepi_fazenda_subtitle', 'Aprendizado que nasce na prática');
+    $faz_desc     = $get_fval('apepi_fazenda_desc', 'Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
+    $faz_subdesc  = $get_fval('apepi_fazenda_subdesc', 'Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
+    $faz_img      = $get_fval('apepi_fazenda_main_img', get_template_directory_uri() . '/assets/fazenda_hero_photo.png');
+    ?>
+    <div style="padding: 10px 0;">
+        <p style="font-size:13px; color:#2c5e3b; background:#f0f7f2; border-left:4px solid #003E19; padding:10px 14px; margin-bottom:18px; border-radius:3px;">
+            🌿 <strong>Campos Editáveis da Página Fazenda:</strong> Altere os textos, selos, callouts, vídeos do YouTube e banner de chamada da Página da Fazenda diretamente por aqui. Os dados salvos aqui também sincronizam automaticamente com as opções gerais do tema.
+        </p>
+
+        <div class="apepi-mb-section">
+            <h4>1. Selos / Badges do Banner Hero</h4>
+            <div class="apepi-meta-field">
+                <label>Selo 1:</label>
+                <input type="text" name="apepi_fazenda_badge1" value="<?php echo esc_attr($badge1); ?>">
+            </div>
+            <div class="apepi-meta-field">
+                <label>Selo 2:</label>
+                <input type="text" name="apepi_fazenda_badge2" value="<?php echo esc_attr($badge2); ?>">
+            </div>
+            <div class="apepi-meta-field">
+                <label>Selo 3:</label>
+                <input type="text" name="apepi_fazenda_badge3" value="<?php echo esc_attr($badge3); ?>">
+            </div>
+        </div>
+
+        <div class="apepi-mb-section">
+            <h4>2. Callout Box Flutuante (Card Verde)</h4>
+            <div class="apepi-meta-field">
+                <label>Texto Esquerdo (Equipe de professores):</label>
+                <textarea name="apepi_fazenda_callout_left" rows="3"><?php echo esc_textarea($callout_left); ?></textarea>
+            </div>
+            <div class="apepi-meta-field">
+                <label>Texto Direito (Dia de imersão):</label>
+                <textarea name="apepi_fazenda_callout_right" rows="3"><?php echo esc_textarea($callout_right); ?></textarea>
+            </div>
+        </div>
+
+        <div class="apepi-mb-section">
+            <h4>3. Galeria de Vídeos da Fazenda (YouTube)</h4>
+            <p class="description" style="margin-bottom:10px;">Substitui a galeria de fotos anterior pelos vídeos do YouTube.</p>
+            <div class="apepi-meta-field">
+                <label>Vídeo 1 (URL ou ID do YouTube):</label>
+                <input type="text" name="apepi_fazenda_video1" value="<?php echo esc_attr($vid1); ?>" placeholder="https://youtu.be/a2SPamnnxr0">
+            </div>
+            <div class="apepi-meta-field">
+                <label>Vídeo 2 (URL ou ID do YouTube):</label>
+                <input type="text" name="apepi_fazenda_video2" value="<?php echo esc_attr($vid2); ?>" placeholder="https://youtu.be/Ddb2VmBXrYc">
+            </div>
+            <div class="apepi-meta-field">
+                <label>Vídeo 3 (URL ou ID do YouTube):</label>
+                <input type="text" name="apepi_fazenda_video3" value="<?php echo esc_attr($vid3); ?>" placeholder="https://youtu.be/Gpn76rvZBNQ">
+            </div>
+            <div class="apepi-meta-field">
+                <label>Vídeo 4 (URL ou ID do YouTube):</label>
+                <input type="text" name="apepi_fazenda_video4" value="<?php echo esc_attr($vid4); ?>" placeholder="https://youtu.be/3UGWGmO5Ljw">
+            </div>
+        </div>
+
+        <div class="apepi-mb-section">
+            <h4>4. Banner CTA Final (Verde)</h4>
+            <div class="apepi-meta-field">
+                <label>Texto de Chamada do Banner:</label>
+                <textarea name="apepi_fazenda_cta_text" rows="2"><?php echo esc_textarea($cta_text); ?></textarea>
+            </div>
+        </div>
+
+        <div class="apepi-mb-section">
+            <h4>5. Textos e Imagem do Banner Hero (Topo)</h4>
+            <div class="apepi-meta-field">
+                <label>Título Principal:</label>
+                <textarea name="apepi_fazenda_title" rows="2"><?php echo esc_textarea($faz_title); ?></textarea>
+            </div>
+            <div class="apepi-meta-field">
+                <label>Subtítulo:</label>
+                <input type="text" name="apepi_fazenda_subtitle" value="<?php echo esc_attr($faz_subtitle); ?>">
+            </div>
+            <div class="apepi-meta-field">
+                <label>Descrição Principal:</label>
+                <textarea name="apepi_fazenda_desc" rows="3"><?php echo esc_textarea($faz_desc); ?></textarea>
+            </div>
+            <div class="apepi-meta-field">
+                <label>Descrição Complementar:</label>
+                <textarea name="apepi_fazenda_subdesc" rows="3"><?php echo esc_textarea($faz_subdesc); ?></textarea>
+            </div>
+            <div class="apepi-meta-field">
+                <label>Imagem de Fundo do Hero:</label>
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <input type="text" id="apepi_fazenda_img_meta_input" name="apepi_fazenda_main_img" value="<?php echo esc_attr($faz_img); ?>">
+                    <button type="button" class="button button-secondary" id="apepi_upload_fazenda_meta_btn">Selecionar Imagem</button>
+                </div>
+                <img id="apepi_fazenda_meta_preview" src="<?php echo esc_url($faz_img); ?>" style="max-height:80px; margin-top:8px; border-radius:4px; border:1px solid #ddd; display:block;">
+            </div>
+        </div>
+    </div>
+    <script>
+    jQuery(document).ready(function($){
+        $('#apepi_upload_fazenda_meta_btn').on('click', function(e) {
+            e.preventDefault();
+            var frame = wp.media({
+                title: 'Selecionar Imagem da Fazenda',
+                button: { text: 'Usar esta imagem' },
+                multiple: false
+            });
+            frame.on('select', function() {
+                var attachment = frame.state().get('selection').first().toJSON();
+                $('#apepi_fazenda_img_meta_input').val(attachment.url);
+                $('#apepi_fazenda_meta_preview').attr('src', attachment.url);
+            }).open();
+        });
+    });
+    </script>
+    <?php
+}
+
+function apepi_escola_save_fazenda_meta($post_id) {
+    if (!isset($_POST['apepi_fazenda_meta_nonce']) || !wp_verify_nonce($_POST['apepi_fazenda_meta_nonce'], 'apepi_save_fazenda_meta')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_page', $post_id)) return;
+
+    $fields = array(
+        'apepi_fazenda_badge1',
+        'apepi_fazenda_badge2',
+        'apepi_fazenda_badge3',
+        'apepi_fazenda_callout_left',
+        'apepi_fazenda_callout_right',
+        'apepi_fazenda_cta_text',
+        'apepi_fazenda_video1',
+        'apepi_fazenda_video2',
+        'apepi_fazenda_video3',
+        'apepi_fazenda_video4',
+        'apepi_fazenda_title',
+        'apepi_fazenda_subtitle',
+        'apepi_fazenda_desc',
+        'apepi_fazenda_subdesc',
+        'apepi_fazenda_main_img',
+    );
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            $is_textarea = in_array($field, array('apepi_fazenda_desc', 'apepi_fazenda_subdesc', 'apepi_fazenda_callout_left', 'apepi_fazenda_callout_right', 'apepi_fazenda_cta_text', 'apepi_fazenda_title'));
+            $val = $is_textarea ? sanitize_textarea_field($_POST[$field]) : sanitize_text_field($_POST[$field]);
+            update_post_meta($post_id, '_' . $field, $val);
+            update_option($field, $val);
+        }
+    }
+}
+add_action('save_post_page', 'apepi_escola_save_fazenda_meta');
+
+/**
  * Injector de Classes do Menu
  */
 function apepi_escola_nav_menu_link_attributes($atts, $item, $args) {
@@ -2444,55 +2638,68 @@ add_shortcode('apepi_pagina_quem_somos', 'apepi_shortcode_pagina_quem_somos');
 // 7. Shortcode Página Fazenda – Fidelidade Absoluta ref/fazenda.jfif
 function apepi_shortcode_pagina_fazenda() {
     ob_start();
+    global $post;
+    $curr_id = is_object($post) ? $post->ID : 0;
+
+    $get_fval = function($key, $def = '') use ($curr_id) {
+        if ($curr_id) {
+            $m = get_post_meta($curr_id, '_' . $key, true);
+            if ($m !== '' && $m !== false && $m !== null) {
+                return $m;
+            }
+        }
+        return apepi_get_option($key, $def);
+    };
+
     $wa_num           = apepi_get_option('apepi_whatsapp_number', '5521979570000');
-    $fazenda_title    = apepi_get_option('apepi_fazenda_title', "Visita à\nFazenda da APEPI");
-    $fazenda_subtitle = apepi_get_option('apepi_fazenda_subtitle', 'Aprendizado que nasce na prática');
-    $fazenda_desc     = apepi_get_option('apepi_fazenda_desc', 'Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
-    $fazenda_subdesc  = apepi_get_option('apepi_fazenda_subdesc', 'Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
-    $fazenda_img      = apepi_get_option('apepi_fazenda_main_img', get_template_directory_uri() . '/assets/fazenda_hero_photo.png');
+    $fazenda_title    = $get_fval('apepi_fazenda_title', "Visita à\nFazenda da APEPI");
+    $fazenda_subtitle = $get_fval('apepi_fazenda_subtitle', 'Aprendizado que nasce na prática');
+    $fazenda_desc     = $get_fval('apepi_fazenda_desc', 'Acompanhe de perto todo o processo de produção dos nossos óleos — desde a germinação até a extração dos compostos da Cannabis.');
+    $fazenda_subdesc  = $get_fval('apepi_fazenda_subdesc', 'Uma experiência imersiva, guiada por especialistas, para quem busca conhecimento com ciência, segurança e responsabilidade.');
+    $fazenda_img      = $get_fval('apepi_fazenda_main_img', get_template_directory_uri() . '/assets/fazenda_hero_photo.png');
 
-    $badge1           = apepi_get_option('apepi_fazenda_badge1', 'Para médicos, veterinários e profissionais da saúde');
-    $badge2           = apepi_get_option('apepi_fazenda_badge2', 'Imersão prática e conteúdo científico');
-    $badge3           = apepi_get_option('apepi_fazenda_badge3', 'Conexão entre teoria e prática com excelência');
+    $badge1           = $get_fval('apepi_fazenda_badge1', 'Para médicos, veterinários e profissionais da saúde');
+    $badge2           = $get_fval('apepi_fazenda_badge2', 'Imersão prática e conteúdo científico');
+    $badge3           = $get_fval('apepi_fazenda_badge3', 'Conexão entre teoria e prática com excelência');
 
-    $callout_left     = apepi_get_option('apepi_fazenda_callout_left', 'Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.');
-    $callout_right    = apepi_get_option('apepi_fazenda_callout_right', 'O dia de imersão para conhecer do cultivo até a produção dos óleos.');
-    $cta_text         = apepi_get_option('apepi_fazenda_cta_text', 'Viva uma experiência única e transforme seu conhecimento em prática responsável.');
+    $callout_left     = $get_fval('apepi_fazenda_callout_left', 'Nossa equipe de professores e técnicos especializados estará com você durante toda a experiência, garantindo aprendizado com clareza, segurança e troca de conhecimento.');
+    $callout_right    = $get_fval('apepi_fazenda_callout_right', 'O dia de imersão para conhecer do cultivo até a produção dos óleos.');
+    $cta_text         = $get_fval('apepi_fazenda_cta_text', 'Viva uma experiência única e transforme seu conhecimento em prática responsável.');
 
-    $destaques_title = apepi_get_option('apepi_fazenda_destaques_title', 'DESTAQUES DA EXPERIÊNCIA');
+    $destaques_title = $get_fval('apepi_fazenda_destaques_title', 'DESTAQUES DA EXPERIÊNCIA');
 
     $dest_items = array(
         array(
-            'title' => apepi_get_option('apepi_fazenda_dest1_title', "Laboratório\nde extração"),
-            'desc'  => apepi_get_option('apepi_fazenda_dest1_desc', 'Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.'),
-            'img'   => apepi_get_option('apepi_fazenda_dest1_img', get_template_directory_uri() . '/assets/faz_dest_lab.png'),
-            'icon'  => apepi_get_option('apepi_fazenda_dest1_icon', 'fa-solid fa-flask-vial'),
+            'title' => $get_fval('apepi_fazenda_dest1_title', "Laboratório\nde extração"),
+            'desc'  => $get_fval('apepi_fazenda_dest1_desc', 'Conheça nosso laboratório e acompanhe o processo de extração e controle de qualidade dos óleos.'),
+            'img'   => $get_fval('apepi_fazenda_dest1_img', get_template_directory_uri() . '/assets/faz_dest_lab.png'),
+            'icon'  => $get_fval('apepi_fazenda_dest1_icon', 'fa-solid fa-flask-vial'),
         ),
         array(
-            'title' => apepi_get_option('apepi_fazenda_dest2_title', "Cultivo com\nexcelência"),
-            'desc'  => apepi_get_option('apepi_fazenda_dest2_desc', 'Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.'),
-            'img'   => apepi_get_option('apepi_fazenda_dest2_img', get_template_directory_uri() . '/assets/faz_dest_cultivo.png'),
-            'icon'  => apepi_get_option('apepi_fazenda_dest2_icon', 'fa-solid fa-seedling'),
+            'title' => $get_fval('apepi_fazenda_dest2_title', "Cultivo com\nexcelência"),
+            'desc'  => $get_fval('apepi_fazenda_dest2_desc', 'Visite o matrizário, berçário e as áreas de cultivo em ambiente controlado e sustentável.'),
+            'img'   => $get_fval('apepi_fazenda_dest2_img', get_template_directory_uri() . '/assets/faz_dest_cultivo.png'),
+            'icon'  => $get_fval('apepi_fazenda_dest2_icon', 'fa-solid fa-seedling'),
         ),
         array(
-            'title' => apepi_get_option('apepi_fazenda_dest3_title', "Processos\ncompletos"),
-            'desc'  => apepi_get_option('apepi_fazenda_dest3_desc', 'Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.'),
-            'img'   => apepi_get_option('apepi_fazenda_dest3_img', get_template_directory_uri() . '/assets/faz_dest_processos.png'),
-            'icon'  => apepi_get_option('apepi_fazenda_dest3_icon', 'fa-solid fa-leaf'),
+            'title' => $get_fval('apepi_fazenda_dest3_title', "Processos\ncompletos"),
+            'desc'  => $get_fval('apepi_fazenda_dest3_desc', 'Acompanhe cada etapa: germinação, crescimento, colheita, secagem e beneficiamento.'),
+            'img'   => $get_fval('apepi_fazenda_dest3_img', get_template_directory_uri() . '/assets/faz_dest_processos.png'),
+            'icon'  => $get_fval('apepi_fazenda_dest3_icon', 'fa-solid fa-leaf'),
         ),
         array(
-            'title' => apepi_get_option('apepi_fazenda_dest4_title', "Pesquisa e\nInovação"),
-            'desc'  => apepi_get_option('apepi_fazenda_dest4_desc', 'Desenvolvimento contínuo de genética, ciência e saúde para os associados APEPI.'),
-            'img'   => apepi_get_option('apepi_fazenda_dest4_img', get_template_directory_uri() . '/assets/faz_dest_lab.png'),
-            'icon'  => apepi_get_option('apepi_fazenda_dest4_icon', 'fa-solid fa-microscope'),
+            'title' => $get_fval('apepi_fazenda_dest4_title', "Pesquisa e\nInovação"),
+            'desc'  => $get_fval('apepi_fazenda_dest4_desc', 'Desenvolvimento contínuo de genética, ciência e saúde para os associados APEPI.'),
+            'img'   => $get_fval('apepi_fazenda_dest4_img', get_template_directory_uri() . '/assets/faz_dest_lab.png'),
+            'icon'  => $get_fval('apepi_fazenda_dest4_icon', 'fa-solid fa-microscope'),
         ),
     );
 
     $video_urls = array(
-        apepi_get_option('apepi_fazenda_video1', 'https://youtu.be/a2SPamnnxr0'),
-        apepi_get_option('apepi_fazenda_video2', 'https://youtu.be/Ddb2VmBXrYc'),
-        apepi_get_option('apepi_fazenda_video3', 'https://youtu.be/Gpn76rvZBNQ'),
-        apepi_get_option('apepi_fazenda_video4', 'https://youtu.be/3UGWGmO5Ljw'),
+        $get_fval('apepi_fazenda_video1', 'https://youtu.be/a2SPamnnxr0'),
+        $get_fval('apepi_fazenda_video2', 'https://youtu.be/Ddb2VmBXrYc'),
+        $get_fval('apepi_fazenda_video3', 'https://youtu.be/Gpn76rvZBNQ'),
+        $get_fval('apepi_fazenda_video4', 'https://youtu.be/3UGWGmO5Ljw'),
     );
     ?>
     <div class="faz-page-exact-wrapper">
